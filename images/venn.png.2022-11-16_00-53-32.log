@@ -1,0 +1,14 @@
+INFO [2022-11-16 00:53:32] $x
+INFO [2022-11-16 00:53:32] list(data %>% filter(chip == "foxa1_dox_foxa1_chipseq_rep1") %>% 
+INFO [2022-11-16 00:53:32]     select(status) %>% unlist(), data %>% filter(chip == "foxa1_dox_h3k27ac_chipseq") %>% 
+INFO [2022-11-16 00:53:32]     select(status) %>% unlist())
+INFO [2022-11-16 00:53:32] 
+INFO [2022-11-16 00:53:32] $filename
+INFO [2022-11-16 00:53:32] [1] "images/venn.png"
+INFO [2022-11-16 00:53:32] 
+INFO [2022-11-16 00:53:32] $output
+INFO [2022-11-16 00:53:32] [1] TRUE
+INFO [2022-11-16 00:53:32] 
+INFO [2022-11-16 00:53:32] $imagetype
+INFO [2022-11-16 00:53:32] [1] "png"
+INFO [2022-11-16 00:53:32] 

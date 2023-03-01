@@ -1,0 +1,13 @@
+INFO [2022-11-16 00:59:35] [[1]]
+INFO [2022-11-16 00:59:35] abc
+INFO [2022-11-16 00:59:35] 
+INFO [2022-11-16 00:59:35] $filename
+INFO [2022-11-16 00:59:35] [1] "images/venn.png"
+INFO [2022-11-16 00:59:35] 
+INFO [2022-11-16 00:59:35] $output
+INFO [2022-11-16 00:59:35] [1] TRUE
+INFO [2022-11-16 00:59:35] 
+INFO [2022-11-16 00:59:35] $imagetype
+INFO [2022-11-16 00:59:35] [1] "png"
+INFO [2022-11-16 00:59:35] 
+ERROR [2022-11-16 00:59:35] Unexpected parameter length for "category"

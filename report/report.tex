@@ -53,7 +53,30 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\setcounter{secnumdepth}{5}
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 \usepackage[labelsep=period]{caption}
 \usepackage[labelfont=bf]{caption}
 \usepackage{booktabs}
@@ -108,7 +131,7 @@
 \Huge
 \textbf{TITLE}\\
 \vspace*{1\baselineskip}
-\Large{by Natasha L. Hopkins}\\
+\Large{by Natasha Louise Hopkins}\\
 \vspace*{2\baselineskip}
 \Large{\textbf{Master of Biology (Honours), Molecular Cell Biology}}\\
 \Large{University of York, UK}\\
@@ -159,45 +182,68 @@ Abstract
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
 
+\hypertarget{foxa1-expression-and-erux3b1-breast-cancer}{%
+\subsection{FOXA1 Expression and ERα+ Breast Cancer}\label{foxa1-expression-and-erux3b1-breast-cancer}}
+
+\hypertarget{trnas-and-gene-expression}{%
+\subsection{tRNAs and Gene Expression}\label{trnas-and-gene-expression}}
+
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\hypertarget{methods}{%
-\section{Methods}\label{methods}}
+\hypertarget{materials-methods}{%
+\section{Materials \& Methods}\label{materials-methods}}
 
-\hypertarget{chip-seq-data-acquisition}{%
-\subsection{ChIP-seq Data Acquisition}\label{chip-seq-data-acquisition}}
+\hypertarget{mcf7l-chip-seq-data-from-ncbi}{%
+\subsection{MCF7L ChIP-seq Data from NCBI}\label{mcf7l-chip-seq-data-from-ncbi}}
 
-(table \ref{tab:data}).
+ChIP-seq was performed on MCF7L cells expressing Dox-inducible FOXA1\textsuperscript{\protect\hyperlink{ref-fu2019}{1}}. Datasets were deposited into the National Centre for Biotechnology Information (NCBI) Sequence Read Archive (SRA) under accession no. PRJNA512997\textsuperscript{\protect\hyperlink{ref-leinonen2010}{2}} (Table \ref{tab:data}). SRAs were downloaded by Galaxy (v23.0.rc1)\textsuperscript{\protect\hyperlink{ref-thegala2022}{3}} and converted to FastQ files and then into BAM files using ``Genetic Manipulation Tools''.
 
 \begin{table}[!h]
 
-\caption{\label{tab:data}Publically available ChIP-seq datasets aquired from the NCBI database (accession no. PRJNA512997).}
+\caption{\label{tab:data}Publicly available ChIP-seq SRA files aquired from the NCBI SRA database (accession no. PRJNA512997).}
 \centering
-\begin{tabu} to \linewidth {>{\raggedright}X>{\raggedright}X>{\raggedright}X}
+\begin{tabu} to \linewidth {>{\raggedright}X>{\raggedright}X>{\raggedright}X>{\raggedright}X>{\raggedright}X}
 \toprule
-SRA & Factor & Source\\
+Experiment & SRA & Factor & Tissue & Assembly\\
 \midrule
-SRR8393424 & FOXA1 & MCF7L-P\\
+ & SRR8393424 &  &  & \\
 
-SRR8393425 & FOXA1 & MCF7L-P\\
+ & SRR8393425 &  &  & \\
 
-SRR8393426 & FOXA1 & MCF7L-P\\
+ & SRR8393426 & \multirow[t]{-3}{*}{\raggedright\arraybackslash FOXA1} &  & \\
 
-SRR8393427 & H3K27ac & MCF7L-P\\
+ & SRR8393427 &  &  & \\
 
-SRR8393428 & H3K27ac & MCF7L-P\\
+ & SRR8393428 & \multirow[t]{-2}{*}{\raggedright\arraybackslash H3K27ac} &  & \\
 
-SRR8393431 & None (input) & MCF7L-P\\
+ & SRR8393431 &  &  & \\
 
-SRR8393432 & None (input) & MCF7L-P\\
+\multirow[t]{-7}{*}{\raggedright\arraybackslash PRJNA512997} & SRR8393432 & \multirow[t]{-2}{*}{\raggedright\arraybackslash None (input)} & \multirow[t]{-7}{*}{\raggedright\arraybackslash MCF-7LP} & \multirow[t]{-7}{*}{\raggedright\arraybackslash GRCh37 Hg19}\\
 \bottomrule
 \end{tabu}
 \end{table}
+
+\hypertarget{easeq-for-the-quantification-of-foxa1-and-h3k27ac-at-trna-genes}{%
+\subsection{EaSeq for the Quantification of FOXA1 and H3K27ac at tRNA genes}\label{easeq-for-the-quantification-of-foxa1-and-h3k27ac-at-trna-genes}}
+
+EaSeq (v1.111)\textsuperscript{\protect\hyperlink{ref-lerdrup2016}{4}}.
+
+\hypertarget{motif-analysis}{%
+\subsection{Motif Analysis}\label{motif-analysis}}
+
+\hypertarget{statistics}{%
+\subsection{Statistics}\label{statistics}}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{results}{%
 \section{Results}\label{results}}
+
+\hypertarget{localisation-of-foxa1-at-trna-genes-in-mcf-7-cells}{%
+\subsection{Localisation of FOXA1 at tRNA genes in MCF-7 cells}\label{localisation-of-foxa1-at-trna-genes-in-mcf-7-cells}}
+
+\hypertarget{co-localisation-of-foxa1-with-enhancer-marks-at-trna-genes}{%
+\subsection{Co-localisation of FOXA1 with enhancer marks at tRNA genes}\label{co-localisation-of-foxa1-with-enhancer-marks-at-trna-genes}}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -205,12 +251,33 @@ SRR8393432 & None (input) & MCF7L-P\\
 \section{Discussion}\label{discussion}}
 
 \begin{flushright}
-12 Words
+112 Words
 \end{flushright}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{references}{%
-\section{References}\label{references}}
+\section*{References}\label{references}}
+\addcontentsline{toc}{section}{References}
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{0}{0}
+\leavevmode\vadjust pre{\hypertarget{ref-fu2019}{}}%
+\CSLLeftMargin{1 }%
+\CSLRightInline{Fu X, Pereira R, De Angelis C, Veeraraghavan J, Nanda S, Qin L \emph{et al.} \href{https://doi.org/10.1073/pnas.1911584116}{FOXA1 upregulation promotes enhancer and transcriptional reprogramming in endocrine-resistant breast cancer}. \emph{Proceedings of the National Academy of Sciences} 2019; \textbf{116}: 26823--26834.}
+
+\leavevmode\vadjust pre{\hypertarget{ref-leinonen2010}{}}%
+\CSLLeftMargin{2 }%
+\CSLRightInline{Leinonen R, Sugawara H, Shumway M. \href{https://doi.org/10.1093/nar/gkq1019}{The Sequence Read Archive}. \emph{Nucleic Acids Research} 2010; \textbf{39}: D19--D21.}
+
+\leavevmode\vadjust pre{\hypertarget{ref-thegala2022}{}}%
+\CSLLeftMargin{3 }%
+\CSLRightInline{Afgan E, Nekrutenko A, Grüning BA, Blankenberg D, Goecks J, Schatz MC \emph{et al.} \href{https://doi.org/10.1093/nar/gkac247}{The Galaxy platform for accessible, reproducible and collaborative biomedical analyses: 2022 update}. \emph{Nucleic Acids Research} 2022; \textbf{50}: W345--W351.}
+
+\leavevmode\vadjust pre{\hypertarget{ref-lerdrup2016}{}}%
+\CSLLeftMargin{4 }%
+\CSLRightInline{Lerdrup M, Johansen JV, Agrawal-Singh S, Hansen K. \href{https://doi.org/10.1038/nsmb.3180}{An interactive environment for agile analysis and visualization of ChIP-sequencing data}. \emph{Nature Structural \& Molecular Biology} 2016; \textbf{23}: 349--357.}
+
+\end{CSLReferences}
 
 \end{document}

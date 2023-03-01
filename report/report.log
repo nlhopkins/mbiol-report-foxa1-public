@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.1)  1 MAR 2023 14:55
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.1)  1 MAR 2023 17:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -319,7 +319,11 @@ Package graphics Info: Driver file: xetex.def on input line 107.
 )
 \Gin@req@height=\dimen181
 \Gin@req@width=\dimen182
-) (/Users/natashahopkins/Library/TinyTeX/texmf-dist/tex/latex/caption/caption.sty
+)
+\cslhangindent=\skip62
+\csllabelwidth=\skip63
+\cslentryspacingunit=\skip64
+(/Users/natashahopkins/Library/TinyTeX/texmf-dist/tex/latex/caption/caption.sty
 Package: caption 2022/03/01 v3.6b Customizing captions (AR)
 (/Users/natashahopkins/Library/TinyTeX/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2022/03/17 v2.3b caption3 kernel (AR)
@@ -379,7 +383,7 @@ LaTeX Info: Redefining \upshape on input line 537.
 LaTeX Info: Redefining \swshape on input line 544.
 LaTeX Info: Redefining \textsw on input line 553.
 ))
-LaTeX Font Info:    Trying to load font information for T1+yvt on input line 68.
+LaTeX Font Info:    Trying to load font information for T1+yvt on input line 91.
 (/Users/natashahopkins/Library/TinyTeX/texmf-dist/tex/latex/venturis/t1yvt.fd
 File: t1yvt.fd 2010/07/03 Fontinst v1.933 font definitions for T1/yvt.
 
@@ -409,9 +413,9 @@ LaTeX Info: Font shape T1/yvt/mc/sl has incorrect series value `mc'.
 
 ) (/Users/natashahopkins/Library/TinyTeX/texmf-dist/tex/latex/multirow/multirow.sty
 Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
-\multirow@colwidth=\skip62
+\multirow@colwidth=\skip65
 \multirow@cntb=\count307
-\multirow@dima=\skip63
+\multirow@dima=\skip66
 \bigstrutjot=\dimen191
 ) (/Users/natashahopkins/Library/TinyTeX/texmf-dist/tex/latex/wrapfig/wrapfig.sty
 \wrapoverhang=\dimen192
@@ -430,7 +434,7 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 ) (/Users/natashahopkins/Library/TinyTeX/texmf-dist/tex/latex/colortbl/colortbl.sty
 Package: colortbl 2022/06/20 v1.0f Color table columns (DPC)
 \everycr=\toks31
-\minrowclearance=\skip64
+\minrowclearance=\skip67
 \rownum=\count310
 ) (/Users/natashahopkins/Library/TinyTeX/texmf-dist/tex/latex/pdflscape/pdflscape.sty
 Package: pdflscape 2022-10-27 v0.13 Display of landscape pages in PDF
@@ -470,7 +474,7 @@ Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \tabu@arstrutbox=\box68
 \tabu@hleads=\box69
 \tabu@vleads=\box70
-\tabu@cellskip=\skip65
+\tabu@cellskip=\skip68
 ) (/Users/natashahopkins/Library/TinyTeX/texmf-dist/tex/latex/threeparttable/threeparttable.sty
 Package: threeparttable 2003/06/13  v 3.0
 \@tempboxb=\box71
@@ -481,11 +485,11 @@ Package: environ 2014/05/04 v0.3 A new way to define environments
 (/Users/natashahopkins/Library/TinyTeX/texmf-dist/tex/latex/trimspaces/trimspaces.sty
 Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 ))
-\TPTL@width=\skip66
+\TPTL@width=\skip69
 ) (/Users/natashahopkins/Library/TinyTeX/texmf-dist/tex/generic/ulem/ulem.sty
 \UL@box=\box72
 \UL@hyphenbox=\box73
-\UL@skip=\skip67
+\UL@skip=\skip70
 \UL@hook=\toks34
 \UL@height=\dimen261
 \UL@pe=\count318
@@ -608,49 +612,49 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 )
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 285.
 )
-\Hy@SectionHShift=\skip68
+\Hy@SectionHShift=\skip71
 ) (/Users/natashahopkins/Library/TinyTeX/texmf-dist/tex/latex/bookmark/bkm-dvipdfm.def
 File: bkm-dvipdfm.def 2020-11-06 v1.29 bookmark driver for dvipdfm (HO)
 \BKM@id=\count333
 ))
-Package hyperref Info: Option `colorlinks' set `true' on input line 95.
+Package hyperref Info: Option `colorlinks' set `true' on input line 118.
 (./report.aux)
 \openout1 = `report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 100.
-LaTeX Font Info:    ... okay on input line 100.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 100.
-LaTeX Font Info:    ... okay on input line 100.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 100.
-LaTeX Font Info:    ... okay on input line 100.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 100.
-LaTeX Font Info:    ... okay on input line 100.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 100.
-LaTeX Font Info:    ... okay on input line 100.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 100.
-LaTeX Font Info:    ... okay on input line 100.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 100.
-LaTeX Font Info:    ... okay on input line 100.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 100.
-LaTeX Font Info:    ... okay on input line 100.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 100.
-LaTeX Font Info:    ... okay on input line 100.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 100.
-LaTeX Font Info:    ... okay on input line 100.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/lmr/m/n --> TU/yvt/m/n on input line 100.
+(Font)                  OT1/lmr/m/n --> TU/yvt/m/n on input line 123.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/lmr/m/it --> TU/yvt/m/it on input line 100.
+(Font)                  OT1/lmr/m/it --> TU/yvt/m/it on input line 123.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/lmr/bx/n --> TU/yvt/b/n on input line 100.
+(Font)                  OT1/lmr/bx/n --> TU/yvt/b/n on input line 123.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/lmss/m/n --> TU/yv1/m/n on input line 100.
+(Font)                  OT1/lmss/m/n --> TU/yv1/m/n on input line 123.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/lmss/bx/n --> TU/yv1/b/n on input line 100.
+(Font)                  OT1/lmss/bx/n --> TU/yv1/b/n on input line 123.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/lmtt/m/n --> TU/lmtt/m/n on input line 100.
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/m/n on input line 123.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/lmtt/m/n --> TU/lmtt/b/n on input line 100.
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/b/n on input line 123.
 
 Package fontspec Info: latinmodern-math scale = 0.9999935336814366.
 
@@ -675,11 +679,11 @@ Package fontspec Info: Font family 'latinmodern-math.otf(0)' created for font
 (fontspec)             <->s*[0.9999935336814366]"[latinmodern-math.otf]/OT:script=math;language=dflt;"
 (fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
 
-LaTeX Font Info:    Trying to load font information for T1+latinmodern-math.otf(0) on input line 100.
-LaTeX Font Info:    No file T1latinmodern-math.otf(0).fd. on input line 100.
+LaTeX Font Info:    Trying to load font information for T1+latinmodern-math.otf(0) on input line 123.
+LaTeX Font Info:    No file T1latinmodern-math.otf(0).fd. on input line 123.
 
 LaTeX Font Warning: Font shape `T1/latinmodern-math.otf(0)/m/n' undefined
-(Font)              using `T1/cmr/m/n' instead on input line 100.
+(Font)              using `T1/cmr/m/n' instead on input line 123.
 
 
 Package unicode-math Warning: The first font loaded by unicode-math must be an
@@ -719,25 +723,25 @@ Package fontspec Info: Font family 'latinmodern-math.otf(1)' created for font
 (fontspec)             <->s*[0.9999935336814366]"[latinmodern-math.otf]/OT:script=math;language=dflt;"
 (fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
 
-LaTeX Font Info:    Trying to load font information for T1+latinmodern-math.otf(1) on input line 100.
-LaTeX Font Info:    No file T1latinmodern-math.otf(1).fd. on input line 100.
+LaTeX Font Info:    Trying to load font information for T1+latinmodern-math.otf(1) on input line 123.
+LaTeX Font Info:    No file T1latinmodern-math.otf(1).fd. on input line 123.
 
 LaTeX Font Warning: Font shape `T1/latinmodern-math.otf(1)/m/n' undefined
-(Font)              using `T1/cmr/m/n' instead on input line 100.
+(Font)              using `T1/cmr/m/n' instead on input line 123.
 
 LaTeX Font Info:    Encoding `OT1' has changed to `T1' for symbol font
-(Font)              `operators' in the math version `normal' on input line 100.
+(Font)              `operators' in the math version `normal' on input line 123.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/lmr/m/n --> T1/latinmodern-math.otf(1)/m/n on input line 100.
+(Font)                  OT1/lmr/m/n --> T1/latinmodern-math.otf(1)/m/n on input line 123.
 LaTeX Font Info:    Encoding `OT1' has changed to `T1' for symbol font
-(Font)              `operators' in the math version `bold' on input line 100.
+(Font)              `operators' in the math version `bold' on input line 123.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/lmr/bx/n --> T1/latinmodern-math.otf(1)/b/n on input line 100.
-LaTeX Info: Redefining \microtypecontext on input line 100.
-Package microtype Info: Applying patch `item' on input line 100.
-Package microtype Info: Applying patch `toc' on input line 100.
-Package microtype Info: Applying patch `eqnum' on input line 100.
-Package microtype Info: Applying patch `footnote' on input line 100.
+(Font)                  OT1/lmr/bx/n --> T1/latinmodern-math.otf(1)/b/n on input line 123.
+LaTeX Info: Redefining \microtypecontext on input line 123.
+Package microtype Info: Applying patch `item' on input line 123.
+Package microtype Info: Applying patch `toc' on input line 123.
+Package microtype Info: Applying patch `eqnum' on input line 123.
+Package microtype Info: Applying patch `footnote' on input line 123.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: No adjustment of tracking.
@@ -787,37 +791,38 @@ Package caption Info: hyperref package is loaded.
 Package caption Info: threeparttable package is loaded.
 Package caption Info: wrapfig package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring ON on input line 100.
+Package hyperref Info: Link coloring ON on input line 123.
 File: ../images/uoy_logo.png Graphic file (type bmp)
 <../images/uoy_logo.png>
 [1
 
 ] (./report.toc
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 3.
+Missing character: There is no α ("3B1) in font yvtr8t!
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 2.
 (/Users/natashahopkins/Library/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 3.
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 2.
 (/Users/natashahopkins/Library/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 3.
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 2.
 (/Users/natashahopkins/Library/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 3.
+(Font)              <10.95> on input line 2.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 3.
+(Font)              <8> on input line 2.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 3.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 3.
+(Font)              <6> on input line 2.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 2.
 (/Users/natashahopkins/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/Users/natashahopkins/Library/TinyTeX/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 3.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 2.
 (/Users/natashahopkins/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/Users/natashahopkins/Library/TinyTeX/texmf-dist/tex/latex/microtype/mt-msb.cfg
@@ -827,27 +832,51 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 \openout3 = `report.toc'.
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 145--148
+Underfull \hbox (badness 10000) in paragraph at lines 168--171
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 156--158
+Underfull \hbox (badness 10000) in paragraph at lines 179--181
 
  []
 
-[1] [2] (./report.aux)
+Missing character: There is no α ("3B1) in font yvtb8t!
+[1]
+Underfull \hbox (badness 10000) in paragraph at lines 265--268
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 269--272
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 273--276
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 277--280
+
+ []
+
+[2] (./report.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
  ) 
 Here is how much of TeX's memory you used:
- 22948 strings out of 478683
- 420285 string characters out of 5847477
- 1851018 words of memory out of 5000000
- 42712 multiletter control sequences out of 15000+600000
- 598573 words of font info for 68 fonts, out of 8000000 for 9000
+ 22978 strings out of 478683
+ 420840 string characters out of 5847477
+ 1854018 words of memory out of 5000000
+ 42741 multiletter control sequences out of 15000+600000
+ 612196 words of font info for 70 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 86i,15n,120p,1003b,578s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 86i,16n,120p,1003b,592s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on report.pdf (4 pages).

@@ -14,7 +14,7 @@ linestretch: 1.2
 fontsize: 11pt
 indent: true
 bibliography: refs.bib
-citation-style: ../csl/current-opinion-journals.csl
+citation-style: ../csl/university-of-york-vancouver.csl
 link-citations: true
 citecolor: teal
 linkcolor: teal
@@ -25,15 +25,14 @@ header-includes:
 - \usepackage{booktabs}
 - \usepackage{caption}
 - \usepackage{microtype}
-- \usepackage{multicol,lipsum}
 - \usepackage{sectsty}
-- \captionsetup[figure]{font=footnotesize}
-- \captionsetup[table]{font=footnotesize}
-- \captionsetup[table]{justification=centerlast}
-- \captionsetup[figure]{justification=centerlast}
-- \usepackage{epigrafica}
-- \usepackage[LGR,OT1]{fontenc}
+- \captionsetup[figure]{font=small}
+- \captionsetup[table]{font=small}
+- \captionsetup[table]{justification=justified}
+- \captionsetup[figure]{justification=justified}
+- \usepackage[lf]{venturis}
 - \normalfont
+
 editor_options: 
     markdown:
       canonical: true 
@@ -71,16 +70,76 @@ citation_count <-
 `r word_count("abstract.Rmd")` Words
 \end{flushright}
 \hrulefill\\
-\multicols{2}
 \setlength{\parindent}{10pt}
 ```
 # Introduction
 
-hello
-
 ------------------------------------------------------------------------
 
 # Methods
+
+## MCF-7 ChIP-seq data from *NCBI*
+
+(table \@ref(tab:data)).
+
+```{r data}
+knitr::kable(
+  data.frame(
+    Experiment = c(
+      "PRJNA512997",
+      "PRJNA512997",
+      "PRJNA512997",
+      "PRJNA512997",
+      "PRJNA512997",
+      "PRJNA512997",
+      "PRJNA512997"
+    ),
+    SRA = c(
+      "SRR8393424",
+      "SRR8393425",
+      "SRR8393426",
+      "SRR8393427",
+      "SRR8393428",
+      "SRR8393431",
+      "SRR8393432"
+    ),
+    Factor = c(
+      "FOXA1",
+      "FOXA1",
+      "FOXA1",
+      "H3K27ac",
+      "H3K27ac",
+      "None (input)",
+      "None (input)"
+    ),
+    Source = c(
+      "MCF-7LP",
+      "MCF-7LP",
+      "MCF-7LP",
+      "MCF-7LP",
+      "MCF-7LP",
+      "MCF-7LP",
+      "MCF-7LP"
+    )
+  ),
+  booktabs = T,
+  caption = "Publically available ChIP-seq datasets aquired from the NCBI database (accession no. PRJNA512997)."
+) %>%
+  kable_styling(
+    full_width = T,
+    latex_options = "hold_position",
+    position = "center",
+    htmltable_class = "lightable-classic",
+    html_font = "venturis"
+  ) %>%
+  collapse_rows(columns = 1, valign = "top")
+```
+
+## Heatmaps
+
+## Quantification
+
+## Motif Analysis
 
 ------------------------------------------------------------------------
 

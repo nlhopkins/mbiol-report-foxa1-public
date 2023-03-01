@@ -59,15 +59,12 @@
 \usepackage{booktabs}
 \usepackage{caption}
 \usepackage{microtype}
-\usepackage{multicol,lipsum}
 \usepackage{sectsty}
-\setsansfont{Helvetica}
-\captionsetup[figure]{font=footnotesize}
-\captionsetup[table]{font=footnotesize}
-\captionsetup[table]{justification=centerlast}
-\captionsetup[figure]{justification=centerlast}
-\usepackage{epigrafica}
-\usepackage[LGR,OT1]{fontenc}
+\captionsetup[figure]{font=small}
+\captionsetup[table]{font=small}
+\captionsetup[table]{justification=justified}
+\captionsetup[figure]{justification=justified}
+\usepackage[lf]{venturis}
 \normalfont
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -114,17 +111,17 @@
 \Large{by Natasha L. Hopkins}\\
 \vspace*{2\baselineskip}
 \Large{\textbf{Master of Biology (Honours), Molecular Cell Biology}}\\
-\Large{Univeristy of York, UK}\\
+\Large{University of York, UK}\\
 \vspace*{2\baselineskip}
 \Large{\textbf{Project Director}}\\
-Anonymous\\
+Prof. Robert J White\\
 \vspace*{2\baselineskip}
 \Large{\textbf{Examination Date}}\\
-07 November, 2022\\
+17 April, 2023\\
 \vspace*{2\baselineskip}
 \Large{\textbf{Word Count}}\\
-Abstract: 101\\
-Main: 2070\\
+Abstract: \\
+Main: \\
 \vspace*{2\baselineskip}
 \begin{figure}[h!]
 \centering
@@ -157,7 +154,6 @@ Abstract
 1 Words
 \end{flushright}
 \hrulefill\\
-\multicols{2}
 \setlength{\parindent}{10pt}
 
 \hypertarget{introduction}{%
@@ -167,6 +163,36 @@ Abstract
 
 \hypertarget{methods}{%
 \section{Methods}\label{methods}}
+
+\hypertarget{chip-seq-data-acquisition}{%
+\subsection{ChIP-seq Data Acquisition}\label{chip-seq-data-acquisition}}
+
+(table \ref{tab:data}).
+
+\begin{table}[!h]
+
+\caption{\label{tab:data}Publically available ChIP-seq datasets aquired from the NCBI database (accession no. PRJNA512997).}
+\centering
+\begin{tabu} to \linewidth {>{\raggedright}X>{\raggedright}X>{\raggedright}X}
+\toprule
+SRA & Factor & Source\\
+\midrule
+SRR8393424 & FOXA1 & MCF7L-P\\
+
+SRR8393425 & FOXA1 & MCF7L-P\\
+
+SRR8393426 & FOXA1 & MCF7L-P\\
+
+SRR8393427 & H3K27ac & MCF7L-P\\
+
+SRR8393428 & H3K27ac & MCF7L-P\\
+
+SRR8393431 & None (input) & MCF7L-P\\
+
+SRR8393432 & None (input) & MCF7L-P\\
+\bottomrule
+\end{tabu}
+\end{table}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -179,7 +205,7 @@ Abstract
 \section{Discussion}\label{discussion}}
 
 \begin{flushright}
-5 Words
+12 Words
 \end{flushright}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}

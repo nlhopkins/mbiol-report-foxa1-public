@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.1)  1 MAR 2023 17:17
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2023.3.1)  2 MAR 2023 17:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -843,26 +843,75 @@ Underfull \hbox (badness 10000) in paragraph at lines 179--181
 
 Missing character: There is no α ("3B1) in font yvtb8t!
 [1]
-Underfull \hbox (badness 10000) in paragraph at lines 265--268
+LaTeX Font Info:    Trying to load font information for TS1+yvt on input line 234.
+(/Users/natashahopkins/Library/TinyTeX/texmf-dist/tex/latex/venturis/ts1yvt.fd
+File: ts1yvt.fd 2010/07/03 Fontinst v1.933 font definitions for TS1/yvt.
+
+LaTeX Info: Font shape TS1/yvt/mc/n has incorrect series value `mc'.
+            It should not contain an `m'! Please correct it.
+            Found on input line 54.
+
+
+LaTeX Info: Font shape TS1/yvt/mc/sc has incorrect series value `mc'.
+            It should not contain an `m'! Please correct it.
+            Found on input line 58.
+
+
+LaTeX Info: Font shape TS1/yvt/mc/it has incorrect series value `mc'.
+            It should not contain an `m'! Please correct it.
+            Found on input line 62.
+
+
+LaTeX Info: Font shape TS1/yvt/mc/si has incorrect series value `mc'.
+            It should not contain an `m'! Please correct it.
+            Found on input line 66.
+
+
+LaTeX Info: Font shape TS1/yvt/mc/sl has incorrect series value `mc'.
+            It should not contain an `m'! Please correct it.
+            Found on input line 94.
+
+) [2]
+Underfull \hbox (badness 10000) in paragraph at lines 326--329
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 269--272
+Underfull \hbox (badness 10000) in paragraph at lines 330--333
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 273--276
+Underfull \hbox (badness 10000) in paragraph at lines 334--337
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 277--280
+Underfull \hbox (badness 10000) in paragraph at lines 338--341
 
  []
 
-[2] (./report.aux)
+
+Underfull \hbox (badness 10000) in paragraph at lines 342--345
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 346--349
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 350--353
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 354--357
+
+ []
+
+[3] (./report.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -871,12 +920,12 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 22978 strings out of 478683
- 420840 string characters out of 5847477
- 1854018 words of memory out of 5000000
- 42741 multiletter control sequences out of 15000+600000
- 612196 words of font info for 70 fonts, out of 8000000 for 9000
+ 23022 strings out of 478683
+ 421519 string characters out of 5847477
+ 1852018 words of memory out of 5000000
+ 42781 multiletter control sequences out of 15000+600000
+ 612554 words of font info for 71 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 86i,16n,120p,1003b,592s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 86i,10n,120p,1003b,520s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on report.pdf (4 pages).
+Output written on report.pdf (5 pages).

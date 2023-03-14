@@ -84,19 +84,19 @@ citation_count <-
 
 ## MCF7L ChIP-seq Data from NCBI
 
-ChIP-seq was performed on MCF7L cells expressing Dox-inducible FOXA1[@fu2019]. Datasets were deposited into the National Centre for Biotechnology Information (NCBI) Sequence Read Archive (SRA) under accession no. PRJNA512997[@leinonen2010] (Table \@ref(tab:data)). SRAs were downloaded by Galaxy (v23.0.rc1)[@thegala2022] and converted to FastQ files and then into BAM files using "Genetic Manipulation Tools".
+ChIP-seq was performed on MCF7L cells expressing Dox-inducible FOXA1, established using a lentiviral cDNA delivery system [@fu2016; @fu2019]. Datasets were deposited into the National Centre for Biotechnology Information (NCBI) Sequence Read Archive (SRA) under accession no. PRJNA512997[@leinonen2010] (Table \@ref(tab:data)). SRAs were downloaded by Galaxy (v23.0.rc1)[@thegala2022] and converted to FastQ files and then into BAM files using 'Genetic Manipulation Tools'.
 
 ```{r data}
-knitr::kable(
+kbl(
   data.frame(
     "Experiment" = c(
       "PRJNA512997",
-      "PRJNA512997",
-      "PRJNA512997",
-      "PRJNA512997",
-      "PRJNA512997",
-      "PRJNA512997",
-      "PRJNA512997"
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
     ),
     "SRA" = c(
       "SRR8393424",
@@ -109,49 +109,51 @@ knitr::kable(
     ),
     "Factor" = c(
       "FOXA1",
-      "FOXA1",
-      "FOXA1",
+      "",
+      "",
       "H3K27ac",
-      "H3K27ac",
+      "",
       "None (input)",
-      "None (input)"
+      ""
     ),
     "Tissue" = c(
       "MCF-7LP",
-      "MCF-7LP",
-      "MCF-7LP",
-      "MCF-7LP",
-      "MCF-7LP",
-      "MCF-7LP",
-      "MCF-7LP"
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
     ),
     "Assembly" = c(
       "GRCh37 Hg19",
-      "GRCh37 Hg19",
-      "GRCh37 Hg19",
-      "GRCh37 Hg19",
-      "GRCh37 Hg19",
-      "GRCh37 Hg19",
-      "GRCh37 Hg19"
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
     )
   ),
   booktabs = TRUE,
-  caption = "Publicly available ChIP-seq SRA files aquired from the NCBI SRA database (accession no. PRJNA512997)."
-) %>%
-  kable_styling(
-    full_width = T,
-    latex_options = "hold_position",
-    position = "center",
-    html_font = "venturis"
-  ) %>%
-  collapse_rows(columns = c(1, 3, 4, 5),
-                valign = "top",
-                latex_hline = "none")
+  caption = "Publicly available ChIP-seq SRA files aquired from the NCBI SRA database (accession no. PRJNA512997).",
+  format = "markdown"
+)
 ```
 
 ## EaSeq for the Quantification of FOXA1 and H3K27ac at tRNA genes
 
-EaSeq (v1.111)[@lerdrup2016].
+BAM files were uploaded into EaSeq (v1.111)[@lerdrup2016] as 'Datasets' using the standard settings for Chip-seq data.
+The reference genome hg19 was downloaded as a 'Geneset' from the UCSC Table Browser[@Karolchik2004].
+High-confidence tRNAs identified in the GtRNAdb[@Chan2016] were extracted as a 'Regionset'.
+Signal peak intensities surrounding tRNAs were quantified using the 'Quantify' tool.
+Here, the default settings were left checked, with the exception of 'Normalise to a signal of'.
+The window size was offset ±500bp from the start of each gene.
+Outputs are referred to as 'Q-values'.
+
+-   sorted by q value
+
+-   heatmap, filltrack, ect
 
 ## Motif Analysis
 
@@ -163,11 +165,65 @@ EaSeq (v1.111)[@lerdrup2016].
 
 ## Localisation of FOXA1 at tRNA genes in MCF-7 cells
 
+Table \@ref(tab:clusters)
+
+```{r clusters, out.width='90%'}
+knitr::kable(
+  data.frame(
+    "Group" = c(
+      "ALOXE",
+      "Ebersole",
+      "HES7",
+      "Per1",
+      "TMEM107",
+      "Arg-CCG",
+      "Glu-TTC",
+      "iMET",
+      "Met",
+      "SeC"
+    ),
+    "Function" = c(
+      "Insulator Function[@raab2011]",
+      "",
+      "",
+      "",
+      "",
+      "Implicated in Cancer",
+      "",
+      "Proliferation of Breast Cancer",
+      "iMet Control",
+      "Involved in REDOX"
+    )
+  ),
+  booktabs = TRUE,
+  caption = ".",
+  format = "markdown"
+) 
+```
+
 ## Co-localisation of FOXA1 with enhancer marks at tRNA genes
 
 ------------------------------------------------------------------------
 
 # Discussion
+
+## Future
+
+-   FOXA1 alone not efficient to increase activity
+
+    -   p300
+
+-   FOXA1 moves nucleosomes to make other TF acessible
+
+-   Loses fox = weak binding?
+
+-   Dynamic and stable marks
+
+-   pertubations
+
+<!-- -->
+
+-   ATAC-seq
 
 ```{=tex}
 \begin{flushright}

@@ -1,5 +1,6 @@
 library(tidyverse)
 library(hrbrthemes)
+library(eulerr)
 
 raw <- read.delim("data/raw/hg19.txt") %>%
     janitor::clean_names() %>%
@@ -19,7 +20,9 @@ raw <- raw %>%
                    dox_h3k27ac < threshold, 'loss', 'shared')
     ))
 
-
+library(eulerr)
+fit <- euler(c(A = 450, B = 1800, "A&B" = 230))
+plot(fit)
 
 ggplot(raw, aes(x = log10(fox_fold), y = log10(h3_fold))) +
     geom_point(color = "black") +
@@ -42,6 +45,23 @@ ggplot(raw, aes(x = log10(dox_foxa1_high), y = log10(dox_h3k27ac))) +
     theme_ipsum()
 
 
-lose_lose <- raw %>% filter(fox_status == "loss" & h3_status == "loss")
+fox_gain <- length(grep("gain", raw$fox_status)) %>% as.numeric()
+fox_loss <- length(grep("loss", raw$fox_status)) %>% as.numeric()
 
-gain_gain <- raw %>% filter(fox_status == "gain" & h3_status == "gain")
+h3_gain <- length(grep("gain", raw$h3_status)) %>% as.numeric()
+h3_loss <- length(grep("loss", raw$h3_status)) %>% as.numeric()
+
+loss_loss <-
+    raw %>% filter(fox_status == "loss" &
+                       h3_status == "loss") %>% length() %>% as.numeric()
+gain_gain <-
+    raw %>% filter(fox_status == "gain" &
+                       h3_status == "gain") %>% length() %>% as.numeric()
+
+
+
+
+euler(c(A = fox_gain, B = h3_gain, "A&B" = gain_gain)) %>% plot
+
+
+euler(c(A = fox_loss, B = h3_loss, "A&B" = loss_loss)) %>% plot

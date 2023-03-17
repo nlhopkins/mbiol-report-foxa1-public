@@ -24,7 +24,15 @@ raw <- raw %>%
 
 upstream <- read.delim("data/raw/upstream.txt") %>%
     janitor::clean_names() %>%
-    mutate(position = "upstream") %>%
+    mutate(position = "upstream")
+
+downstream <- read.delim("data/raw/downstream.txt") %>%
+    janitor::clean_names() %>%
+    mutate(position = "downstream")
+
+
+total <- full_join(upstream,
+                   downstream) %>%
     mutate(across(contains("ed"), ~ .x / ed_input)) %>%
     mutate(across(contains("dox"), ~ .x / dox_input)) %>%
     mutate(fox_fold = (dox_foxa1_high - ed_foxa1) / ed_foxa1) %>%
@@ -36,17 +44,6 @@ upstream <- read.delim("data/raw/upstream.txt") %>%
         ifelse(ed_h3k27ac > threshold &
                    dox_h3k27ac < threshold, 'loss', 'shared')
     ))
-
-downstream <- read.delim("data/raw/downstream.txt") %>%
-    janitor::clean_names() %>%
-    mutate(position = "downstream")
-
-
-total <- full_join(upstream,
-                   downstream,
-                   by = "name",
-                   suffix = c(".up", ".dn"))
-
 
 ggplot(raw, aes(x = log10(fox_fold), y = log10(h3_fold))) +
     geom_point(color = "black") +
@@ -87,7 +84,6 @@ gain_gain <-
 
 euler(c(A = fox_gain, B = h3_gain, "A&B" = gain_gain)) %>% plot
 
-
 euler(c(A = fox_loss, B = h3_loss, "A&B" = loss_loss)) %>% plot
 
 
@@ -95,28 +91,136 @@ euler(c(A = fox_loss, B = h3_loss, "A&B" = loss_loss)) %>% plot
 
 
 # foxa1
-raw %>%
+raw   %>%
     pivot_longer(cols = contains(c("_foxa1", "_h3k27ac")),
                  names_to = "treatment") %>%
     filter(!grepl("h3k27ac|dox_foxa1_low", treatment)) %>%
     ggplot(aes(x = value, fill = treatment)) +
-    geom_histogram(color = "#e9ecef",
-                   alpha = 0.6,
-                   position = 'identity') +
+    geom_histogram(
+        color = "#e9ecef",
+        alpha = 0.6,
+        position = 'identity',
+        bins = 50
+    ) +
     scale_fill_manual(values = c("#69b3a2", "#404080")) +
     theme_ipsum() +
     labs(fill = "")
 
 
 # h3k27ac
-raw %>%
+raw  %>%
     pivot_longer(cols = contains(c("_foxa1", "_h3k27ac")),
                  names_to = "treatment") %>%
     filter(!grepl("foxa1", treatment)) %>%
     ggplot(aes(x = value, fill = treatment)) +
-    geom_histogram(color = "#e9ecef",
-                   alpha = 0.6,
-                   position = 'identity') +
+    geom_histogram(
+        color = "#e9ecef",
+        alpha = 0.6,
+        position = 'identity',
+        bins = 50
+    ) +
     scale_fill_manual(values = c("#69b3a2", "#404080")) +
     theme_ipsum() +
     labs(fill = "")
+
+
+# position
+# foxa1
+total %>%
+    filter(!grepl("h3k27ac|dox_foxa1_low", treatment)) %>%
+    ggplot(aes(x = value, fill = position)) +
+    geom_histogram(
+        color = "#e9ecef",
+        alpha = 0.6,
+        position = 'identity',
+        bins = 50
+    ) +
+    scale_fill_manual(values = c("#69b3a2", "#404080")) +
+    theme_ipsum() +
+    labs(fill = "")
+
+# h3
+total  %>%
+    pivot_longer(cols = contains(c("_foxa1", "_h3k27ac")),
+                 names_to = "treatment") %>%
+    filter(!grepl("foxa1", treatment)) %>%
+    ggplot(aes(x = value, fill = treatment)) +
+    geom_histogram(
+        color = "#e9ecef",
+        alpha = 0.6,
+        position = 'identity',
+        bins = 50
+    ) +
+    scale_fill_manual(values = c("#69b3a2", "#404080")) +
+    theme_ipsum() +
+    labs(fill = "")
+
+# fold
+total  %>%
+    pivot_longer(cols = contains(c("_foxa1", "_h3k27ac")),
+                 names_to = "treatment") %>%
+    filter(!grepl("h3k27ac|dox_foxa1_low", treatment)) %>%
+    ggplot(aes(x = fox_fold, fill = position)) +
+    geom_histogram(
+        color = "#e9ecef",
+        alpha = 0.6,
+        position = 'identity',
+        bins = 50
+    ) +
+    scale_fill_manual(values = c("#69b3a2", "#404080")) +
+    theme_ipsum() +
+    labs(fill = "")
+
+total  %>%
+    pivot_longer(cols = contains(c("_foxa1", "_h3k27ac")),
+                 names_to = "treatment") %>%
+    filter(!grepl("foxa1", treatment)) %>%
+    ggplot(aes(x = h3_fold, fill = position)) +
+    geom_histogram(
+        color = "#e9ecef",
+        alpha = 0.6,
+        position = 'identity',
+        bins = 50
+    ) +
+    scale_fill_manual(values = c("#69b3a2", "#404080")) +
+    theme_ipsum() +
+    labs(fill = "")
+
+
+# whisker plots
+raw  %>%
+    pivot_longer(cols = contains(c("_foxa1", "_h3k27ac")),
+                 names_to = "treatment") %>%
+    filter(!grepl("h3k27ac|dox_foxa1_low", treatment)) %>%
+    ggplot(aes(x = treatment,
+               y = log10(value),
+               fill = treatment)) +
+    geom_boxplot() +
+    theme_ipsum()
+
+
+total  %>%
+    pivot_longer(cols = contains(c("_foxa1", "_h3k27ac")),
+                 names_to = "treatment") %>%
+    filter(!grepl("h3k27ac|dox_foxa1_low", treatment)) %>%
+    ggplot(aes(x = treatment, y = log10(value), fill = position)) +
+    geom_boxplot() +
+    theme_ipsum()
+
+
+total %>%
+    pivot_longer(cols = contains(c("_foxa1", "_h3k27ac")),
+                 names_to = "treatment") %>%
+    mutate(activity = if_else(value > threshold, "active", "inactive")) %>%
+    filter(!grepl("h3k27ac|dox_foxa1_low", treatment)) %>%
+    filter(!grepl("inactive", activity)) %>%
+    ggplot(aes(
+        fill = factor(position, level = c("upstream", "downstream")),
+        x = factor(treatment,
+                   level = c("ed_foxa1", "dox_foxa1_high")),
+        y = ((..count..) / 416 * 100)
+    )) +
+    geom_bar(position = "dodge") +
+    xlab("") +
+    scale_fill_discrete(name = "") +
+    theme_ipsum()

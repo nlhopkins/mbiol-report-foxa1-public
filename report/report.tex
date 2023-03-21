@@ -221,15 +221,12 @@ PRJNA512997 & SRR8393424 & FOXA1 & MCF-7LP & GRCh37 (Hg19) \\
 \bottomrule()
 \end{longtable}
 
-\hypertarget{chip-seq-peak-analysis}{%
-\subsection{ChIP-seq Peak Analysis}\label{chip-seq-peak-analysis}}
-
-BAM files were uploaded into EaSeq (v1.111)\textsuperscript{\protect\hyperlink{ref-lerdrup2016}{5}} as ``Datasets'' using the standard settings for Chip-seq data.
-GRCh37 (hg19) tRNA sequences (n = 606) were downloaded as a ``Geneset'' from the UCSC Table Browser\textsuperscript{\protect\hyperlink{ref-Karolchik2004}{6}}, (available at \url{https://genome.ucsc.edu}).
-High-confidence tRNAs (n = 416) identified in the GtRNAdb\textsuperscript{\protect\hyperlink{ref-Chan2016}{7}} were extracted as a ``Regionset''.
-
 \hypertarget{easeq-for-chip-seq-peak-quantification}{%
 \subsubsection{EaSeq for Chip-seq Peak Quantification}\label{easeq-for-chip-seq-peak-quantification}}
+
+BAM files were uploaded into EaSeq (v1.111) as ``Datasets'' using the standard settings for Chip-seq data.
+GRCh37 (hg19) tRNA sequences (n = 606) were downloaded as a ``Geneset'' from the UCSC Table Browser\textsuperscript{\protect\hyperlink{ref-Karolchik2004}{5}}, (available at \url{https://genome.ucsc.edu}).
+High-confidence tRNAs (n = 416) identified in the GtRNAdb\textsuperscript{\protect\hyperlink{ref-Chan2016}{6}} were extracted as a ``Regionset''.
 
 Signal peak intensities surrounding tRNAs were quantified using the EaSeq ``quantify'' tool.
 Here the default settings ``Normalize to reads per million'' and ``Normalize counts to DNA-fragments'' were left checked.
@@ -237,23 +234,22 @@ The default setting ``Normalise to a signal of 1000 bp'' was unchecked.
 The window size was offset ±500bp from the start of each tRNA gene.
 Outputs are referred to as ``Q-values''.
 
-To quantify distinct upstream and downstream signals, the ``quantify'' tool was used with adjusted window sizes.
-The upstream region was defined as 500 bp preceding and the first nucleotide of tRNA gene body.
-Thus the start position was offset to 0 bp, and the end position was offset to -500 bp.
+To quantify upstream and downstream signals, the ``quantify'' tool was used with adjusted window sizes.
+The upstream region was defined as 500 bp preceding and the first nucleotide of tRNA loci.
+Thus, the start position was offset to 0 bp, and the end position was offset to -500 bp.
 The downstream region constitutes the 500 bp region beginning with the first nucleotide of tRNA gene body.
 The start position was offset to 1 bp, and the end position was offset to 500 bp.
 
-\hypertarget{heatmap}{%
-\subsubsection{Heatmap}\label{heatmap}}
-
-\hypertarget{filltrack}{%
-\subsubsection{Filltrack}\label{filltrack}}
-
-\hypertarget{motif-analysis}{%
-\subsection{Motif Analysis}\label{motif-analysis}}
+Following quantification, data was visualised with ``heatmap'', ``average'', and ``overlay'' EaSeq tools.
+EaSeq\textsuperscript{\protect\hyperlink{ref-lerdrup2016}{7}} is avaiable at \url{http://easeq.net}.
 
 \hypertarget{statistics}{%
 \subsection{Statistics}\label{statistics}}
+
+Statistical tests were carried out using R\textsuperscript{\protect\hyperlink{ref-r}{8}} (v 4.2.3), R Studio\textsuperscript{\protect\hyperlink{ref-rstudio}{9}} (v 2023.03.0.386) and the tidyverse\textsuperscript{\protect\hyperlink{ref-wickham2019}{10}} package.
+
+\hypertarget{motif-analysis}{%
+\subsection{Motif Analysis}\label{motif-analysis}}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -273,16 +269,16 @@ Group & Function \\
 Group & Function \\
 \midrule()
 \endhead
-ALOXE & Insulator Function\textsuperscript{\protect\hyperlink{ref-raab2011}{8},\protect\hyperlink{ref-sizer2022}{9}} \\
-Ebersole & Insulator Function\textsuperscript{\protect\hyperlink{ref-sizer2022}{9},\protect\hyperlink{ref-Ebersole2011}{10}} \\
+ALOXE & Insulator Function\textsuperscript{\protect\hyperlink{ref-raab2011}{11},\protect\hyperlink{ref-sizer2022}{12}} \\
+Ebersole & Insulator Function\textsuperscript{\protect\hyperlink{ref-sizer2022}{12},\protect\hyperlink{ref-Ebersole2011}{13}} \\
 HES7 & \\
 Per1 & \\
-TMEM107 & Insulator Function\textsuperscript{\protect\hyperlink{ref-raab2011}{8},\protect\hyperlink{ref-sizer2022}{9}} \\
-Arg-CCG & Implicated in Cancer Progression\textsuperscript{\protect\hyperlink{ref-Goodarzi2016}{11}} \\
-Glu-TTC & Implicated in Cancer Progression\textsuperscript{\protect\hyperlink{ref-Goodarzi2016}{11}} \\
+TMEM107 & Insulator Function\textsuperscript{\protect\hyperlink{ref-raab2011}{11},\protect\hyperlink{ref-sizer2022}{12}} \\
+Arg-CCG & Implicated in Cancer Progression\textsuperscript{\protect\hyperlink{ref-Goodarzi2016}{14}} \\
+Glu-TTC & Implicated in Cancer Progression\textsuperscript{\protect\hyperlink{ref-Goodarzi2016}{14}} \\
 iMET & Proliferation of Breast Cancer \\
 Met & iMet Control \\
-SeC & Involved in REDOX\textsuperscript{\protect\hyperlink{ref-Sangha2022}{12}} \\
+SeC & Involved in REDOX\textsuperscript{\protect\hyperlink{ref-Sangha2022}{15}} \\
 \bottomrule()
 \end{longtable}
 
@@ -320,7 +316,7 @@ SeC & Involved in REDOX\textsuperscript{\protect\hyperlink{ref-Sangha2022}{12}} 
 \end{itemize}
 
 \begin{flushright}
-356 Words
+392 Words
 \end{flushright}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
@@ -347,36 +343,48 @@ SeC & Involved in REDOX\textsuperscript{\protect\hyperlink{ref-Sangha2022}{12}} 
 \CSLLeftMargin{4 }%
 \CSLRightInline{Langmead B, Salzberg SL. \href{https://doi.org/10.1038/nmeth.1923}{Fast gapped-read alignment with Bowtie 2}. \emph{Nature Methods} 2012; \textbf{9}: 357--359.}
 
-\leavevmode\vadjust pre{\hypertarget{ref-lerdrup2016}{}}%
-\CSLLeftMargin{5 }%
-\CSLRightInline{Lerdrup M, Johansen JV, Agrawal-Singh S, Hansen K. \href{https://doi.org/10.1038/nsmb.3180}{An interactive environment for agile analysis and visualization of ChIP-sequencing data}. \emph{Nature Structural \& Molecular Biology} 2016; \textbf{23}: 349--357.}
-
 \leavevmode\vadjust pre{\hypertarget{ref-Karolchik2004}{}}%
-\CSLLeftMargin{6 }%
+\CSLLeftMargin{5 }%
 \CSLRightInline{Karolchik D. \href{https://doi.org/10.1093/nar/gkh103}{The UCSC Table Browser data retrieval tool}. \emph{Nucleic Acids Research} 2004; \textbf{32}: 493D--496.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Chan2016}{}}%
-\CSLLeftMargin{7 }%
+\CSLLeftMargin{6 }%
 \CSLRightInline{Chan PP, Lowe TM. \href{https://doi.org/10.1093/nar/gkv1309}{GtRNAdb 2.0: an expanded database of transfer RNA genes identified in complete and draft genomes}. \emph{Nucleic Acids Research} 2015; \textbf{44}: D184--D189.}
 
-\leavevmode\vadjust pre{\hypertarget{ref-raab2011}{}}%
+\leavevmode\vadjust pre{\hypertarget{ref-lerdrup2016}{}}%
+\CSLLeftMargin{7 }%
+\CSLRightInline{Lerdrup M, Johansen JV, Agrawal-Singh S, Hansen K. \href{https://doi.org/10.1038/nsmb.3180}{An interactive environment for agile analysis and visualization of ChIP-sequencing data}. \emph{Nature Structural \& Molecular Biology} 2016; \textbf{23}: 349--357.}
+
+\leavevmode\vadjust pre{\hypertarget{ref-r}{}}%
 \CSLLeftMargin{8 }%
+\CSLRightInline{R Core Team. \emph{R: A language and environment for statistical computing}. R Foundation for Statistical Computing: Vienna, Austria, 2023. \url{https://www.R-project.org/}.}
+
+\leavevmode\vadjust pre{\hypertarget{ref-rstudio}{}}%
+\CSLLeftMargin{9 }%
+\CSLRightInline{Posit Team. \emph{RStudio: Integrated development environment for r}. Posit Software, PBC: Boston, MA, 2023. \url{http://www.posit.co/}.}
+
+\leavevmode\vadjust pre{\hypertarget{ref-wickham2019}{}}%
+\CSLLeftMargin{10 }%
+\CSLRightInline{Wickham H, Averick M, Bryan J, Chang W, McGowan L, François R \emph{et al.} \href{https://doi.org/10.21105/joss.01686}{Welcome to the tidyverse}. \emph{Journal of Open Source Software} 2019; \textbf{4}: 1686.}
+
+\leavevmode\vadjust pre{\hypertarget{ref-raab2011}{}}%
+\CSLLeftMargin{11 }%
 \CSLRightInline{Raab JR, Chiu J, Zhu J, Katzman S, Kurukuti S, Wade PA \emph{et al.} \href{https://doi.org/10.1038/emboj.2011.406}{Human tRNA genes function as chromatin insulators}. \emph{The EMBO Journal} 2011; \textbf{31}: 330--350.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-sizer2022}{}}%
-\CSLLeftMargin{9 }%
+\CSLLeftMargin{12 }%
 \CSLRightInline{Sizer RE, Chahid N, Butterfield SP, Donze D, Bryant NJ, White RJ. \href{https://doi.org/10.1016/j.gene.2022.146533}{TFIIIC-based chromatin insulators through eukaryotic evolution}. \emph{Gene} 2022; \textbf{835}: 146533.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Ebersole2011}{}}%
-\CSLLeftMargin{10 }%
+\CSLLeftMargin{13 }%
 \CSLRightInline{Ebersole T, Kim J-H, Samoshkin A, Kouprina N, Pavlicek A, White RJ \emph{et al.} \href{https://doi.org/10.4161/cc.10.16.17092}{tRNA genes protect a reporter gene from epigenetic silencing in mouse cells}. \emph{Cell Cycle} 2011; \textbf{10}: 2779--2791.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Goodarzi2016}{}}%
-\CSLLeftMargin{11 }%
+\CSLLeftMargin{14 }%
 \CSLRightInline{Goodarzi H, Nguyen HCB, Zhang S, Dill BD, Molina H, Tavazoie SF. \href{https://doi.org/10.1016/j.cell.2016.05.046}{Modulated Expression of Specific tRNAs Drives Gene Expression and Cancer Progression}. \emph{Cell} 2016; \textbf{165}: 1416--1427.}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Sangha2022}{}}%
-\CSLLeftMargin{12 }%
+\CSLLeftMargin{15 }%
 \CSLRightInline{Sangha AK, Kantidakis T. \href{https://doi.org/10.3390/cimb44070207}{The Aminoacyl-tRNA Synthetase and tRNA Expression Levels Are Deregulated in Cancer and Correlate Independently with Patient Survival}. \emph{Current Issues in Molecular Biology} 2022; \textbf{44}: 3001--3019.}
 
 \end{CSLReferences}

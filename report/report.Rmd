@@ -144,13 +144,11 @@ kbl(
 )
 ```
 
-## ChIP-seq Peak Analysis
+### EaSeq for Chip-seq Peak Quantification
 
-BAM files were uploaded into EaSeq (v1.111)[@lerdrup2016] as "Datasets" using the standard settings for Chip-seq data.
+BAM files were uploaded into EaSeq (v1.111) as "Datasets" using the standard settings for Chip-seq data.
 GRCh37 (hg19) tRNA sequences (n = 606) were downloaded as a "Geneset" from the UCSC Table Browser[@Karolchik2004], (available at <https://genome.ucsc.edu>).
 High-confidence tRNAs (n = 416) identified in the GtRNAdb[@Chan2016] were extracted as a "Regionset".
-
-### EaSeq for Chip-seq Peak Quantification
 
 Signal peak intensities surrounding tRNAs were quantified using the EaSeq "quantify" tool.
 Here the default settings "Normalize to reads per million" and "Normalize counts to DNA-fragments" were left checked.
@@ -158,25 +156,49 @@ The default setting "Normalise to a signal of 1000 bp" was unchecked.
 The window size was offset ±500bp from the start of each tRNA gene.
 Outputs are referred to as "Q-values".
 
-To quantify distinct upstream and downstream signals, the "quantify" tool was used with adjusted window sizes.
-The upstream region was defined as 500 bp preceding and the first nucleotide of tRNA gene body.
-Thus the start position was offset to 0 bp, and the end position was offset to -500 bp.
+To quantify upstream and downstream signals, the "quantify" tool was used with adjusted window sizes.
+The upstream region was defined as 500 bp preceding and the first nucleotide of tRNA loci.
+Thus, the start position was offset to 0 bp, and the end position was offset to -500 bp.
 The downstream region constitutes the 500 bp region beginning with the first nucleotide of tRNA gene body.
 The start position was offset to 1 bp, and the end position was offset to 500 bp.
 
-### Heatmap
-
-### Filltrack
+Following quantification, data was visualised with "heatmap", "average", and "overlay" EaSeq tools.
+EaSeq[@lerdrup2016] is avaiable at <http://easeq.net>.
 
 ## Motif Analysis
 
 ## Statistics
 
+Statistical tests and graphs were generated with R[@r] (v 4.2.3), R Studio[@rstudio] (v 2023.03.0.386) and the tidyverse[@wickham2019] package.
+
 ------------------------------------------------------------------------
 
 # Results
 
-## Localisation of FOXA1 at tRNA genes in MCF-7 cells
+## FOXA1 and H3k27ac Binding Events
+
+### Why?
+
+### What?
+
+-   quantification of reads
+
+```{=html}
+<!-- -->
+```
+-   heatmaps
+
+-   ordered by -dox q-value
+
+### Results
+
+-   foxa1 at all tRNAs
+
+-   H3k27ac at all but 2 genes
+
+### Suggests
+
+## Localisation of FOXA1 at indicidual tRNA genes in MCF-7 cells
 
 ```{r clusters, out.width='90%'}
 knitr::kable(
@@ -215,6 +237,8 @@ knitr::kable(
 ------------------------------------------------------------------------
 
 # Discussion
+
+-   not compared mcf-7 to treatment responsive cells
 
 ## Future
 

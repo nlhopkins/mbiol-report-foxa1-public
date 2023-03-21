@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.3.21)  21 MAR 2023 15:52
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.3.21)  21 MAR 2023 20:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1024,17 +1024,27 @@ LaTeX Font Info:    Font shape `TU/SourceSansPro(0)/m/n' will be
 (Font)              scaled to size 10.95pt on input line 205.
 LaTeX Font Info:    Font shape `TU/SourceSansPro(0)/b/n' will be
 (Font)              scaled to size 10.95pt on input line 205.
-[1] [2]
+[1]
+Underfull \hbox (badness 2837) in paragraph at lines 231--236
+[]\TU/SourceSansPro(0)/m/n/12 Signal peak intensities surrounding tRNAs were quantified using the EaSeq “quantify”
+ []
+
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 330--333
+
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 334--337
 
  []
 
-
+[3]
 Underfull \hbox (badness 10000) in paragraph at lines 338--341
 
  []
 
-[3]
+
 Underfull \hbox (badness 10000) in paragraph at lines 342--345
 
  []
@@ -1084,18 +1094,28 @@ Underfull \hbox (badness 10000) in paragraph at lines 378--381
 
  []
 
-[4] (./report.aux)
+
+Underfull \hbox (badness 10000) in paragraph at lines 382--385
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 386--389
+
+ []
+
+[4] [5] (./report.aux)
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 22875 strings out of 478682
- 426857 string characters out of 5847468
- 1855018 words of memory out of 5000000
- 42627 multiletter control sequences out of 15000+600000
+ 22869 strings out of 478682
+ 426795 string characters out of 5847468
+ 1858018 words of memory out of 5000000
+ 42621 multiletter control sequences out of 15000+600000
  516094 words of font info for 87 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  86i,10n,115p,1003b,524s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on report.pdf (6 pages).
+Output written on report.pdf (7 pages).

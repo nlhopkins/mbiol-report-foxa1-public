@@ -11,7 +11,7 @@ output:
             header.sty
 geometry: "left=2.5cm,right=2.5cm,top=2cm,bottom=2cm"
 linestretch: 1.2
-fontsize: 11pt
+fontsize: 12pt
 indent: true
 bibliography: refs.bib
 citation-style: ../csl/nature-publishing-group-vancouver.csl
@@ -30,8 +30,7 @@ header-includes:
 - \captionsetup[table]{font=small}
 - \captionsetup[table]{justification=justified}
 - \captionsetup[figure]{justification=justified}
-- \usepackage[lf]{venturis}
-- \normalfont
+- \usepackage[default]{sourcesanspro}
 
 editor_options: 
     markdown:
@@ -82,9 +81,13 @@ citation_count <-
 
 # Materials & Methods
 
-## MCF7L ChIP-seq Data from NCBI
+## Acquisition of Public ChIP-seq Datasets
 
-ChIP-seq was performed on MCF7L cells expressing Dox-inducible FOXA1, established using a lentiviral cDNA delivery system [@fu2016; @fu2019]. Datasets were deposited into the National Centre for Biotechnology Information (NCBI) Sequence Read Archive (SRA) under accession no. PRJNA512997[@leinonen2010] (Table \@ref(tab:data)). SRAs were downloaded by Galaxy (v23.0.rc1)[@thegala2022] and converted to FastQ files and then into BAM files using 'Genetic Manipulation Tools'.
+ChIP-seq was performed on genetically modified MCF7L cells (*insertion, using a lentiviral cDNA delivery system to express Dox-inducible FOXA1*) [@fu2019].
+Datasets were deposited into the National Centre for Biotechnology Information (NCBI) Sequence Read Archive (SRA)[@leinonen2010] under accession no.
+PRJNA512997 (Table \@ref(tab:data)).
+Using "Genetic Manipulation Tools" within the Galaxy[@thegala2022] environment (v 23.0.rc1), SRAs were converted to FastQ files.
+FastQ files were then aligned to the human genome assembly GRCh37 (hg19) using Bowtie2 (v 2.5.0)[@langmead2012] to output BAM files.
 
 ```{r data}
 kbl(
@@ -126,7 +129,7 @@ kbl(
       ""
     ),
     "Assembly" = c(
-      "GRCh37 Hg19",
+      "GRCh37 (Hg19)",
       "",
       "",
       "",
@@ -141,19 +144,29 @@ kbl(
 )
 ```
 
-## EaSeq for the Quantification of FOXA1 and H3K27ac at tRNA genes
+## ChIP-seq Peak Analysis
 
-BAM files were uploaded into EaSeq (v1.111)[@lerdrup2016] as 'Datasets' using the standard settings for Chip-seq data.
-The reference genome hg19 was downloaded as a 'Geneset' from the UCSC Table Browser[@Karolchik2004].
-High-confidence tRNAs identified in the GtRNAdb[@Chan2016] were extracted as a 'Regionset'.
-Signal peak intensities surrounding tRNAs were quantified using the 'Quantify' tool.
-Here, the default settings were left checked, with the exception of 'Normalise to a signal of'.
-The window size was offset ±500bp from the start of each gene.
-Outputs are referred to as 'Q-values'.
+BAM files were uploaded into EaSeq (v1.111)[@lerdrup2016] as "Datasets" using the standard settings for Chip-seq data.
+GRCh37 (hg19) tRNA sequences (n = 606) were downloaded as a "Geneset" from the UCSC Table Browser[@Karolchik2004], (available at <https://genome.ucsc.edu>).
+High-confidence tRNAs (n = 416) identified in the GtRNAdb[@Chan2016] were extracted as a "Regionset".
 
--   sorted by q value
+### EaSeq for Chip-seq Peak Quantification
 
--   heatmap, filltrack, ect
+Signal peak intensities surrounding tRNAs were quantified using the EaSeq "quantify" tool.
+Here the default settings "Normalize to reads per million" and "Normalize counts to DNA-fragments" were left checked.
+The default setting "Normalise to a signal of 1000 bp" was unchecked.
+The window size was offset ±500bp from the start of each tRNA gene.
+Outputs are referred to as "Q-values".
+
+To quantify distinct upstream and downstream signals, the "quantify" tool was used with adjusted window sizes.
+The upstream region was defined as 500 bp preceding and the first nucleotide of tRNA gene body.
+Thus the start position was offset to 0 bp, and the end position was offset to -500 bp.
+The downstream region constitutes the 500 bp region beginning with the first nucleotide of tRNA gene body.
+The start position was offset to 1 bp, and the end position was offset to 500 bp.
+
+### Heatmap
+
+### Filltrack
 
 ## Motif Analysis
 
@@ -164,8 +177,6 @@ Outputs are referred to as 'Q-values'.
 # Results
 
 ## Localisation of FOXA1 at tRNA genes in MCF-7 cells
-
-Table \@ref(tab:clusters)
 
 ```{r clusters, out.width='90%'}
 knitr::kable(
@@ -183,16 +194,16 @@ knitr::kable(
       "SeC"
     ),
     "Function" = c(
-      "Insulator Function[@raab2011]",
+      "Insulator Function[@raab2011; @sizer2022]",
+      "Insulator Function[@Ebersole2011; @sizer2022]",
       "",
       "",
-      "",
-      "",
-      "Implicated in Cancer",
-      "",
+      "Insulator Function [@raab2011; @sizer2022]",
+      "Implicated in Cancer Progression[@Goodarzi2016]",
+      "Implicated in Cancer Progression[@Goodarzi2016]",
       "Proliferation of Breast Cancer",
       "iMet Control",
-      "Involved in REDOX"
+      "Involved in REDOX [@Sangha2022]"
     )
   ),
   booktabs = TRUE,
@@ -200,8 +211,6 @@ knitr::kable(
   format = "markdown"
 ) 
 ```
-
-## Co-localisation of FOXA1 with enhancer marks at tRNA genes
 
 ------------------------------------------------------------------------
 

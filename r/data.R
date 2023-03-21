@@ -1,5 +1,6 @@
 library(tidyverse)
 library(hrbrthemes)
+library(ggthemes)
 library(eulerr)
 
 
@@ -53,7 +54,7 @@ ggplot(raw, aes(x = log10(fox_fold), y = log10(h3_fold))) +
         fill = "#69b3a2",
         se = TRUE
     ) +
-    theme_ipsum()
+    theme_classic()
 
 ggplot(raw, aes(x = log10(dox_foxa1_high), y = log10(dox_h3k27ac))) +
     geom_point(color = "black") +
@@ -63,7 +64,7 @@ ggplot(raw, aes(x = log10(dox_foxa1_high), y = log10(dox_h3k27ac))) +
         fill = "#69b3a2",
         se = TRUE
     ) +
-    theme_ipsum()
+    theme_classic()
 
 
 fox_gain <- length(grep("gain", raw$fox_status)) %>% as.numeric()

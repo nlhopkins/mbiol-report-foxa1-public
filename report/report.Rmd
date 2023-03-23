@@ -183,12 +183,13 @@ Statistical tests and graphs were generated with R[@r] (v 4.2.3), R Studio[@rstu
 
 -   quantification of reads
 
-```{=html}
 <!-- -->
-```
+
 -   heatmaps
 
 -   ordered by -dox q-value
+
+-   average tracks
 
 ### Results
 

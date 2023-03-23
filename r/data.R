@@ -2,12 +2,12 @@ library(tidyverse)
 library(hrbrthemes)
 library(ggthemes)
 library(eulerr)
-
+library(ggpubr)
 
 raw <- read.delim("data/raw/hg19.txt") %>%
     janitor::clean_names()
 
-threshold <- median(raw$ed_h3k27ac)
+threshold <- median(raw$ed_h3k27ac, na.rm = TRUE)
 
 raw <- raw %>%
     mutate(across(contains("ed"), ~ .x / ed_input)) %>%
@@ -20,7 +20,9 @@ raw <- raw %>%
         'gain',
         ifelse(ed_h3k27ac > threshold &
                    dox_h3k27ac < threshold, 'loss', 'shared')
-    ))
+    )) %>%
+    mutate(fox_abs = dox_foxa1_high - ed_foxa1) %>%
+    mutate(h3_abs = dox_h3k27ac - ed_h3k27ac)
 
 
 upstream <- read.delim("data/raw/upstream.txt") %>%
@@ -46,6 +48,10 @@ total <- full_join(upstream,
                    dox_h3k27ac < threshold, 'loss', 'shared')
     ))
 
+
+pos_threshold <- median(total$ed_h3k27ac, na.rm = TRUE)
+
+# fold change
 ggplot(raw, aes(x = log10(fox_fold), y = log10(h3_fold))) +
     geom_point(color = "black") +
     geom_smooth(
@@ -56,6 +62,18 @@ ggplot(raw, aes(x = log10(fox_fold), y = log10(h3_fold))) +
     ) +
     theme_classic()
 
+# abs values
+ggplot(raw, aes(x = log10(fox_abs), y = log10(h3_abs))) +
+    geom_point(color = "black") +
+    geom_smooth(
+        method = lm ,
+        color = "red",
+        fill = "#69b3a2",
+        se = TRUE
+    ) +
+    theme_classic()
+
+# q values
 ggplot(raw, aes(x = log10(dox_foxa1_high), y = log10(dox_h3k27ac))) +
     geom_point(color = "black") +
     geom_smooth(
@@ -128,6 +146,8 @@ raw  %>%
 # position
 # foxa1
 total %>%
+    pivot_longer(cols = contains(c("_foxa1", "_h3k27ac")),
+                 names_to = "treatment") %>%
     filter(!grepl("h3k27ac|dox_foxa1_low", treatment)) %>%
     ggplot(aes(x = value, fill = position)) +
     geom_histogram(
@@ -188,19 +208,9 @@ total  %>%
     labs(fill = "")
 
 
-# whisker plots
-raw  %>%
+total  %>%
     pivot_longer(cols = contains(c("_foxa1", "_h3k27ac")),
                  names_to = "treatment") %>%
-    filter(!grepl("h3k27ac|dox_foxa1_low", treatment)) %>%
-    ggplot(aes(x = treatment,
-               y = log10(value),
-               fill = treatment)) +
-    geom_boxplot() +
-    theme_ipsum()
-
-
-total  %>%
     pivot_longer(cols = contains(c("_foxa1", "_h3k27ac")),
                  names_to = "treatment") %>%
     filter(!grepl("h3k27ac|dox_foxa1_low", treatment)) %>%
@@ -212,16 +222,57 @@ total  %>%
 total %>%
     pivot_longer(cols = contains(c("_foxa1", "_h3k27ac")),
                  names_to = "treatment") %>%
-    mutate(activity = if_else(value > threshold, "active", "inactive")) %>%
+    mutate(activity = if_else(value > pos_threshold, "active", "inactive")) %>%
     filter(!grepl("h3k27ac|dox_foxa1_low", treatment)) %>%
     filter(!grepl("inactive", activity)) %>%
     ggplot(aes(
         fill = factor(position, level = c("upstream", "downstream")),
         x = factor(treatment,
                    level = c("ed_foxa1", "dox_foxa1_high")),
-        y = ((..count..) / 416 * 100)
+        y = after_stat(count)
     )) +
     geom_bar(position = "dodge") +
     xlab("") +
     scale_fill_discrete(name = "") +
     theme_ipsum()
+
+
+
+# whisker plots
+x <- raw %>%
+    pivot_longer(cols = contains(c("_foxa1", "_h3k27ac")),
+                 names_to = "treatment") %>%
+    mutate(target = case_when(str_detect(treatment, "fox") ~ "fox", TRUE ~ "h3")) %>%
+    mutate(variable = case_when(str_detect(treatment, "dox") ~ "dox", TRUE ~ "ed"))
+
+mod <- aov(data = x, value ~ target * variable)
+summary(mod)
+TukeyHSD(mod)
+plot(mod, which = 2)
+plot(mod, which = 1)
+
+
+raw  %>%
+    pivot_longer(cols = contains(c("_foxa1", "_h3k27ac")),
+                 names_to = "treatment") %>%
+    mutate(target = case_when(str_detect(treatment, "fox") ~ "fox", TRUE ~ "h3")) %>%
+    mutate(variable = case_when(str_detect(treatment, "dox") ~ "dox", TRUE ~ "ed"))  %>%
+    filter(!grepl("dox_foxa1_low", treatment)) %>%
+    ggplot(aes(x = target,
+               y = log10(value),
+               fill = variable)) +
+    geom_boxplot() +
+    theme_ipsum() +
+    stat_compare_means(method = "wilcox.test",
+                       label = "p.signif",
+                       paired = T)
+
+
+raw  %>%
+    pivot_longer(cols = contains(c("_foxa1", "_h3k27ac")),
+                 names_to = "treatment") %>%
+    mutate(target = case_when(str_detect(treatment, "fox") ~ "fox", TRUE ~ "h3")) %>%
+    mutate(variable = case_when(str_detect(treatment, "dox") ~ "dox", TRUE ~ "ed"))  %>%
+    filter(!grepl("dox_foxa1_low", treatment)) %>% 
+    ggplot(aes(treatment, name, fill = log10(value))) +
+    geom_tile()

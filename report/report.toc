@@ -1,0 +1,25 @@
+\contentsline {section}{Introduction}{1}{section*.3}%
+\contentsline {subsection}{FOXA1 Expression and ERα+ Breast Cancer}{1}{section*.4}%
+\contentsline {subsection}{tRNAs and Gene Expression}{1}{section*.5}%
+\contentsline {section}{Materials \& Methods}{1}{section*.6}%
+\contentsline {subsection}{Acquisition of Public ChIP-seq Datasets}{1}{section*.7}%
+\contentsline {subsubsection}{EaSeq for Chip-seq Peak Quantification}{2}{section*.8}%
+\contentsline {subsection}{Motif Analysis}{2}{section*.9}%
+\contentsline {subsection}{Statistics}{3}{section*.10}%
+\contentsline {section}{Results}{3}{section*.11}%
+\contentsline {subsection}{FOXA1 and H3k27ac Binding Events}{3}{section*.12}%
+\contentsline {subsubsection}{Background}{3}{section*.13}%
+\contentsline {subsubsection}{-}{3}{section*.14}%
+\contentsline {subsubsection}{Why? What?}{3}{section*.15}%
+\contentsline {subsubsection}{Heatmaps}{3}{section*.16}%
+\contentsline {subsubsection}{Average Tracks}{3}{section*.17}%
+\contentsline {subsubsection}{Suggests}{5}{section*.19}%
+\contentsline {subsection}{Boxplots}{5}{section*.20}%
+\contentsline {subsubsection}{Why?}{5}{section*.21}%
+\contentsline {subsubsection}{What?}{5}{section*.22}%
+\contentsline {subsubsection}{Boxplot}{5}{section*.23}%
+\contentsline {subsubsection}{Volcano}{5}{section*.24}%
+\contentsline {subsection}{Localisation of FOXA1 at individual tRNA genes in MCF-7 cells}{5}{section*.25}%
+\contentsline {section}{Discussion}{6}{section*.26}%
+\contentsline {subsection}{Future}{6}{section*.27}%
+\contentsline {section}{References}{6}{section*.28}%

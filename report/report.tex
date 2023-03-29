@@ -25,6 +25,16 @@
   \usepackage[]{microtype}
   \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
 \usepackage{xcolor}
 \usepackage[left=2.5cm,right=2.5cm,top=2cm,bottom=2cm]{geometry}
 \usepackage{longtable,booktabs,array}
@@ -53,7 +63,7 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{5}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 \newlength{\cslhangindent}
 \setlength{\cslhangindent}{1.5em}
 \newlength{\csllabelwidth}
@@ -169,6 +179,8 @@ Main: \\
 \textbf{Natasha L. Hopkins}\\
 
 \setstretch{1.2}
+\hfill\break
+
 Abstract
 
 \normalsize
@@ -195,11 +207,11 @@ Abstract
 \hypertarget{acquisition-of-public-chip-seq-datasets}{%
 \subsection{Acquisition of Public ChIP-seq Datasets}\label{acquisition-of-public-chip-seq-datasets}}
 
-ChIP-seq was performed on genetically modified MCF7L cells (\emph{insertion, using a lentiviral cDNA delivery system to express Dox-inducible FOXA1})\textsuperscript{\protect\hyperlink{ref-fu2019}{1}}.
-Datasets were deposited into the National Centre for Biotechnology Information (NCBI) Sequence Read Archive (SRA)\textsuperscript{\protect\hyperlink{ref-leinonen2010}{2}} under accession no.
+ChIP-seq was performed on genetically modified MCF7L cells (\emph{insertion, using a lentiviral cDNA delivery system to express Dox-inducible FOXA1})\textsuperscript{{[}\protect\hyperlink{ref-fu2019}{1}{]}}.
+Datasets were deposited into the National Centre for Biotechnology Information (NCBI) Sequence Read Archive (SRA)\textsuperscript{{[}\protect\hyperlink{ref-leinonen2010}{2}{]}} under accession no.
 PRJNA512997 (Table \ref{tab:data}).
-Using ``Genetic Manipulation Tools'' within the Galaxy\textsuperscript{\protect\hyperlink{ref-thegala2022}{3}} environment (v 23.0.rc1), SRAs were converted to FastQ files.
-FastQ files were then aligned to the human genome assembly GRCh37 (hg19) using Bowtie2 (v 2.5.0)\textsuperscript{\protect\hyperlink{ref-langmead2012}{4}} to output BAM files.
+Using ``Genetic Manipulation Tools'' within the Galaxy\textsuperscript{{[}\protect\hyperlink{ref-thegala2022}{3}{]}} environment (v 23.0.rc1), SRAs were converted to FastQ files.
+FastQ files were then aligned to the human genome assembly GRCh37 (hg19) using Bowtie2 (v 2.5.0)\textsuperscript{{[}\protect\hyperlink{ref-langmead2012}{4}{]}} to output BAM files.
 
 \begin{longtable}[]{@{}lllll@{}}
 \caption{\label{tab:data}Publicly available ChIP-seq SRA files aquired from the NCBI SRA database (accession no. PRJNA512997).}\tabularnewline
@@ -225,8 +237,8 @@ PRJNA512997 & SRR8393424 & FOXA1 & MCF-7LP & GRCh37 (Hg19) \\
 \subsubsection{EaSeq for Chip-seq Peak Quantification}\label{easeq-for-chip-seq-peak-quantification}}
 
 BAM files were uploaded into EaSeq (v1.111) as ``Datasets'' using the standard settings for Chip-seq data.
-GRCh37 (hg19) tRNA sequences (n = 606) were downloaded as a ``Geneset'' from the UCSC Table Browser\textsuperscript{\protect\hyperlink{ref-Karolchik2004}{5}}, (available at \url{https://genome.ucsc.edu}).
-High-confidence tRNAs (n = 416) identified in the GtRNAdb\textsuperscript{\protect\hyperlink{ref-Chan2016}{6}} were extracted as a ``Regionset''.
+GRCh37 (hg19) tRNA sequences (n = 606) were downloaded as a ``Geneset'' from the UCSC Table Browser\textsuperscript{{[}\protect\hyperlink{ref-Karolchik2004}{5}{]}}, (available at \url{https://genome.ucsc.edu}).
+High-confidence tRNAs (n = 416) identified in the GtRNAdb\textsuperscript{{[}\protect\hyperlink{ref-Chan2016}{6}{]}} were extracted as a ``Regionset''.
 
 Signal peak intensities surrounding tRNAs were quantified using the EaSeq ``quantify'' tool.
 Here the default settings ``Normalize to reads per million'' and ``Normalize counts to DNA-fragments'' were left checked.
@@ -240,24 +252,91 @@ Thus, the start position was offset to 0 bp, and the end position was offset to 
 The downstream region constitutes the 500 bp region beginning with the first nucleotide of tRNA gene body.
 The start position was offset to 1 bp, and the end position was offset to 500 bp.
 
-Following quantification, data was visualised with ``heatmap'', ``average'', and ``overlay'' EaSeq tools.
-EaSeq\textsuperscript{\protect\hyperlink{ref-lerdrup2016}{7}} is avaiable at \url{http://easeq.net}.
+Following quantification, tRNA binding events were arranged in ascending order -DOX Q-value and visualised as heatmaps.
+Data was also visualised with ``average'', and ``overlay'' EaSeq tools.
+
+EaSeq\textsuperscript{{[}\protect\hyperlink{ref-lerdrup2016}{7}{]}} is avaiable at \url{http://easeq.net}.
+
+\hypertarget{motif-analysis}{%
+\subsection{Motif Analysis}\label{motif-analysis}}
+
+Multiple EM for Motif Elicitation ChIP (MEME) Suite
 
 \hypertarget{statistics}{%
 \subsection{Statistics}\label{statistics}}
 
-Statistical tests were carried out using R\textsuperscript{\protect\hyperlink{ref-r}{8}} (v 4.2.3), R Studio\textsuperscript{\protect\hyperlink{ref-rstudio}{9}} (v 2023.03.0.386) and the tidyverse\textsuperscript{\protect\hyperlink{ref-wickham2019}{10}} package.
-
-\hypertarget{motif-analysis}{%
-\subsection{Motif Analysis}\label{motif-analysis}}
+Statistical tests and graphs were generated with R\textsuperscript{{[}\protect\hyperlink{ref-r}{8}{]}} (v 4.2.3), R Studio\textsuperscript{{[}\protect\hyperlink{ref-rstudio}{9}{]}} (v 2023.03.0.386) and the tidyverse\textsuperscript{{[}\protect\hyperlink{ref-wickham2019}{10}{]}} package.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{results}{%
 \section{Results}\label{results}}
 
-\hypertarget{localisation-of-foxa1-at-trna-genes-in-mcf-7-cells}{%
-\subsection{Localisation of FOXA1 at tRNA genes in MCF-7 cells}\label{localisation-of-foxa1-at-trna-genes-in-mcf-7-cells}}
+\hypertarget{foxa1-and-h3k27ac-binding-events}{%
+\subsection{FOXA1 and H3k27ac Binding Events}\label{foxa1-and-h3k27ac-binding-events}}
+
+\hypertarget{background}{%
+\subsubsection{Background}\label{background}}
+
+\hypertarget{section}{%
+\subsubsection{-}\label{section}}
+
+\hypertarget{why-what}{%
+\subsubsection{Why? What?}\label{why-what}}
+
+To investigate the impact of FOXA1 on 416 tRNA enhancers in ER+ MCF-7 cells, public ChIP-Seq datasets from Fu et al.~(2019)\textsuperscript{{[}\protect\hyperlink{ref-fu2019}{1}{]}} were interrogated.
+In this paper, a doxycycline (Dox) inducible OE system was used to achieve FOXA1 OE akin to tamoxifen-resistant (TamR) MCF-7 cells\textsuperscript{{[}\protect\hyperlink{ref-fu2019}{1}{]}}.
+
+\hypertarget{heatmaps}{%
+\subsubsection{Heatmaps}\label{heatmaps}}
+
+Examination of these datasets revealed that both FOXA1 and H3k27ac interact with the majority of tRNA, relative to ±10kb flanking regions.
+
+Heatmaps showed that upon FOXA1 OE, FOXA1 binding at tRNAs increases slightly cat tRNA TSS.
+However, H3K27ac substantially decreases around tRNA TSS.
+
+\hypertarget{average-tracks}{%
+\subsubsection{Average Tracks}\label{average-tracks}}
+
+This was confirmed by average signal intensity tracks 4/1.
+
+\begin{figure}
+
+{\centering \includegraphics[width=24.54in]{../images/results_01} 
+
+}
+
+\caption{(B) Ratiometric heatmaps of the log2 ratio between the binding of FOXA1 or H3k27ac with endogenous FOXA1 expression vs. the binding of FOXA1 or H3k27ac with FOXA1 OE.}\label{fig:results-1}
+\end{figure}
+
+\hypertarget{suggests}{%
+\subsubsection{Suggests}\label{suggests}}
+
+\hypertarget{boxplots}{%
+\subsection{Boxplots}\label{boxplots}}
+
+\hypertarget{why}{%
+\subsubsection{Why?}\label{why}}
+
+\hypertarget{what}{%
+\subsubsection{What?}\label{what}}
+
+Mann Whitney U to compare means
+
+\hypertarget{boxplot}{%
+\subsubsection{Boxplot}\label{boxplot}}
+
+\hypertarget{volcano}{%
+\subsubsection{Volcano}\label{volcano}}
+
+X2 = x number of significantly upregulated and downregulated genes
+
+more Up than down (FOX)
+
+about the same for H3
+
+\hypertarget{localisation-of-foxa1-at-individual-trna-genes-in-mcf-7-cells}{%
+\subsection{Localisation of FOXA1 at individual tRNA genes in MCF-7 cells}\label{localisation-of-foxa1-at-individual-trna-genes-in-mcf-7-cells}}
 
 \begin{longtable}[]{@{}ll@{}}
 \caption{\label{tab:clusters}.}\tabularnewline
@@ -269,16 +348,16 @@ Group & Function \\
 Group & Function \\
 \midrule()
 \endhead
-ALOXE & Insulator Function\textsuperscript{\protect\hyperlink{ref-raab2011}{11},\protect\hyperlink{ref-sizer2022}{12}} \\
-Ebersole & Insulator Function\textsuperscript{\protect\hyperlink{ref-sizer2022}{12},\protect\hyperlink{ref-Ebersole2011}{13}} \\
+ALOXE & Insulator Function\textsuperscript{{[}\protect\hyperlink{ref-raab2011}{11},\protect\hyperlink{ref-sizer2022}{12}{]}} \\
+Ebersole & Insulator Function\textsuperscript{{[}\protect\hyperlink{ref-sizer2022}{12},\protect\hyperlink{ref-Ebersole2011}{13}{]}} \\
 HES7 & \\
 Per1 & \\
-TMEM107 & Insulator Function\textsuperscript{\protect\hyperlink{ref-raab2011}{11},\protect\hyperlink{ref-sizer2022}{12}} \\
-Arg-CCG & Implicated in Cancer Progression\textsuperscript{\protect\hyperlink{ref-Goodarzi2016}{14}} \\
-Glu-TTC & Implicated in Cancer Progression\textsuperscript{\protect\hyperlink{ref-Goodarzi2016}{14}} \\
+TMEM107 & Insulator Function\textsuperscript{{[}\protect\hyperlink{ref-raab2011}{11},\protect\hyperlink{ref-sizer2022}{12}{]}} \\
+Arg-CCG & Implicated in Cancer Progression\textsuperscript{{[}\protect\hyperlink{ref-Goodarzi2016}{14}{]}} \\
+Glu-TTC & Implicated in Cancer Progression\textsuperscript{{[}\protect\hyperlink{ref-Goodarzi2016}{14}{]}} \\
 iMET & Proliferation of Breast Cancer \\
 Met & iMet Control \\
-SeC & Involved in REDOX\textsuperscript{\protect\hyperlink{ref-Sangha2022}{15}} \\
+SeC & Involved in REDOX\textsuperscript{{[}\protect\hyperlink{ref-Sangha2022}{15}{]}} \\
 \bottomrule()
 \end{longtable}
 
@@ -286,6 +365,12 @@ SeC & Involved in REDOX\textsuperscript{\protect\hyperlink{ref-Sangha2022}{15}} 
 
 \hypertarget{discussion}{%
 \section{Discussion}\label{discussion}}
+
+\begin{itemize}
+\tightlist
+\item
+  not compared mcf-7 to treatment responsive cells
+\end{itemize}
 
 \hypertarget{future}{%
 \subsection{Future}\label{future}}
@@ -316,7 +401,7 @@ SeC & Involved in REDOX\textsuperscript{\protect\hyperlink{ref-Sangha2022}{15}} 
 \end{itemize}
 
 \begin{flushright}
-392 Words
+568 Words
 \end{flushright}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
@@ -328,64 +413,64 @@ SeC & Involved in REDOX\textsuperscript{\protect\hyperlink{ref-Sangha2022}{15}} 
 \hypertarget{refs}{}
 \begin{CSLReferences}{0}{0}
 \leavevmode\vadjust pre{\hypertarget{ref-fu2019}{}}%
-\CSLLeftMargin{1 }%
-\CSLRightInline{Fu X, Pereira R, De Angelis C, Veeraraghavan J, Nanda S, Qin L \emph{et al.} \href{https://doi.org/10.1073/pnas.1911584116}{FOXA1 upregulation promotes enhancer and transcriptional reprogramming in endocrine-resistant breast cancer}. \emph{Proceedings of the National Academy of Sciences} 2019; \textbf{116}: 26823--26834.}
+\CSLLeftMargin{1. }%
+\CSLRightInline{Fu X, Pereira R, De Angelis C, Veeraraghavan J, Nanda S, Qin L, et al. FOXA1 upregulation promotes enhancer and transcriptional reprogramming in endocrine-resistant breast cancer. Proceedings of the National Academy of Sciences {[}Internet{]}. 2019 Dec 11;116(52):26823--34. Available from: \url{http://dx.doi.org/10.1073/pnas.1911584116}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-leinonen2010}{}}%
-\CSLLeftMargin{2 }%
-\CSLRightInline{Leinonen R, Sugawara H, Shumway M. \href{https://doi.org/10.1093/nar/gkq1019}{The Sequence Read Archive}. \emph{Nucleic Acids Research} 2010; \textbf{39}: D19--D21.}
+\CSLLeftMargin{2. }%
+\CSLRightInline{Leinonen R, Sugawara H, Shumway M. The Sequence Read Archive. Nucleic Acids Research {[}Internet{]}. 2010 Nov 9;39(Database):D19--21. Available from: \url{http://dx.doi.org/10.1093/nar/gkq1019}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-thegala2022}{}}%
-\CSLLeftMargin{3 }%
-\CSLRightInline{Afgan E, Nekrutenko A, Grüning BA, Blankenberg D, Goecks J, Schatz MC \emph{et al.} \href{https://doi.org/10.1093/nar/gkac247}{The Galaxy platform for accessible, reproducible and collaborative biomedical analyses: 2022 update}. \emph{Nucleic Acids Research} 2022; \textbf{50}: W345--W351.}
+\CSLLeftMargin{3. }%
+\CSLRightInline{Afgan E, Nekrutenko A, Grüning BA, Blankenberg D, Goecks J, Schatz MC, et al. The Galaxy platform for accessible, reproducible and collaborative biomedical analyses: 2022 update. Nucleic Acids Research {[}Internet{]}. 2022 Apr 21;50(W1):W345--51. Available from: \url{http://dx.doi.org/10.1093/nar/gkac247}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-langmead2012}{}}%
-\CSLLeftMargin{4 }%
-\CSLRightInline{Langmead B, Salzberg SL. \href{https://doi.org/10.1038/nmeth.1923}{Fast gapped-read alignment with Bowtie 2}. \emph{Nature Methods} 2012; \textbf{9}: 357--359.}
+\CSLLeftMargin{4. }%
+\CSLRightInline{Langmead B, Salzberg SL. Fast gapped-read alignment with Bowtie 2. Nature Methods {[}Internet{]}. 2012 Mar 4;9(4):357--9. Available from: \url{http://dx.doi.org/10.1038/nmeth.1923}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Karolchik2004}{}}%
-\CSLLeftMargin{5 }%
-\CSLRightInline{Karolchik D. \href{https://doi.org/10.1093/nar/gkh103}{The UCSC Table Browser data retrieval tool}. \emph{Nucleic Acids Research} 2004; \textbf{32}: 493D--496.}
+\CSLLeftMargin{5. }%
+\CSLRightInline{Karolchik D. The UCSC Table Browser data retrieval tool. Nucleic Acids Research {[}Internet{]}. 2004 Jan 1;32(90001):493D--496. Available from: \url{http://dx.doi.org/10.1093/nar/gkh103}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Chan2016}{}}%
-\CSLLeftMargin{6 }%
-\CSLRightInline{Chan PP, Lowe TM. \href{https://doi.org/10.1093/nar/gkv1309}{GtRNAdb 2.0: an expanded database of transfer RNA genes identified in complete and draft genomes}. \emph{Nucleic Acids Research} 2015; \textbf{44}: D184--D189.}
+\CSLLeftMargin{6. }%
+\CSLRightInline{Chan PP, Lowe TM. GtRNAdb 2.0: an expanded database of transfer RNA genes identified in complete and draft genomes. Nucleic Acids Research {[}Internet{]}. 2015 Dec 15;44(D1):D184--9. Available from: \url{http://dx.doi.org/10.1093/nar/gkv1309}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-lerdrup2016}{}}%
-\CSLLeftMargin{7 }%
-\CSLRightInline{Lerdrup M, Johansen JV, Agrawal-Singh S, Hansen K. \href{https://doi.org/10.1038/nsmb.3180}{An interactive environment for agile analysis and visualization of ChIP-sequencing data}. \emph{Nature Structural \& Molecular Biology} 2016; \textbf{23}: 349--357.}
+\CSLLeftMargin{7. }%
+\CSLRightInline{Lerdrup M, Johansen JV, Agrawal-Singh S, Hansen K. An interactive environment for agile analysis and visualization of ChIP-sequencing data. Nature Structural \& Molecular Biology {[}Internet{]}. 2016 Feb 29;23(4):349--57. Available from: \url{http://dx.doi.org/10.1038/nsmb.3180}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-r}{}}%
-\CSLLeftMargin{8 }%
-\CSLRightInline{R Core Team. \emph{R: A language and environment for statistical computing}. R Foundation for Statistical Computing: Vienna, Austria, 2023. \url{https://www.R-project.org/}.}
+\CSLLeftMargin{8. }%
+\CSLRightInline{R Core Team. R: A language and environment for statistical computing {[}Internet{]}. Vienna, Austria: R Foundation for Statistical Computing; 2023. Available from: \url{https://www.R-project.org/}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-rstudio}{}}%
-\CSLLeftMargin{9 }%
-\CSLRightInline{Posit Team. \emph{RStudio: Integrated development environment for r}. Posit Software, PBC: Boston, MA, 2023. \url{http://www.posit.co/}.}
+\CSLLeftMargin{9. }%
+\CSLRightInline{Posit Team. RStudio: Integrated development environment for r {[}Internet{]}. Boston, MA: Posit Software, PBC; 2023. Available from: \url{http://www.posit.co/}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-wickham2019}{}}%
-\CSLLeftMargin{10 }%
-\CSLRightInline{Wickham H, Averick M, Bryan J, Chang W, McGowan L, François R \emph{et al.} \href{https://doi.org/10.21105/joss.01686}{Welcome to the tidyverse}. \emph{Journal of Open Source Software} 2019; \textbf{4}: 1686.}
+\CSLLeftMargin{10. }%
+\CSLRightInline{Wickham H, Averick M, Bryan J, Chang W, McGowan L, François R, et al. Welcome to the tidyverse. Journal of Open Source Software {[}Internet{]}. 2019 Nov 21;4(43):1686. Available from: \url{http://dx.doi.org/10.21105/joss.01686}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-raab2011}{}}%
-\CSLLeftMargin{11 }%
-\CSLRightInline{Raab JR, Chiu J, Zhu J, Katzman S, Kurukuti S, Wade PA \emph{et al.} \href{https://doi.org/10.1038/emboj.2011.406}{Human tRNA genes function as chromatin insulators}. \emph{The EMBO Journal} 2011; \textbf{31}: 330--350.}
+\CSLLeftMargin{11. }%
+\CSLRightInline{Raab JR, Chiu J, Zhu J, Katzman S, Kurukuti S, Wade PA, et al. Human tRNA genes function as chromatin insulators. The EMBO Journal {[}Internet{]}. 2011 Nov 15;31(2):330--50. Available from: \url{http://dx.doi.org/10.1038/emboj.2011.406}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-sizer2022}{}}%
-\CSLLeftMargin{12 }%
-\CSLRightInline{Sizer RE, Chahid N, Butterfield SP, Donze D, Bryant NJ, White RJ. \href{https://doi.org/10.1016/j.gene.2022.146533}{TFIIIC-based chromatin insulators through eukaryotic evolution}. \emph{Gene} 2022; \textbf{835}: 146533.}
+\CSLLeftMargin{12. }%
+\CSLRightInline{Sizer RE, Chahid N, Butterfield SP, Donze D, Bryant NJ, White RJ. TFIIIC-based chromatin insulators through eukaryotic evolution. Gene {[}Internet{]}. 2022 Aug;835:146533. Available from: \url{http://dx.doi.org/10.1016/j.gene.2022.146533}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Ebersole2011}{}}%
-\CSLLeftMargin{13 }%
-\CSLRightInline{Ebersole T, Kim J-H, Samoshkin A, Kouprina N, Pavlicek A, White RJ \emph{et al.} \href{https://doi.org/10.4161/cc.10.16.17092}{tRNA genes protect a reporter gene from epigenetic silencing in mouse cells}. \emph{Cell Cycle} 2011; \textbf{10}: 2779--2791.}
+\CSLLeftMargin{13. }%
+\CSLRightInline{Ebersole T, Kim J-H, Samoshkin A, Kouprina N, Pavlicek A, White RJ, et al. tRNA genes protect a reporter gene from epigenetic silencing in mouse cells. Cell Cycle {[}Internet{]}. 2011 Aug 15;10(16):2779--91. Available from: \url{http://dx.doi.org/10.4161/cc.10.16.17092}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Goodarzi2016}{}}%
-\CSLLeftMargin{14 }%
-\CSLRightInline{Goodarzi H, Nguyen HCB, Zhang S, Dill BD, Molina H, Tavazoie SF. \href{https://doi.org/10.1016/j.cell.2016.05.046}{Modulated Expression of Specific tRNAs Drives Gene Expression and Cancer Progression}. \emph{Cell} 2016; \textbf{165}: 1416--1427.}
+\CSLLeftMargin{14. }%
+\CSLRightInline{Goodarzi H, Nguyen HCB, Zhang S, Dill BD, Molina H, Tavazoie SF. Modulated Expression of Specific tRNAs Drives Gene Expression and Cancer Progression. Cell {[}Internet{]}. 2016 Jun;165(6):1416--27. Available from: \url{http://dx.doi.org/10.1016/j.cell.2016.05.046}}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Sangha2022}{}}%
-\CSLLeftMargin{15 }%
-\CSLRightInline{Sangha AK, Kantidakis T. \href{https://doi.org/10.3390/cimb44070207}{The Aminoacyl-tRNA Synthetase and tRNA Expression Levels Are Deregulated in Cancer and Correlate Independently with Patient Survival}. \emph{Current Issues in Molecular Biology} 2022; \textbf{44}: 3001--3019.}
+\CSLLeftMargin{15. }%
+\CSLRightInline{Sangha AK, Kantidakis T. The Aminoacyl-tRNA Synthetase and tRNA Expression Levels Are Deregulated in Cancer and Correlate Independently with Patient Survival. Current Issues in Molecular Biology {[}Internet{]}. 2022 Jul 2;44(7):3001--19. Available from: \url{http://dx.doi.org/10.3390/cimb44070207}}
 
 \end{CSLReferences}
 

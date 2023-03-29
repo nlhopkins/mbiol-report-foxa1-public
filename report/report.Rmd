@@ -3,7 +3,7 @@ output:
   bookdown::pdf_document2:
     latex_engine: xelatex
     keep_tex: true
-    number_sections: true
+    number_sections: false
     fig_caption: true
     toc: false
     includes:
@@ -12,9 +12,9 @@ output:
 geometry: "left=2.5cm,right=2.5cm,top=2cm,bottom=2cm"
 linestretch: 1.2
 fontsize: 12pt
-indent: true
+indent: false
 bibliography: refs.bib
-citation-style: ../csl/nature-publishing-group-vancouver.csl
+citation-style: ../csl/university-of-york-vancouver.csl
 link-citations: true
 citecolor: teal
 linkcolor: teal
@@ -31,7 +31,6 @@ header-includes:
 - \captionsetup[table]{justification=justified}
 - \captionsetup[figure]{justification=justified}
 - \usepackage[default]{sourcesanspro}
-
 editor_options: 
     markdown:
       canonical: true 
@@ -51,14 +50,16 @@ library(wordcountaddin) # Load wordcountaddin. Counts words and characters in te
 library(rmdwc)
 
 citation_count <-
-  rmdcount(
-    files = "report.Rmd",
-    space = "[:space:]",
-    word = "\\@",
-    line = "\\n",
-    exclude = "```\\{.*?```"
-  )
+    rmdcount(
+        files = "report.Rmd",
+        space = "[:space:]",
+        word = "\\@",
+        line = "\\n",
+        exclude = "```\\{.*?```"
+    )
 ```
+
+\
 
 ```{r child = "abstract.Rmd"}
 ```
@@ -162,10 +163,14 @@ Thus, the start position was offset to 0 bp, and the end position was offset to 
 The downstream region constitutes the 500 bp region beginning with the first nucleotide of tRNA gene body.
 The start position was offset to 1 bp, and the end position was offset to 500 bp.
 
-Following quantification, data was visualised with "heatmap", "average", and "overlay" EaSeq tools.
+Following quantification, tRNA binding events were arranged in ascending order -DOX Q-value and visualised as heatmaps.
+Data was also visualised with "average", and "overlay" EaSeq tools.
+
 EaSeq[@lerdrup2016] is avaiable at <http://easeq.net>.
 
 ## Motif Analysis
+
+Multiple EM for Motif Elicitation ChIP (MEME) Suite
 
 ## Statistics
 
@@ -177,29 +182,55 @@ Statistical tests and graphs were generated with R[@r] (v 4.2.3), R Studio[@rstu
 
 ## FOXA1 and H3k27ac Binding Events
 
+### Background
+
+### -
+
+### Why? What?
+
+To investigate the impact of FOXA1 on tRNA enhancers in ER+ MCF-7 cells, public ChIP-Seq datasets from Fu et al. (2019)[@fu2019] were interrogated.
+In this paper, a doxycycline (Dox) inducible OE system was used to achieve FOXA1 OE akin to tamoxifen-resistant (TamR) MCF-7 cells[@fu2019].
+
+### Heatmaps
+
+Quantification of 416 high-confidence tRNAs revealed that both FOXA1 and H3k27ac interact with the majority of tRNA genes, relative to ±10kb flanking regions.
+Whereas input reads generated minimal peak enrichment (Supplementary Figures).
+Upon FOXA1 OE, average FOXA1 binding at tRNAs increases tRNA genes.
+On the other hand, H3K27ac binding decreases.
+
+### Average Tracks
+
+This was confirmed by average signal intensity tracks 4/1.
+
+```{r results-1, fig.cap = "(B) Ratiometric heatmaps of the log2 ratio between the binding of FOXA1 or H3k27ac with endogenous FOXA1 expression vs. the binding of FOXA1 or H3k27ac with FOXA1 OE."}
+knitr::include_graphics("../images/results_01.png")
+```
+
+### Suggests
+
+## Boxplots
+
 ### Why?
 
 ### What?
 
--   quantification of reads
+Mann Whitney U to compare means
 
-<!-- -->
+### Boxplot
 
--   heatmaps
+### Volcano
 
--   ordered by -dox q-value
+X2 = x number of significantly upregulated and downregulated genes
 
--   average tracks
+more Up than down (FOX)
 
-### Results
+about the same for H3
 
--   foxa1 at all tRNAs
+```{r results-2, fig.cap = "(B) Ratiometric heatmaps of the log2 ratio between the binding of FOXA1 or H3k27ac with endogenous FOXA1 expression vs. the binding of FOXA1 or H3k27ac with FOXA1 OE."}
+knitr::include_graphics("../images/results_02.png")
+```
 
--   H3k27ac at all but 2 genes
-
-### Suggests
-
-## Localisation of FOXA1 at indicidual tRNA genes in MCF-7 cells
+## Localisation of FOXA1 at individual tRNA genes in MCF-7 cells
 
 ```{r clusters, out.width='90%'}
 knitr::kable(

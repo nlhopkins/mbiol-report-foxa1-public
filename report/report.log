@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.3.21)  29 MAR 2023 19:27
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.3.21)  30 MAR 2023 18:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1008,74 +1008,50 @@ Underfull \hbox (badness 10000) in paragraph at lines 177--180
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 182--183
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 190--192
+Underfull \hbox (badness 10000) in paragraph at lines 188--190
 
  []
 
 LaTeX Font Info:    Font shape `TU/SourceSansPro(0)/m/n' will be
-(Font)              scaled to size 14.4pt on input line 197.
+(Font)              scaled to size 14.4pt on input line 195.
 LaTeX Font Info:    Font shape `TU/SourceSansPro(0)/b/n' will be
-(Font)              scaled to size 14.4pt on input line 197.
+(Font)              scaled to size 14.4pt on input line 195.
 LaTeX Font Info:    Font shape `TU/SourceSansPro(0)/m/it' will be
-(Font)              scaled to size 12.0pt on input line 210.
+(Font)              scaled to size 12.0pt on input line 208.
 LaTeX Font Info:    Font shape `TU/SourceSansPro(0)/m/n' will be
-(Font)              scaled to size 8.4pt on input line 210.
+(Font)              scaled to size 8.4pt on input line 208.
 LaTeX Font Info:    Font shape `TU/SourceSansPro(0)/m/n' will be
-(Font)              scaled to size 10.95pt on input line 217.
+(Font)              scaled to size 10.95pt on input line 215.
 LaTeX Font Info:    Font shape `TU/SourceSansPro(0)/b/n' will be
-(Font)              scaled to size 10.95pt on input line 217.
+(Font)              scaled to size 10.95pt on input line 215.
 [1]
-Underfull \hbox (badness 2837) in paragraph at lines 243--248
+Underfull \hbox (badness 2837) in paragraph at lines 241--246
 []\TU/SourceSansPro(0)/m/n/12 Signal peak intensities surrounding tRNAs were quantified using the EaSeq “quantify”
  []
 
 [2]
+Underfull \hbox (badness 1824) in paragraph at lines 276--282
+\TU/SourceSansPro(0)/m/n/12 Quantification of 416 high-confidence tRNAs revealed that FOXA1 interacts with 100% of
+ []
+
 File: ../images/results-01.png Graphic file (type bmp)
 <../images/results-01.png>
-[3] [4]
+[3]
+Overfull \vbox (23.89398pt too high) has occurred while \output is active []
+
+[4]
 File: ../images/results-02.png Graphic file (type bmp)
 <../images/results-02.png>
-[5] [6]
-Underfull \hbox (badness 10000) in paragraph at lines 424--427
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 428--431
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 432--435
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 436--439
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 440--443
-
- []
+[5]
+File: ../images/results-03.png Graphic file (type bmp)
+<../images/results-03.png>
+[6]
+Overfull \vbox (10.29398pt too high) has occurred while \output is active []
 
 [7]
-Underfull \hbox (badness 10000) in paragraph at lines 444--447
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 448--451
-
- []
-
-
+File: ../images/results-04.png Graphic file (type bmp)
+<../images/results-04.png>
+[8] [9] [10]
 Underfull \hbox (badness 10000) in paragraph at lines 452--455
 
  []
@@ -1115,18 +1091,53 @@ Underfull \hbox (badness 10000) in paragraph at lines 480--483
 
  []
 
-[8] (./report.aux)
+
+Underfull \hbox (badness 10000) in paragraph at lines 484--487
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 488--491
+
+ []
+
+[11]
+Underfull \hbox (badness 10000) in paragraph at lines 492--495
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 496--499
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 500--503
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 504--507
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 508--511
+
+ []
+
+[12] (./report.aux)
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 22940 strings out of 478682
- 428169 string characters out of 5847468
- 1863018 words of memory out of 5000000
- 42687 multiletter control sequences out of 15000+600000
+ 22968 strings out of 478682
+ 429129 string characters out of 5847468
+ 1861018 words of memory out of 5000000
+ 42713 multiletter control sequences out of 15000+600000
  516094 words of font info for 87 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  86i,10n,115p,1003b,524s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on report.pdf (10 pages).
+Output written on report.pdf (14 pages).

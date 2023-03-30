@@ -11,29 +11,33 @@ TukeyHSD(mod)
 plot(mod, which = 2)
 plot(mod, which = 1)
 
-
 data  %>%
     mutate(target = case_when(str_detect(treatment, "fox") ~ "fox", TRUE ~ "h3")) %>%
     mutate(variable = case_when(str_detect(treatment, "dox") ~ "dox", TRUE ~ "ed"))  %>%
     filter(!grepl("dox_foxa1_low", treatment)) %>%
-    ggplot(aes(x = target,
-               y = log2(value),
-               fill = variable)) +
+    ggplot(aes(
+        x = target,
+        y = log2(value),
+        fill = variable
+    )) +
     geom_boxplot() +
     theme_ipsum() +
     stat_compare_means(method = "wilcox.test",
-                       label = "p.signif",
-                       paired = F) +
-    labs(subtitle = "Mann Whitney U")
+                       label = "p",
+                       paired = T)
+
+
 
 
 data  %>%
     mutate(target = case_when(str_detect(treatment, "fox") ~ "fox", TRUE ~ "h3")) %>%
     mutate(variable = case_when(str_detect(treatment, "dox") ~ "dox", TRUE ~ "ed"))  %>%
     filter(!grepl("dox_foxa1_low", treatment)) %>%
-    ggplot(aes(x = target,
-               y = log2(value),
-               fill = variable)) +
+    ggplot(aes(
+        x = target,
+        y = log2(value),
+        fill = factor(variable, levels = c("ed", "dox"))
+    )) +
     geom_boxplot() +
     theme_ipsum() +
     stat_compare_means(method = "wilcox.test",
@@ -52,3 +56,4 @@ total  %>%
 
 
 save.image(file = 'environments/boxplot.RData')
+

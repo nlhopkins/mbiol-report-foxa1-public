@@ -179,8 +179,6 @@ Main: \\
 \textbf{Natasha L. Hopkins}\\
 
 \setstretch{1.2}
-\hfill\break
-
 Abstract
 
 \normalsize
@@ -272,35 +270,26 @@ Statistical tests and graphs were generated with R\textsuperscript{{[}\protect\h
 \hypertarget{results}{%
 \section{Results}\label{results}}
 
-\hypertarget{foxa1-and-h3k27ac-binding-events}{%
-\subsection{FOXA1 and H3k27ac Binding Events}\label{foxa1-and-h3k27ac-binding-events}}
-
-\hypertarget{background}{%
-\subsubsection{Background}\label{background}}
-
-\hypertarget{section}{%
-\subsubsection{-}\label{section}}
-
-\hypertarget{why-what}{%
-\subsubsection{Why? What?}\label{why-what}}
+\hypertarget{binding-of-foxa1-and-h3k27ac-to-trna-genes}{%
+\subsection{Binding of FOXA1 and H3k27ac to tRNA Genes}\label{binding-of-foxa1-and-h3k27ac-to-trna-genes}}
 
 To investigate the impact of FOXA1 on tRNA enhancers in ER+ MCF-7 cells, public ChIP-Seq datasets from Fu et al.~(2019)\textsuperscript{{[}\protect\hyperlink{ref-fu2019}{1}{]}} were interrogated.
 In this paper, a doxycycline (Dox) inducible OE system was used to achieve FOXA1 OE akin to tamoxifen-resistant (TamR) MCF-7 cells\textsuperscript{{[}\protect\hyperlink{ref-fu2019}{1}{]}}.
+Quantification of 416 high-confidence tRNAs revealed that FOXA1 interacts with 100\% of tRNAs and H3k27ac with 99.5\%.
+of tRNA genes, relative to ±500 bp flanking regions (Figure \ref{fig:results-1}A).
+Whereas input reads generated minimal peak enrichment (Supplementary Figure X).
+The number of genes bound was unchanged by OE of FOXA1.
 
-\hypertarget{heatmaps}{%
-\subsubsection{Heatmaps}\label{heatmaps}}
+Mapped reads of FOXA1 and H3K27ac binding were visualised as heatmaps and ordered by increasing -DOX Q-value.
+This revealed a concentration of FOXA1 and H3k27ac at approximately half of tRNAs, relative to ±10 kb flanking regions.
+Upon FOXA1 OE, FOXA1 binding increased at a small proportion of tRNAs genes and H3K27ac binding decreases at approximately half of tRNA genes (Figure \ref{fig:results-1}A).
+This was confirmed by average signal intensity plots of FOXA1 and H3K27ac binding (Figure \ref{fig:results-1}B).
 
-Quantification of 416 high-confidence tRNAs revealed that both FOXA1 and H3k27ac interact with the majority of tRNA genes, relative to ±10kb flanking regions.
-Whereas input reads generated minimal peak enrichment (Supplementary Figures).
-Upon FOXA1 OE, average FOXA1 binding at tRNAs increases tRNA genes.
-On the other hand, H3K27ac binding decreases.
+Upon FOXA1 OE, the mean Q-values for FOXA1 binding significantly decreased 0.16-fold and insignificantly decrease by 0.62 for H3K27ac (Mann-Whitney: p \textless0.005) (Supplementary Figures X).
+However, there is a significant difference in binding between -DOX and +DOX tRNAs for both FOXA1 and H3K27ac (Wilcoxon Signed Rank Test : p \textless0.0001) (Figure \ref{fig:results-1}C).
+Changes in FOXA1 and H3K27ac binding has been visualised as a parameter heatmap in Figure \ref{fig:results-1}D. Together, these results suggest that FOXA1 overexpression alters the binding landscape of FOXA1 and H3K27ac at tRNAs.
 
-\hypertarget{average-tracks}{%
-\subsubsection{Average Tracks}\label{average-tracks}}
-
-This was confirmed by average signal intensity tracks 4/1.
-
-\begin{figure}
+\begin{figure}[H]
 
 {\centering \includegraphics[width=1\linewidth]{../images/results-01} 
 
@@ -309,33 +298,31 @@ This was confirmed by average signal intensity tracks 4/1.
 \caption{(B) Ratiometric heatmaps of the log2 ratio between the binding of FOXA1 or H3k27ac with endogenous FOXA1 expression vs. the binding of FOXA1 or H3k27ac with FOXA1 OE.}\label{fig:results-1}
 \end{figure}
 
-\hypertarget{suggests}{%
-\subsubsection{Suggests}\label{suggests}}
-
 \hypertarget{boxplots}{%
 \subsection{Boxplots}\label{boxplots}}
 
 \hypertarget{why}{%
 \subsubsection{Why?}\label{why}}
 
+FOX OE alters binding at tRNAs (fig1).
+
 \hypertarget{what}{%
 \subsubsection{What?}\label{what}}
 
-Mann Whitney U to compare means
+Using Q-values, tRNAs that are differently enriched upon FOXA1 OE were categorised as `GAIN' or `LOSS'.
+This discovered substantially more tRNAs with increased (GAIN) than decreased (LOSS) FOXA1 (96 vs.~23) (Figure \ref{fig:results-2}A).
+However, for H3K27ac, the number of tRNAs with an increase (GAIN) was comparable to those with a decrease (LOSS) (54 vs.~52)(Figure \ref{fig:results-2}B).
 
-\hypertarget{boxplot}{%
-\subsubsection{Boxplot}\label{boxplot}}
+Of the tRNAs which gained FOXA1, 14\% also gained H3K27ac.
+and 13.5\% lost H3K27ac.
+These subsets represent approximately 25\% of all tRNAs with GAIN H3K27ac or LOSS H3k27ac, respectively (Figure \ref{fig:results-2}C).
 
-\hypertarget{volcano}{%
-\subsubsection{Volcano}\label{volcano}}
+Examples of these tRNAs are shown in Figure \ref{fig:results-2}D.
 
-X2 = x number of significantly upregulated and downregulated genes
+\hypertarget{suggests}{%
+\subsubsection{Suggests}\label{suggests}}
 
-more Up than down (FOX)
-
-about the same for H3
-
-\begin{figure}
+\begin{figure}[H]
 
 {\centering \includegraphics[width=1\linewidth]{../images/results-02} 
 
@@ -344,8 +331,49 @@ about the same for H3
 \caption{(B) Ratiometric heatmaps of the log2 ratio between the binding of FOXA1 or H3k27ac with endogenous FOXA1 expression vs. the binding of FOXA1 or H3k27ac with FOXA1 OE.}\label{fig:results-2}
 \end{figure}
 
+\hypertarget{figure-3}{%
+\subsection{Figure 3}\label{figure-3}}
+
+Why?
+
+What?
+
+Suggests?
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=1\linewidth]{../images/results-03} 
+
+}
+
+\caption{.}\label{fig:results-3}
+\end{figure}
+
+\hypertarget{figure-4}{%
+\subsection{Figure 4}\label{figure-4}}
+
+Why?
+
+What?
+
+Suggests?
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=1\linewidth]{../images/results-04} 
+
+}
+
+\end{figure}
+
 \hypertarget{localisation-of-foxa1-at-individual-trna-genes-in-mcf-7-cells}{%
 \subsection{Localisation of FOXA1 at individual tRNA genes in MCF-7 cells}\label{localisation-of-foxa1-at-individual-trna-genes-in-mcf-7-cells}}
+
+Why?
+
+What?
+
+Suggests?
 
 \begin{longtable}[]{@{}ll@{}}
 \caption{\label{tab:clusters}.}\tabularnewline
@@ -410,7 +438,7 @@ SeC & Involved in REDOX\textsuperscript{{[}\protect\hyperlink{ref-Sangha2022}{15
 \end{itemize}
 
 \begin{flushright}
-574 Words
+844 Words
 \end{flushright}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}

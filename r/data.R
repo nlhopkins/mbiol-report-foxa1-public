@@ -14,31 +14,37 @@ options(scipen = 999)
 raw <- read.delim("data/raw/hg19.txt") %>%
     janitor::clean_names()
 
+threshold <- raw %>%
+    mutate(across(contains("ed"), ~ .x / ed_input)) %>%
+    mutate(across(contains("dox"), ~ .x / dox_input)) %>%
+    pivot_longer(cols = contains(c("_foxa1", "_h3k27ac")),
+                 names_to = "treatment") %>%
+    group_by(treatment) %>%
+    summarise_at("value", median) %>%
+    filter(treatment == "ed_h3k27ac") %>%
+    pull(2)
+
 data <- raw %>%
     mutate(across(contains("ed"), ~ .x / ed_input)) %>%
     mutate(across(contains("dox"), ~ .x / dox_input)) %>%
     mutate(fox_fold = (dox_foxa1_high - ed_foxa1) / ed_foxa1) %>%
     mutate(h3_fold = (dox_h3k27ac - ed_h3k27ac) / ed_h3k27ac)  %>%
-    mutate(activity = ifelse(
-        ed_h3k27ac < threshold & dox_h3k27ac > threshold,
-        'gain',
-        ifelse(ed_h3k27ac > threshold &
-                   dox_h3k27ac < threshold, 'loss', 'shared')
-    )) %>%
     mutate(fox_abs = dox_foxa1_high - ed_foxa1) %>%
     mutate(h3_abs = dox_h3k27ac - ed_h3k27ac) %>%
     pivot_longer(cols = contains(c("_foxa1", "_h3k27ac")),
                  names_to = "treatment") %>%
     mutate(condition = str_extract(treatment, "[^_]+"))
 
-threshold <- data %>%
-    group_by(treatment) %>%
-    summarise_at("value", median) %>%
-    filter(treatment == "ed_h3k27ac") %>%
-    pull(2)
 
+# mutate(activity = ifelse(
+#     ed_h3k27ac < threshold & dox_h3k27ac > threshold,
+#     'gain',
+#     ifelse(ed_h3k27ac > threshold &
+#                dox_h3k27ac < threshold, 'loss', 'shared')
+# )) %>%
 
-
+means <- data %>% group_by(treatment) %>%
+    summarise_at("value", mean)
 
 
 #### fox volcano ####
@@ -103,7 +109,7 @@ diffexpressed <-
     mutate(comparison = str_replace(comparison, "diffexpressed.y", "h3")) %>%
     distinct()
 
-data <- merge(diffexpressed, data, by = "name")
+data2 <- merge(diffexpressed, data, by = "name")
 
 
 #### Venn ####
@@ -129,8 +135,8 @@ gain_loss <-
     sum(volcano_fox$diffexpressed == "UP" &
             grepl("DOWN", volcano_h3$diffexpressed))
 loss_gain <-
-    sum(volcano_h3$diffexpressed == "DOWN" &
-            grepl("UP", volcano_fox$diffexpressed))
+    sum(volcano_fox$diffexpressed == "DOWN" &
+            grepl("UP", volcano_h3$diffexpressed))
 
 
 up <- merge(volcano_fox, volcano_h3, by = "name") %>%
@@ -168,4 +174,3 @@ total_threshold <- data %>%
     pull(2)
 
 save.image(file = 'environments/data.RData')
-

@@ -37,7 +37,7 @@ editor_options:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, fig.align = "center")
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, fig.align = "center", out.width = '100%')
 ```
 
 ```{r load-pkgs, include=FALSE}
@@ -58,8 +58,6 @@ citation_count <-
         exclude = "```\\{.*?```"
     )
 ```
-
-\
 
 ```{r child = "abstract.Rmd"}
 ```
@@ -202,8 +200,8 @@ On the other hand, H3K27ac binding decreases.
 
 This was confirmed by average signal intensity tracks 4/1.
 
-```{r results-1, fig.cap = "(B) Ratiometric heatmaps of the log2 ratio between the binding of FOXA1 or H3k27ac with endogenous FOXA1 expression vs. the binding of FOXA1 or H3k27ac with FOXA1 OE."}
-knitr::include_graphics("../images/results_01.png")
+```{r results-1, out.width = '100%', fig.cap = "(B) Ratiometric heatmaps of the log2 ratio between the binding of FOXA1 or H3k27ac with endogenous FOXA1 expression vs. the binding of FOXA1 or H3k27ac with FOXA1 OE."}
+knitr::include_graphics("../images/results-01.png")
 ```
 
 ### Suggests
@@ -226,8 +224,8 @@ more Up than down (FOX)
 
 about the same for H3
 
-```{r results-2, fig.cap = "(B) Ratiometric heatmaps of the log2 ratio between the binding of FOXA1 or H3k27ac with endogenous FOXA1 expression vs. the binding of FOXA1 or H3k27ac with FOXA1 OE."}
-knitr::include_graphics("../images/results_02.png")
+```{r results-2, out.width='100%', fig.cap = "(B) Ratiometric heatmaps of the log2 ratio between the binding of FOXA1 or H3k27ac with endogenous FOXA1 expression vs. the binding of FOXA1 or H3k27ac with FOXA1 OE."}
+knitr::include_graphics("../images/results-02.png")
 ```
 
 ## Localisation of FOXA1 at individual tRNA genes in MCF-7 cells

@@ -284,16 +284,16 @@ Statistical tests and graphs were generated with R\textsuperscript{{[}\protect\h
 \hypertarget{why-what}{%
 \subsubsection{Why? What?}\label{why-what}}
 
-To investigate the impact of FOXA1 on 416 tRNA enhancers in ER+ MCF-7 cells, public ChIP-Seq datasets from Fu et al.~(2019)\textsuperscript{{[}\protect\hyperlink{ref-fu2019}{1}{]}} were interrogated.
+To investigate the impact of FOXA1 on tRNA enhancers in ER+ MCF-7 cells, public ChIP-Seq datasets from Fu et al.~(2019)\textsuperscript{{[}\protect\hyperlink{ref-fu2019}{1}{]}} were interrogated.
 In this paper, a doxycycline (Dox) inducible OE system was used to achieve FOXA1 OE akin to tamoxifen-resistant (TamR) MCF-7 cells\textsuperscript{{[}\protect\hyperlink{ref-fu2019}{1}{]}}.
 
 \hypertarget{heatmaps}{%
 \subsubsection{Heatmaps}\label{heatmaps}}
 
-Examination of these datasets revealed that both FOXA1 and H3k27ac interact with the majority of tRNA, relative to ±10kb flanking regions.
-
-Heatmaps showed that upon FOXA1 OE, FOXA1 binding at tRNAs increases slightly cat tRNA TSS.
-However, H3K27ac substantially decreases around tRNA TSS.
+Quantification of 416 high-confidence tRNAs revealed that both FOXA1 and H3k27ac interact with the majority of tRNA genes, relative to ±10kb flanking regions.
+Whereas input reads generated minimal peak enrichment (Supplementary Figures).
+Upon FOXA1 OE, average FOXA1 binding at tRNAs increases tRNA genes.
+On the other hand, H3K27ac binding decreases.
 
 \hypertarget{average-tracks}{%
 \subsubsection{Average Tracks}\label{average-tracks}}
@@ -302,7 +302,7 @@ This was confirmed by average signal intensity tracks 4/1.
 
 \begin{figure}
 
-{\centering \includegraphics[width=24.54in]{../images/results_01} 
+{\centering \includegraphics[width=1\linewidth]{../images/results-01} 
 
 }
 
@@ -334,6 +334,15 @@ X2 = x number of significantly upregulated and downregulated genes
 more Up than down (FOX)
 
 about the same for H3
+
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{../images/results-02} 
+
+}
+
+\caption{(B) Ratiometric heatmaps of the log2 ratio between the binding of FOXA1 or H3k27ac with endogenous FOXA1 expression vs. the binding of FOXA1 or H3k27ac with FOXA1 OE.}\label{fig:results-2}
+\end{figure}
 
 \hypertarget{localisation-of-foxa1-at-individual-trna-genes-in-mcf-7-cells}{%
 \subsection{Localisation of FOXA1 at individual tRNA genes in MCF-7 cells}\label{localisation-of-foxa1-at-individual-trna-genes-in-mcf-7-cells}}
@@ -401,7 +410,7 @@ SeC & Involved in REDOX\textsuperscript{{[}\protect\hyperlink{ref-Sangha2022}{15
 \end{itemize}
 
 \begin{flushright}
-568 Words
+574 Words
 \end{flushright}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}

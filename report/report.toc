@@ -19,7 +19,7 @@
 \contentsline {subsubsection}{What?}{5}{section*.22}%
 \contentsline {subsubsection}{Boxplot}{5}{section*.23}%
 \contentsline {subsubsection}{Volcano}{5}{section*.24}%
-\contentsline {subsection}{Localisation of FOXA1 at individual tRNA genes in MCF-7 cells}{5}{section*.25}%
-\contentsline {section}{Discussion}{6}{section*.26}%
-\contentsline {subsection}{Future}{6}{section*.27}%
-\contentsline {section}{References}{6}{section*.28}%
+\contentsline {subsection}{Localisation of FOXA1 at individual tRNA genes in MCF-7 cells}{5}{section*.26}%
+\contentsline {section}{Discussion}{7}{section*.27}%
+\contentsline {subsection}{Future}{7}{section*.28}%
+\contentsline {section}{References}{7}{section*.29}%

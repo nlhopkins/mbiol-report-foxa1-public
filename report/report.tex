@@ -285,7 +285,7 @@ This revealed a concentration of FOXA1 and H3k27ac at approximately half of tRNA
 Upon FOXA1 OE, FOXA1 binding increased at a small proportion of tRNAs genes and H3K27ac binding decreases at approximately half of tRNA genes (Figure \ref{fig:results-1}A).
 This was confirmed by average signal intensity plots of FOXA1 and H3K27ac binding (Figure \ref{fig:results-1}B).
 
-Upon FOXA1 OE, the mean Q-values for FOXA1 binding significantly decreased 0.16-fold and insignificantly decrease by 0.62 for H3K27ac (Mann-Whitney: p \textless0.005) (Supplementary Figures X).
+Upon FOXA1 OE, the mean Q-values for FOXA1 binding significantly decreased 0.16-fold and insignificantly decrease by 0.62-fold for H3K27ac (Mann-Whitney: p \textless0.005) (Supplementary Figures X).
 However, there is a significant difference in binding between -DOX and +DOX tRNAs for both FOXA1 and H3K27ac (Wilcoxon Signed Rank Test : p \textless0.0001) (Figure \ref{fig:results-1}C).
 Changes in FOXA1 and H3K27ac binding has been visualised as a parameter heatmap in Figure \ref{fig:results-1}D. Together, these results suggest that FOXA1 overexpression alters the binding landscape of FOXA1 and H3K27ac at tRNAs.
 
@@ -298,13 +298,13 @@ Changes in FOXA1 and H3K27ac binding has been visualised as a parameter heatmap 
 \caption{(B) Ratiometric heatmaps of the log2 ratio between the binding of FOXA1 or H3k27ac with endogenous FOXA1 expression vs. the binding of FOXA1 or H3k27ac with FOXA1 OE.}\label{fig:results-1}
 \end{figure}
 
-\hypertarget{boxplots}{%
-\subsection{Boxplots}\label{boxplots}}
+\hypertarget{figure-2}{%
+\subsection{Figure 2}\label{figure-2}}
 
 \hypertarget{why}{%
 \subsubsection{Why?}\label{why}}
 
-FOX OE alters binding at tRNAs (fig1).
+FOXA1 OE alters binding at tRNAs (fig1).
 
 \hypertarget{what}{%
 \subsubsection{What?}\label{what}}
@@ -315,12 +315,14 @@ However, for H3K27ac, the number of tRNAs with an increase (GAIN) was comparable
 
 Of the tRNAs which gained FOXA1, 14\% also gained H3K27ac.
 and 13.5\% lost H3K27ac.
-These subsets represent approximately 25\% of all tRNAs with GAIN H3K27ac or LOSS H3k27ac, respectively (Figure \ref{fig:results-2}C).
+These co-binding events represent approximately 25\% of all tRNAs that each gain H3K27ac or lose H3k27ac (Figure \ref{fig:results-2}C).
 
 Examples of these tRNAs are shown in Figure \ref{fig:results-2}D.
 
 \hypertarget{suggests}{%
 \subsubsection{Suggests}\label{suggests}}
+
+FOXA1 alone is insufficient in increasing tRNA activity.
 
 \begin{figure}[H]
 
@@ -334,9 +336,26 @@ Examples of these tRNAs are shown in Figure \ref{fig:results-2}D.
 \hypertarget{figure-3}{%
 \subsection{Figure 3}\label{figure-3}}
 
-Why?
+How many genes are `activated' by FOXA1?
 
 What?
+
+\begin{itemize}
+\item
+  tRNAs were classified as `active' if H3K27ac Q-values exceeded the median -DOX value (Q \textgreater{} 1.81).
+\item
+  How many genes are `active' in -DOX vs +DOX
+
+  \begin{itemize}
+  \item
+    Number is similar
+  \item
+    Are +DOX genes the same genes?
+    Compare -DOX and +DOX tRNA lists
+  \item
+    Parameter heatmap of GAIN/LOSS genes?
+  \end{itemize}
+\end{itemize}
 
 Suggests?
 
@@ -349,14 +368,53 @@ Suggests?
 \caption{.}\label{fig:results-3}
 \end{figure}
 
+\hypertarget{figure}{%
+\subsection{Figure ?}\label{figure}}
+
+\begin{itemize}
+\item
+  Relative position (not very interesting)
+\item
+  Binding at isotopes?
+  Certain AA more up than others?
+\end{itemize}
+
 \hypertarget{figure-4}{%
 \subsection{Figure 4}\label{figure-4}}
 
-Why?
+\hypertarget{why-1}{%
+\paragraph{Why?}\label{why-1}}
 
-What?
+\hypertarget{what-1}{%
+\subsubsection{What?}\label{what-1}}
 
-Suggests?
+MEME CentriMo to identify de novo motifs that are enriched at tRNAs which gain both FOXA1 and H3k27ac
+
+\begin{itemize}
+\item
+  relative to other tRNAS (gain/lose, lose/lose, lose/gain)
+\item
+  FOXA1 not enriched
+\item
+  Look at ERE, AP-1, others?
+\item
+  Top 3 motifs (fisher E values) - IRF7, ERR3, NR4A1
+\item
+  A and B box motifs as a control?
+  How?
+
+  \begin{itemize}
+  \item
+    All downstream
+  \item
+    tRNAs where `matching sequences' all best matches = code for valine
+  \item
+    Branched amino acids associated with lower BC risk
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{suggests-1}{%
+\paragraph{Suggests?}\label{suggests-1}}
 
 \begin{figure}[H]
 
@@ -366,10 +424,28 @@ Suggests?
 
 \end{figure}
 
-\hypertarget{localisation-of-foxa1-at-individual-trna-genes-in-mcf-7-cells}{%
-\subsection{Localisation of FOXA1 at individual tRNA genes in MCF-7 cells}\label{localisation-of-foxa1-at-individual-trna-genes-in-mcf-7-cells}}
+\hypertarget{figure-5}{%
+\subsection{Figure 5}\label{figure-5}}
+
+\begin{itemize}
+\tightlist
+\item
+  Localisation of FOXA1 at individual tRNA genes in MCF-7 cells
+\end{itemize}
 
 Why?
+
+\begin{itemize}
+\item
+  tRNAs implicated in cancer
+\item
+  Are they upregulated?
+\item
+  Look at gain function/gain h3/fox
+\item
+  Motif ontology
+\item
+\end{itemize}
 
 What?
 
@@ -404,15 +480,6 @@ SeC & Involved in REDOX\textsuperscript{{[}\protect\hyperlink{ref-Sangha2022}{15
 \section{Discussion}\label{discussion}}
 
 \begin{itemize}
-\tightlist
-\item
-  not compared mcf-7 to treatment responsive cells
-\end{itemize}
-
-\hypertarget{future}{%
-\subsection{Future}\label{future}}
-
-\begin{itemize}
 \item
   FOXA1 alone not efficient to increase activity
 
@@ -422,23 +489,20 @@ SeC & Involved in REDOX\textsuperscript{{[}\protect\hyperlink{ref-Sangha2022}{15
     p300
   \end{itemize}
 \item
-  FOXA1 moves nucleosomes to make other TF acessible
+  FOXA1 moves nucleosomes to make other TF accessible?
 \item
   Loses fox = weak binding?
 \item
-  Dynamic and stable marks
-\item
-  pertubations
-\end{itemize}
-
-\begin{itemize}
-\tightlist
+  Dynamic vs stable marks
 \item
   ATAC-seq
 \end{itemize}
 
+\hypertarget{conclusion}{%
+\section{Conclusion}\label{conclusion}}
+
 \begin{flushright}
-844 Words
+1009 Words
 \end{flushright}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}

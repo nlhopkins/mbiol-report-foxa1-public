@@ -88,7 +88,7 @@ PRJNA512997 (Table \@ref(tab:data)).
 Using "Genetic Manipulation Tools" within the Galaxy[@thegala2022] environment (v 23.0.rc1), SRAs were converted to FastQ files.
 FastQ files were then aligned to the human genome assembly GRCh37 (hg19) using Bowtie2 (v 2.5.0)[@langmead2012] to output BAM files.
 
-```{r data, out.width = '100%'}
+```{r data}
 kbl(
   data.frame(
     "Experiment" = c(
@@ -183,8 +183,17 @@ Statistical tests and graphs were generated with R[@r] (v 4.2.3), R Studio[@rstu
 
 To investigate the impact of FOXA1 on tRNA enhancers in ER+ MCF-7 cells, public ChIP-Seq datasets from Fu et al. (2019)[@fu2019] were interrogated.
 In this paper, a doxycycline (Dox) inducible OE system was used to achieve FOXA1 OE akin to tamoxifen-resistant (TamR) MCF-7 cells[@fu2019].
-Quantification of 416 high-confidence tRNAs revealed that FOXA1 interacts with 100% of tRNAs and H3k27ac with 99.5%.
-of tRNA genes, relative to ±500 bp flanking regions (Figure \@ref(fig:results-1)A).
+
+FOXA1 and H3K27ac peaks of 416 high-confidence tRNAs were quantified relative to the ±500 bp flanking regions.
+Peaks were classified as binding events if Q-values exceeded the median input values (-Dox = 0.391, +Dox = 0.375).
+
+FOXA1 interacted with 73.8% of tRNAs and
+
+H3k27ac interacted with 68.3%.
+of tRNA genes
+
+64.9% +DOX (Figure \@ref(fig:results-1)A).
+
 Whereas input reads generated minimal peak enrichment (Supplementary Figure X).
 The number of genes bound was unchanged by OE of FOXA1.
 
@@ -193,7 +202,7 @@ This revealed a concentration of FOXA1 and H3k27ac at approximately half of tRNA
 Upon FOXA1 OE, FOXA1 binding increased at a small proportion of tRNAs genes and H3K27ac binding decreases at approximately half of tRNA genes (Figure \@ref(fig:results-1)A).
 This was confirmed by average signal intensity plots of FOXA1 and H3K27ac binding (Figure \@ref(fig:results-1)B).
 
-Upon FOXA1 OE, the mean Q-values for FOXA1 binding significantly decreased 0.16-fold and insignificantly decrease by 0.62 for H3K27ac (Mann-Whitney: p \<0.005) (Supplementary Figures X).
+Upon FOXA1 OE, the mean Q-values for FOXA1 binding significantly decreased 0.16-fold and insignificantly decrease by 0.62-fold for H3K27ac (Mann-Whitney: p \<0.005) (Supplementary Figures X).
 However, there is a significant difference in binding between -DOX and +DOX tRNAs for both FOXA1 and H3K27ac (Wilcoxon Signed Rank Test : p \<0.0001) (Figure \@ref(fig:results-1)C).
 Changes in FOXA1 and H3K27ac binding has been visualised as a parameter heatmap in Figure \@ref(fig:results-1)D. Together, these results suggest that FOXA1 overexpression alters the binding landscape of FOXA1 and H3K27ac at tRNAs.
 
@@ -201,11 +210,11 @@ Changes in FOXA1 and H3K27ac binding has been visualised as a parameter heatmap 
 knitr::include_graphics("../images/results-01.png")
 ```
 
-## Boxplots
+## Figure 2
 
 ### Why?
 
-FOX OE alters binding at tRNAs (fig1).
+FOXA1 OE alters binding at tRNAs (fig1).
 
 ### What?
 
@@ -215,11 +224,13 @@ However, for H3K27ac, the number of tRNAs with an increase (GAIN) was comparable
 
 Of the tRNAs which gained FOXA1, 14% also gained H3K27ac.
 and 13.5% lost H3K27ac.
-These subsets represent approximately 25% of all tRNAs with GAIN H3K27ac or LOSS H3k27ac, respectively (Figure \@ref(fig:results-2)C).
+These co-binding events represent approximately 25% of all tRNAs that each gain H3K27ac or lose H3k27ac (Figure \@ref(fig:results-2)C).
 
 Examples of these tRNAs are shown in Figure \@ref(fig:results-2)D.
 
 ### Suggests
+
+FOXA1 alone is insufficient in increasing tRNA activity.
 
 ```{r results-2, out.width='100%', fig.cap = "(B) Ratiometric heatmaps of the log2 ratio between the binding of FOXA1 or H3k27ac with endogenous FOXA1 expression vs. the binding of FOXA1 or H3k27ac with FOXA1 OE."}
 knitr::include_graphics("../images/results-02.png")
@@ -227,9 +238,20 @@ knitr::include_graphics("../images/results-02.png")
 
 ## Figure 3
 
-Why?
+How many genes are 'activated' by FOXA1?
 
 What?
+
+-   tRNAs were classified as 'active' if H3K27ac Q-values exceeded the median -DOX value (Q \> 1.81).
+
+-   How many genes are 'active' in -DOX vs +DOX
+
+    -   Number is similar
+
+    -   Are +DOX genes the same genes?
+        Compare -DOX and +DOX tRNA lists
+
+    -   Parameter heatmap of GAIN/LOSS genes?
 
 Suggests?
 
@@ -237,27 +259,65 @@ Suggests?
 knitr::include_graphics("../images/results-03.png")
 ```
 
+## Figure ?
+
+-   Relative position (not very interesting)
+
+-   Binding at isotopes?
+    Certain AA more up than others?
+
 ## Figure 4
 
-Why?
+#### Why?
 
-What?
+### What?
 
-Suggests?
+MEME CentriMo to identify de novo motifs that are enriched at tRNAs which gain both FOXA1 and H3k27ac
+
+-   relative to other tRNAS (gain/lose, lose/lose, lose/gain)
+
+-   FOXA1 not enriched
+
+-   Look at ERE, AP-1, others?
+
+-   Top 3 motifs (fisher E values) - IRF7, ERR3, NR4A1
+
+-   A and B box motifs as a control?
+    How?
+
+    -   All downstream
+
+    -   tRNAs where 'matching sequences' all best matches = code for valine
+
+    -   Branched amino acids associated with lower BC risk
+
+#### Suggests?
 
 ```{r results-4, out.width = '100%', fig.cap = ""}
 knitr::include_graphics("../images/results-04.png")
 ```
 
-## Localisation of FOXA1 at individual tRNA genes in MCF-7 cells
+## Figure 5
+
+-   Localisation of FOXA1 at individual tRNA genes in MCF-7 cells
 
 Why?
+
+-   tRNAs implicated in cancer
+
+-   Are they upregulated?
+
+-   Look at gain function/gain h3/fox
+
+-   Motif ontology
+
+-   
 
 What?
 
 Suggests?
 
-```{r clusters, out.width='90%'}
+```{r clusters}
 knitr::kable(
   data.frame(
     "Group" = c(
@@ -295,25 +355,19 @@ knitr::kable(
 
 # Discussion
 
--   not compared mcf-7 to treatment responsive cells
-
-## Future
-
 -   FOXA1 alone not efficient to increase activity
 
     -   p300
 
--   FOXA1 moves nucleosomes to make other TF acessible
+-   FOXA1 moves nucleosomes to make other TF accessible?
 
 -   Loses fox = weak binding?
 
--   Dynamic and stable marks
-
--   pertubations
-
-<!-- -->
+-   Dynamic vs stable marks
 
 -   ATAC-seq
+
+# Conclusion
 
 ```{=tex}
 \begin{flushright}

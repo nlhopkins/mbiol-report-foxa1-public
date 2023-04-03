@@ -1,48 +1,90 @@
 load('environments/data.RData')
 
-x <- data %>%
-    filter(grepl("ed_h3k27ac|dox_h3k27ac", treatment)) %>%
-    mutate(h3_status = case_when(value > threshold ~ "active", TRUE ~ "inactive")) %>%
-    group_by(treatment, h3_status) %>%
-    mutate(active_count = n() / 2) %>%
+
+# active genes
+data %>%
+    filter(grepl("h3k27ac", treatment)) %>%
+    mutate(h3_status = ifelse(value > activity_threshold,
+                              'active', 'inactive')) %>%
+    group_by(h3_status, condition) %>%
+    mutate(active_count = n()) %>%
     ungroup() %>%
-    group_by(treatment) %>%
-    mutate(gene_count = n() / 2) %>%
+    group_by(condition) %>%
+    mutate(gene_count = n()) %>%
+    ungroup() %>%
+    ggplot(aes(
+        x = factor(condition, levels = c("ed", "dox")),
+        y = active_count / gene_count,
+        fill = h3_status
+    )) +
+    geom_bar(position = "dodge", stat = "identity") +
+    xlab("") +
+    scale_fill_discrete(name = "") +
+    theme_ipsum() +
+    scale_y_continuous(labels = scales::percent) +
+    geom_text(
+        position = position_dodge(width = 1),
+        aes(label = active_count / 2,
+            y = active_count / gene_count),
+        size = 3
+    )
+
+
+
+
+
+binding <- raw %>%
+    mutate(dox_fox_bound = ifelse(dox_foxa1_high > dox_biding_threshold, '1', '0')) %>%
+    mutate(ed_fox_bound = ifelse(ed_foxa1 > ed_biding_threshold, '1', '0')) %>%
+    mutate(dox_h3k27ac_bound = ifelse(dox_h3k27ac > dox_biding_threshold, '1', '0')) %>%
+    mutate(ed_h3k27ac_bound = ifelse(ed_h3k27ac > ed_biding_threshold, '1', '0')) %>%
+    pivot_longer(cols = contains("bound"),
+                 names_to = "binding",
+                 values_to = "bound") %>%
+    mutate(condition = case_when(grepl("ed", binding) ~ "ed",
+                                 grepl("dox", binding) ~ "dox")) %>%
+    mutate(binding = case_when(
+        grepl("fox", binding) ~ "fox",
+        grepl("h3k27ac", binding) ~ "h3k27ac"
+    )) %>%
+    group_by(condition, binding, bound) %>%
+    mutate(bound_count = n()) %>%
+    ungroup() %>%
+    group_by(binding) %>%
+    mutate(gene_count = n()) %>%
     ungroup()
 
-
-
-x %>% ggplot(aes(
-    fill = h3_status,
-    x = treatment,
-    y = active_count / gene_count
+binding %>% ggplot(aes(
+    x = factor(condition, levels = c("ed", "dox")),
+    y = bound_count / gene_count,
+    fill = bound
 )) +
     geom_bar(position = "dodge", stat = "identity") +
     xlab("") +
     scale_fill_discrete(name = "") +
     theme_ipsum() +
-    scale_y_continuous(limits = c(0, 0.6),
-                       labels = scales::percent)
-
-
-
-## IGNORE !!! ACTIVITY APPLIED TO FOX FIX
-##
-## total %>%
-mutate(activity = if_else(value > total_threshold, "active", "inactive")) %>%
-    filter(!grepl("dox_foxa1_low", treatment)) %>%
-    filter(!grepl("inactive", activity)) %>%
-    mutate(treatment = if_else(grepl("ed", treatment), "ed", "dox")) %>%
-    ggplot(aes(
-        fill = factor(position, level = c("upstream", "downstream")),
-        x = factor(treatment, level = c("ed", "dox")),
-        y = after_stat(count / sum(count / 4))
-    )) +
-    geom_bar(position = "dodge") +
-    xlab("") +
-    scale_fill_discrete(name = "") +
-    theme_ipsum() +
-    facet_grid(~ target) +
-    scale_y_continuous(labels = scales::percent)
+    scale_y_continuous(labels = scales::percent) +
+    geom_text(position = position_dodge(width = 1),
+              aes(
+                  label = paste(bound_count),
+                  y = bound_count / gene_count,
+                  size = 3
+              )) +
+    facet_wrap( ~ binding)
 
 save.image(file = 'environments/barchart.RData')
+
+
+
+x <- binding %>%
+    filter(binding == "fox") %>%
+    filter(bound == "1") %>% 
+    filter(condition == "ed")
+
+y <- binding %>%
+    filter(binding == "fox") %>%
+    filter(bound == "1")%>%
+    filter(condition == "dox") %>%
+    select(name)
+
+z <- inner_join(x, y)

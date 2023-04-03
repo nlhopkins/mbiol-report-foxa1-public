@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.3.21)  31 MAR 2023 01:49
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.3.21)  4 APR 2023 00:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1030,10 +1030,6 @@ Underfull \hbox (badness 2837) in paragraph at lines 241--246
  []
 
 [2]
-Underfull \hbox (badness 1824) in paragraph at lines 276--282
-\TU/SourceSansPro(0)/m/n/12 Quantification of 416 high-confidence tRNAs revealed that FOXA1 interacts with 100% of
- []
-
 File: ../images/results-01.png Graphic file (type bmp)
 <../images/results-01.png>
 [3]
@@ -1052,77 +1048,77 @@ Overfull \vbox (10.29398pt too high) has occurred while \output is active []
 File: ../images/results-04.png Graphic file (type bmp)
 <../images/results-04.png>
 [8] [9] [10]
-Underfull \hbox (badness 10000) in paragraph at lines 516--519
+Underfull \hbox (badness 10000) in paragraph at lines 513--516
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 520--523
+Underfull \hbox (badness 10000) in paragraph at lines 517--520
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 524--527
+Underfull \hbox (badness 10000) in paragraph at lines 521--524
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 528--531
+Underfull \hbox (badness 10000) in paragraph at lines 525--528
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 532--535
+Underfull \hbox (badness 10000) in paragraph at lines 529--532
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 536--539
+Underfull \hbox (badness 10000) in paragraph at lines 533--536
 
  []
 
 [11]
-Underfull \hbox (badness 10000) in paragraph at lines 540--543
+Underfull \hbox (badness 10000) in paragraph at lines 537--540
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 544--547
+Underfull \hbox (badness 10000) in paragraph at lines 541--544
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 548--551
+Underfull \hbox (badness 10000) in paragraph at lines 545--548
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 552--555
+Underfull \hbox (badness 10000) in paragraph at lines 549--552
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 556--559
+Underfull \hbox (badness 10000) in paragraph at lines 553--556
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 560--563
+Underfull \hbox (badness 10000) in paragraph at lines 557--560
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 564--567
+Underfull \hbox (badness 10000) in paragraph at lines 561--564
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 568--571
+Underfull \hbox (badness 10000) in paragraph at lines 565--568
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 572--575
+Underfull \hbox (badness 10000) in paragraph at lines 569--572
 
  []
 
@@ -1132,10 +1128,10 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 22974 strings out of 478682
- 429127 string characters out of 5847468
+ 22972 strings out of 478682
+ 429113 string characters out of 5847468
  1861018 words of memory out of 5000000
- 42719 multiletter control sequences out of 15000+600000
+ 42717 multiletter control sequences out of 15000+600000
  516094 words of font info for 87 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  86i,10n,115p,1003b,524s stack positions out of 10000i,1000n,20000p,200000b,200000s

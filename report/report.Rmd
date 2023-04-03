@@ -185,26 +185,18 @@ To investigate the impact of FOXA1 on tRNA enhancers in ER+ MCF-7 cells, public 
 In this paper, a doxycycline (Dox) inducible OE system was used to achieve FOXA1 OE akin to tamoxifen-resistant (TamR) MCF-7 cells[@fu2019].
 
 FOXA1 and H3K27ac peaks of 416 high-confidence tRNAs were quantified relative to the ±500 bp flanking regions.
-Peaks were classified as binding events if Q-values exceeded the median input values (-Dox = 0.391, +Dox = 0.375).
-
-FOXA1 interacted with 73.8% of tRNAs and
-
-H3k27ac interacted with 68.3%.
-of tRNA genes
-
-64.9% +DOX (Figure \@ref(fig:results-1)A).
-
-Whereas input reads generated minimal peak enrichment (Supplementary Figure X).
-The number of genes bound was unchanged by OE of FOXA1.
-
 Mapped reads of FOXA1 and H3K27ac binding were visualised as heatmaps and ordered by increasing -DOX Q-value.
 This revealed a concentration of FOXA1 and H3k27ac at approximately half of tRNAs, relative to ±10 kb flanking regions.
 Upon FOXA1 OE, FOXA1 binding increased at a small proportion of tRNAs genes and H3K27ac binding decreases at approximately half of tRNA genes (Figure \@ref(fig:results-1)A).
 This was confirmed by average signal intensity plots of FOXA1 and H3K27ac binding (Figure \@ref(fig:results-1)B).
+Input reads generated minimal peak enrichment (Supplementary Figure X).
 
-Upon FOXA1 OE, the mean Q-values for FOXA1 binding significantly decreased 0.16-fold and insignificantly decrease by 0.62-fold for H3K27ac (Mann-Whitney: p \<0.005) (Supplementary Figures X).
-However, there is a significant difference in binding between -DOX and +DOX tRNAs for both FOXA1 and H3K27ac (Wilcoxon Signed Rank Test : p \<0.0001) (Figure \@ref(fig:results-1)C).
-Changes in FOXA1 and H3K27ac binding has been visualised as a parameter heatmap in Figure \@ref(fig:results-1)D. Together, these results suggest that FOXA1 overexpression alters the binding landscape of FOXA1 and H3K27ac at tRNAs.
+Peaks were classified as binding events if Q-values exceeded the input values.
+FOXA1 interacted with 329 (79.1%) of tRNA genes, decreasing to 319 (76.7%) with FOXA1 OE. H3K27ac interacted with 293 (70.4%) of tRNA genes, decreasing to 266 (63.9%) with FOXA1 OE (Figure \@ref(fig:results-1)C).
+Upon FOXA1 OE, mean Q-values significantly increased 1.18-fold for FOXA1 binding (p \< 0.0001), and significantly decreased 0.86-fold for H3K27ac (p \< 0.01) (Supplementary Figures X).
+However, FOXA1 OE leads to a significant difference in FOXA1 and H3K27ac binding between individual tDNAs (p \<0.0001) (Figure \@ref(fig:results-1)D).
+
+Together, these results support the notion that FOXA1 overexpression alters the binding landscape of FOXA1 and H3K27ac at tRNAs.
 
 ```{r results-1, out.width = '100%', fig.cap = "(B) Ratiometric heatmaps of the log2 ratio between the binding of FOXA1 or H3k27ac with endogenous FOXA1 expression vs. the binding of FOXA1 or H3k27ac with FOXA1 OE."}
 knitr::include_graphics("../images/results-01.png")
@@ -212,18 +204,15 @@ knitr::include_graphics("../images/results-01.png")
 
 ## Figure 2
 
-### Why?
-
-FOXA1 OE alters binding at tRNAs (fig1).
-
-### What?
+### Why
 
 Using Q-values, tRNAs that are differently enriched upon FOXA1 OE were categorised as 'GAIN' or 'LOSS'.
-This discovered substantially more tRNAs with increased (GAIN) than decreased (LOSS) FOXA1 (96 vs. 23) (Figure \@ref(fig:results-2)A).
-However, for H3K27ac, the number of tRNAs with an increase (GAIN) was comparable to those with a decrease (LOSS) (54 vs. 52)(Figure \@ref(fig:results-2)B).
+This discovered substantially more tRNAs with increased (GAIN) than decreased (LOSS) FOXA1 (92 vs. 21) (Figure \@ref(fig:results-2)A).
 
-Of the tRNAs which gained FOXA1, 14% also gained H3K27ac.
-and 13.5% lost H3K27ac.
+However, for H3K27ac, the number of tRNAs with an increase (GAIN) was comparable to those with a decrease (LOSS) (41 vs. 44) (Figure \@ref(fig:results-2)B).
+
+Of the tRNAs which gained FOXA1, 21 (23%) also gained H3K27ac.
+
 These co-binding events represent approximately 25% of all tRNAs that each gain H3K27ac or lose H3k27ac (Figure \@ref(fig:results-2)C).
 
 Examples of these tRNAs are shown in Figure \@ref(fig:results-2)D.

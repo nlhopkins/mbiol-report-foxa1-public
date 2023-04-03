@@ -16,12 +16,11 @@ data  %>%
     mutate(target = case_when(str_detect(treatment, "fox") ~ "fox", TRUE ~ "h3")) %>%
     mutate(variable = case_when(str_detect(treatment, "dox") ~ "dox", TRUE ~ "ed"))  %>%
     filter(!grepl("dox_foxa1_low", treatment)) %>%
-    ggplot(aes(
-        color = variable,
-        x = factor(variable, levels = c("ed", "dox")),
-        y = log2(value)
-    )) +
+    ggplot(aes(x = factor(variable, levels = c("ed", "dox")),
+               y = log2(value),
+               color = variable)) +
     geom_violin(trim = FALSE) +
+    facet_wrap( ~ target) +
     stat_summary(
         fun.data = "mean_sdl",
         fun.args = list(mult = 1),
@@ -30,15 +29,27 @@ data  %>%
     ) +
     theme_ipsum() +
     stat_compare_means(
+        comparisons = list(c("ed", "dox")),
         method = "wilcox.test",
         label = "p.signif",
-        paired = T,
+        paired = T, #change to F to compare means
         label.x = 1.4,
-        label.y = 5
+        label.y = 5,
+        hide.ns = T,
+        bracket.size = 0
     ) +
     labs(subtitle = "Wilcoxon") +
-    facet_wrap(vars(target)) +
     theme(legend.position = "none")
+
+
+
+data  %>%
+    mutate(target = case_when(str_detect(treatment, "fox") ~ "fox", TRUE ~ "h3")) %>%
+    mutate(variable = case_when(str_detect(treatment, "dox") ~ "dox", TRUE ~ "ed"))  %>%
+    filter(!grepl("dox_foxa1_low|h3k27ac", treatment)) %>%
+    group_by(treatment) %>%
+    summarise_at("value", median)
+
 
 
 ## q values for down and up genes
@@ -50,7 +61,7 @@ data  %>%
     filter(!grepl("NS", diffexpressed)) %>%
     ggplot(aes(
         color = diffexpressed,
-        x = diffexpressed,
+        x = factor(diffexpressed, labels = c("UP", "DOWN")),
         y = log2(value)
     )) +
     geom_violin(trim = FALSE) +
@@ -65,21 +76,32 @@ data  %>%
         method = "wilcox.test",
         label = "p.signif",
         paired = F,
-        label.x = 1.5
+        label.x = 1.5,
+        hide.ns = T
     ) +
     labs(subtitle = "Wilcoxon") +
-    facet_wrap(vars(variable)) + theme(legend.position = "none")
+    facet_wrap(vars(variable)) +
+    theme(legend.position = "none")
 
 
+data  %>%
+    mutate(target = case_when(str_detect(treatment, "fox") ~ "fox", TRUE ~ "h3")) %>%
+    mutate(variable = case_when(str_detect(treatment, "dox") ~ "dox", TRUE ~ "ed"))  %>%
+    filter(grepl("h3k27ac", treatment)) %>%
+    filter(!grepl("NS", diffexpressed)) %>%
+    
+    filter(grepl("h3k27ac", treatment)) %>%
+    group_by(treatment) %>%
+    summarise_at("value", median)
 
 
 # relative position
 total  %>%
     filter(!grepl("dox_foxa1_low", treatment)) %>%
-    ggplot(aes(x = condition, 
+    ggplot(aes(x = condition,
                y = log2(value), fill = position)) +
     geom_boxplot() +
-    theme_ipsum() 
+    theme_ipsum()
 
 
 save.image(file = 'environments/boxplot.RData')

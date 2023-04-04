@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.3.21)  4 APR 2023 00:14
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.3.21)  4 APR 2023 20:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1032,97 +1032,97 @@ Underfull \hbox (badness 2837) in paragraph at lines 241--246
 [2]
 File: ../images/results-01.png Graphic file (type bmp)
 <../images/results-01.png>
-[3]
-Overfull \vbox (23.89398pt too high) has occurred while \output is active []
-
-[4]
+[3] [4]
 File: ../images/results-02.png Graphic file (type bmp)
 <../images/results-02.png>
 [5]
+Overfull \vbox (23.89398pt too high) has occurred while \output is active []
+
+[6]
 File: ../images/results-03.png Graphic file (type bmp)
 <../images/results-03.png>
-[6]
+[7]
 Overfull \vbox (10.29398pt too high) has occurred while \output is active []
 
-[7]
+[8]
 File: ../images/results-04.png Graphic file (type bmp)
 <../images/results-04.png>
-[8] [9] [10]
-Underfull \hbox (badness 10000) in paragraph at lines 513--516
+[9] [10] [11]
+Underfull \hbox (badness 10000) in paragraph at lines 526--529
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 517--520
+Underfull \hbox (badness 10000) in paragraph at lines 530--533
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 521--524
+Underfull \hbox (badness 10000) in paragraph at lines 534--537
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 525--528
+Underfull \hbox (badness 10000) in paragraph at lines 538--541
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 529--532
+Underfull \hbox (badness 10000) in paragraph at lines 542--545
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 533--536
+Underfull \hbox (badness 10000) in paragraph at lines 546--549
 
  []
 
-[11]
-Underfull \hbox (badness 10000) in paragraph at lines 537--540
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 541--544
+[12]
+Underfull \hbox (badness 10000) in paragraph at lines 550--553
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 545--548
+Underfull \hbox (badness 10000) in paragraph at lines 554--557
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 549--552
+Underfull \hbox (badness 10000) in paragraph at lines 558--561
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 553--556
+Underfull \hbox (badness 10000) in paragraph at lines 562--565
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 557--560
+Underfull \hbox (badness 10000) in paragraph at lines 566--569
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 561--564
+Underfull \hbox (badness 10000) in paragraph at lines 570--573
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 565--568
+Underfull \hbox (badness 10000) in paragraph at lines 574--577
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 569--572
+Underfull \hbox (badness 10000) in paragraph at lines 578--581
 
  []
 
-[12] (./report.aux)
+
+Underfull \hbox (badness 10000) in paragraph at lines 582--585
+
+ []
+
+[13] (./report.aux)
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
@@ -1136,4 +1136,4 @@ Here is how much of TeX's memory you used:
  14 hyphenation exceptions out of 8191
  86i,10n,115p,1003b,524s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on report.pdf (14 pages).
+Output written on report.pdf (15 pages).

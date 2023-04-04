@@ -283,8 +283,14 @@ Upon FOXA1 OE, FOXA1 binding increased at a small proportion of tRNAs genes and 
 This was confirmed by average signal intensity plots of FOXA1 and H3K27ac binding (Figure \ref{fig:results-1}B).
 Input reads generated minimal peak enrichment (Supplementary Figure X).
 
-Peaks were classified as binding events if Q-values exceeded the input values.
-FOXA1 interacted with 329 (79.1\%) of tRNA genes, decreasing to 319 (76.7\%) with FOXA1 OE. H3K27ac interacted with 293 (70.4\%) of tRNA genes, decreasing to 266 (63.9\%) with FOXA1 OE (Figure \ref{fig:results-1}C).
+Peaks were classified as binding events if Q-values exceeded input values.
+FOXA1 interacted with 329 (79.1\%) of tRNA genes and H3K27ac with 293 (70.4\%) of tRNA genes.
+FOXA1 co-binds with 89.4\% of H3K27ac sites.
+Upon FOXA1 OE, FOXA1 binding decreased to 319 tDNAs (76.7\%).
+H3K27ac decreased to 266 (63.9\%) (Figure \ref{fig:results-1}C).
+Here, FOXA1 co-binds represents 92.5\% of H3K27ac sites.
+Co-binding events represent 62\% (262) of high confidence tDNAs, decreasing to 59.1\% (246) when FOXA1 is overexpressed; these subsets differ by 28 genes.
+
 Upon FOXA1 OE, mean Q-values significantly increased 1.18-fold for FOXA1 binding (p \textless{} 0.0001), and significantly decreased 0.86-fold for H3K27ac (p \textless{} 0.01) (Supplementary Figures X).
 However, FOXA1 OE leads to a significant difference in FOXA1 and H3K27ac binding between individual tDNAs (p \textless0.0001) (Figure \ref{fig:results-1}D).
 
@@ -303,16 +309,17 @@ Together, these results support the notion that FOXA1 overexpression alters the 
 \subsection{Figure 2}\label{figure-2}}
 
 \hypertarget{why}{%
-\subsubsection{Why}\label{why}}
+\subsubsection{Why?}\label{why}}
+
+How does FOXA1 alter H3K27ac binding?
 
 Using Q-values, tRNAs that are differently enriched upon FOXA1 OE were categorised as `GAIN' or `LOSS'.
 This discovered substantially more tRNAs with increased (GAIN) than decreased (LOSS) FOXA1 (92 vs.~21) (Figure \ref{fig:results-2}A).
 
 However, for H3K27ac, the number of tRNAs with an increase (GAIN) was comparable to those with a decrease (LOSS) (41 vs.~44) (Figure \ref{fig:results-2}B).
 
-Of the tRNAs which gained FOXA1, 21 (23\%) also gained H3K27ac.
-
-These co-binding events represent approximately 25\% of all tRNAs that each gain H3K27ac or lose H3k27ac (Figure \ref{fig:results-2}C).
+Of the tDNAs which GAIN H3k27ac, 51\% (21) also gain (GAIN) FOXA1; none lose (LOSS) FOXA1.
+Of the tDNAs which lose (LOSS) H3k27ac, 22.7\% (10) also lose FOXA1, with just 1 tDNA gaining FOXA1 (Figure \ref{fig:results-2}C).
 
 Examples of these tRNAs are shown in Figure \ref{fig:results-2}D.
 
@@ -338,8 +345,14 @@ How many genes are `activated' by FOXA1?
 What?
 
 \begin{itemize}
+\tightlist
 \item
-  tRNAs were classified as `active' if H3K27ac Q-values exceeded the median -DOX value (Q \textgreater{} 1.81).
+  50\% tDNAs active/inactive
+\end{itemize}
+
+\begin{itemize}
+\item
+  tRNAs were classified as `active' if H3K27ac Q-values exceeded the median -DOX value (Q \textgreater{} 1.808).
 \item
   How many genes are `active' in -DOX vs +DOX
 
@@ -499,7 +512,7 @@ SeC & Involved in REDOX\textsuperscript{{[}\protect\hyperlink{ref-Sangha2022}{15
 \section{Conclusion}\label{conclusion}}
 
 \begin{flushright}
-997 Words
+1056 Words
 \end{flushright}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}

@@ -8,16 +8,16 @@
 \contentsline {subsection}{Statistics}{2}{section*.10}%
 \contentsline {section}{Results}{3}{section*.11}%
 \contentsline {subsection}{Binding of FOXA1 and H3k27ac to tRNA Genes}{3}{section*.12}%
-\contentsline {subsection}{Figure 2}{5}{section*.14}%
-\contentsline {subsubsection}{Why}{5}{section*.15}%
+\contentsline {subsection}{Figure 2}{4}{section*.14}%
+\contentsline {subsubsection}{Why?}{4}{section*.15}%
 \contentsline {subsubsection}{Suggests}{5}{section*.16}%
-\contentsline {subsection}{Figure 3}{6}{section*.18}%
-\contentsline {subsection}{Figure ?}{8}{section*.20}%
-\contentsline {subsection}{Figure 4}{8}{section*.21}%
-\contentsline {paragraph}{Why?}{8}{section*.22}%
-\contentsline {subsubsection}{What?}{8}{section*.23}%
-\contentsline {paragraph}{Suggests?}{10}{figure.caption.25}%
-\contentsline {subsection}{Figure 5}{10}{section*.26}%
-\contentsline {section}{Discussion}{11}{section*.27}%
-\contentsline {section}{Conclusion}{11}{section*.28}%
-\contentsline {section}{References}{11}{section*.29}%
+\contentsline {subsection}{Figure 3}{7}{section*.18}%
+\contentsline {subsection}{Figure ?}{9}{section*.20}%
+\contentsline {subsection}{Figure 4}{9}{section*.21}%
+\contentsline {paragraph}{Why?}{9}{section*.22}%
+\contentsline {subsubsection}{What?}{9}{section*.23}%
+\contentsline {paragraph}{Suggests?}{11}{figure.caption.25}%
+\contentsline {subsection}{Figure 5}{11}{section*.26}%
+\contentsline {section}{Discussion}{12}{section*.27}%
+\contentsline {section}{Conclusion}{12}{section*.28}%
+\contentsline {section}{References}{12}{section*.29}%

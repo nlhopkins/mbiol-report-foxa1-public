@@ -22,14 +22,21 @@ data  %>%
         color = variable
     )) +
     geom_violin(trim = FALSE) +
-    facet_wrap( ~ target) +
+    facet_wrap(vars(factor(
+        target,
+        levels = c("fox", "h3k27ac") ,
+        labels = c("FOXA1", "H3K27ac")
+    )),
+    strip.position = "bottom") +
     stat_summary(
         fun.data = "mean_sdl",
         fun.args = list(mult = 1),
         geom = "pointrange",
         color = "black"
     ) +
-    theme_ipsum() +
+    theme_classic(base_size = 15) +
+    xlab("") +
+    ylab("Q-Values at High Confidence hg19 tRNAs") +
     stat_compare_means(
         comparisons = list(c("ed", "dox")),
         method = "wilcox.test",
@@ -42,7 +49,18 @@ data  %>%
         bracket.size = 0
     ) +
     labs(subtitle = "Wilcoxon") +
-    theme(legend.position = "none")
+    theme(
+        legend.position = "none",
+        strip.placement = "outside",
+        strip.background = element_rect(color = NA),
+        panel.spacing = unit(0, "lines")
+    ) +
+    scale_y_continuous(
+        limits = c(-6, 8),
+        expand = c(0, 0),
+        breaks = seq(-6, 8, by = 2)
+    ) +
+    scale_x_discrete(labels = c("ed" = "-Dox", "dox" = "+Dox"))
 
 
 
@@ -57,7 +75,8 @@ data  %>%
 
 #### q values for down and up genes ####
 
-data  %>%
+data %>%
+    merge(diffexpressed, by = "name") %>%
     mutate(target = case_when(str_detect(treatment, "fox") ~ "fox", TRUE ~ "h3")) %>%
     mutate(variable = case_when(str_detect(treatment, "dox") ~ "dox", TRUE ~ "ed"))  %>%
     filter(grepl("h3k27ac", treatment)) %>%
@@ -75,7 +94,15 @@ data  %>%
         geom = "pointrange",
         color = "black"
     ) +
-    theme_ipsum() +
+    xlab("") +
+    ylab("Q-Values at High Confidence hg19 tRNAs") +
+    theme_classic(base_size = 15) +
+    theme(
+        legend.position = "none",
+        strip.placement = "outside",
+        strip.background = element_rect(color = NA),
+        panel.spacing = unit(0, "lines")
+    ) +
     stat_compare_means(
         comparisons = list(c("ed", "dox")),
         method = "wilcox.test",
@@ -86,7 +113,13 @@ data  %>%
         bracket.size = 0
     ) +
     labs(subtitle = "Wilcoxon") +
-    theme(legend.position = "none")
+    theme(legend.position = "none") +
+    scale_y_continuous(
+        limits = c(-6, 8),
+        expand = c(0, 0),
+        breaks = seq(-6, 8, by = 2)
+    ) +
+    scale_x_discrete(labels = c("ed" = "-Dox", "dox" = "+Dox"))
 
 
 

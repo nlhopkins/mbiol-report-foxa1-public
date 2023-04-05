@@ -18,17 +18,12 @@ euler(
 
 x <- diffexpressed %>% pivot_wider(names_from = comparison,
                                    values_from = diffexpressed) %>% 
-        filter(fox_diff == "GAIN" & h3_diff == "GAIN") %>%
-        select(name)
+        filter(fox_diff == "GAIN") 
 
-y <- data %>% filter(grepl("ed_h3k27ac", treatment)) %>%
-        filter(value > activity_threshold) %>%
-        select(c(name, h3_status, value, h3_fold))
+y <- data %>% filter(grepl("dox_h3k27ac", treatment)) %>%
+        filter(h3_status == "gain")
 
 z <- inner_join(x, y, by = "name")
-
-
-
 
 
 

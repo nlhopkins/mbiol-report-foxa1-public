@@ -50,8 +50,12 @@ data <- raw %>%
     mutate(dox_h3k27ac_bound = ifelse(dox_h3k27ac > 1, '1', '0')) %>%
     mutate(ed_h3k27ac_bound = ifelse(ed_h3k27ac > 1, '1', '0')) %>%
     mutate(dox_fox_bound = ifelse(dox_foxa1_high > 1, '1', '0')) %>%
-    mutate(fox_fold = (dox_foxa1_high - ed_foxa1) / ed_foxa1) %>%
-    mutate(h3_fold = (dox_h3k27ac - ed_h3k27ac) / ed_h3k27ac)  %>%
+    mutate(ed_overlaid_bound = ifelse(ed_foxa1 > 1 &
+                                          ed_h3k27ac > 1, '1', '0')) %>%
+    mutate(dox_overlaid_bound = ifelse(dox_foxa1_high > 1 &
+                                           dox_h3k27ac > 1, '1', '0')) %>%
+    mutate(fox_fold = dox_foxa1_high / ed_foxa1) %>%
+    mutate(h3_fold = dox_h3k27ac / ed_h3k27ac)  %>%
     mutate(
         h3_status = ifelse(
             ed_h3k27ac < activity_threshold & dox_h3k27ac > activity_threshold,
@@ -90,7 +94,7 @@ volcano_fox <- data %>%
     mutate(p_value = -log10(pmap_dbl(select(., -1),  ~ chisq.test(c(
         ...
     ))$p.value))) %>%
-    mutate(fox_fold = ((dox_foxa1_high - ed_foxa1) / ed_foxa1)) %>%
+    mutate(fox_fold = log2(dox_foxa1_high / ed_foxa1)) %>%
     filter(fox_fold != "Inf") %>%
     unique()
 
@@ -98,12 +102,12 @@ volcano_fox <- data %>%
 volcano_fox$diffexpressed <- "NS"
 
 # if log2Foldchange > 4 and pvalue < .000000001, set as "GAIN"
-volcano_fox$diffexpressed[volcano_fox$fox_fold > 0.5 &
+volcano_fox$diffexpressed[volcano_fox$fox_fold > log2(1.5) &
                               volcano_fox$p_value > .001] <-
     "GAIN"
 
 # if log2Foldchange < -4 and pvalue < .000000001, set as "LOSS"
-volcano_fox$diffexpressed[volcano_fox$fox_fold < -0.5 &
+volcano_fox$diffexpressed[volcano_fox$fox_fold < -log2(1.5) &
                               volcano_fox$p_value > .001] <-
     "LOSS"
 
@@ -120,7 +124,7 @@ volcano_h3 <- data %>%
     mutate(p_value = -log10(pmap_dbl(select(., -1),  ~ chisq.test(c(
         ...
     ))$p.value))) %>%
-    mutate(h3_fold = ((dox_h3k27ac - ed_h3k27ac) / ed_h3k27ac)) %>%
+    mutate(h3_fold = log2(dox_h3k27ac / ed_h3k27ac)) %>%
     filter(h3_fold != "Inf") %>%
     unique()
 
@@ -129,12 +133,12 @@ volcano_h3 <- data %>%
 volcano_h3$diffexpressed <- "NS"
 
 # if log2Foldchange > 4 and pvalue < .000000001, set as "GAIN"
-volcano_h3$diffexpressed[volcano_h3$h3_fold > 0.5 &
+volcano_h3$diffexpressed[volcano_h3$h3_fold > log2(1.5) &
                              volcano_h3$p_value > .001] <-
     "GAIN"
 
 # if log2Foldchange < -4 and pvalue < .000000001, set as "LOSS"
-volcano_h3$diffexpressed[volcano_h3$h3_fold < -0.5 &
+volcano_h3$diffexpressed[volcano_h3$h3_fold < -log2(1.5) &
                              volcano_h3$p_value > .001] <-
     "LOSS"
 
@@ -256,3 +260,4 @@ total <- total
 total <- merge(diffexpressed, total, by = "name")
 
 save.image(file = 'environments/data.RData')
+

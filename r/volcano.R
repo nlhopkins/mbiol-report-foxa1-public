@@ -37,7 +37,7 @@ volcano_fox %>%
                              show.legend = FALSE) +
     theme_classic(base_size = 15) +
     theme(
-        legend.position = "none",
+        legend.position = "top",
         strip.placement = "outside",
         strip.background = element_rect(color = NA),
         panel.spacing = unit(0, "lines")
@@ -82,7 +82,7 @@ volcano_h3 %>%
                              show.legend = FALSE) +
     theme_classic(base_size = 15) +
     theme(
-        legend.position = "none",
+        legend.position = "top",
         strip.placement = "outside",
         strip.background = element_rect(color = NA),
         panel.spacing = unit(0, "lines")

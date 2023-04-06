@@ -12,7 +12,8 @@ output:
 geometry: "left=2.5cm,right=2.5cm,top=2cm,bottom=2cm"
 linestretch: 1.2
 fontsize: 12pt
-indent: false
+indent: true
+mainfont: Charter
 bibliography: refs.bib
 citation-style: ../csl/university-of-york-vancouver.csl
 link-citations: true
@@ -30,7 +31,10 @@ header-includes:
 - \captionsetup[table]{font=small}
 - \captionsetup[table]{justification=justified}
 - \captionsetup[figure]{justification=justified}
-- \usepackage[default]{sourcesanspro}
+- \usepackage{epigrafica}
+- \usepackage{epigrafica}
+- \usepackage[LGR,OT1]{fontenc}
+- \normalfont
 editor_options: 
     markdown:
       canonical: true 
@@ -72,9 +76,43 @@ citation_count <-
 ```
 # Introduction
 
+-   txn by polymerases
+
+-   pol iii
+
+-   pol iii synthesises RNAs, e.g
+
+-   "Recruitment of Pol III to its target genes requires TFIIIB, which is in most cases recruited by TFIIIC, a six-subunit complex that binds two internal promoter motifs, termed the A and B boxes, downstream of the [transcription start site](https://www.sciencedirect.com/topics/biochemistry-genetics-and-molecular-biology/transcription-initiation-site "Learn more about transcription start site from ScienceDirect's AI-generated Topic Pages") of tRNA genes ([Ramsay and Vannini, 2018](https://www.sciencedirect.com/science/article/pii/S0378111922000993?via%3Dihub#b0170), [Schramm and Hernandez, 2002](https://www.sciencedirect.com/science/article/pii/S0378111922000993?via%3Dihub#b0200))."
+
+# Pol III & cancer
+
+-   aberrant expression = cancers
+
+-   pol ii products linked to cancer e.g.s (tRNAs)
+
+-   tumours express tRNAs that are absent from the normal tissue of origin (Tumour-specific phenylalanine tRNA contains two supernumary methylated bases, Nature)
+
+-   Elevated tRNA~i~^Met^ synthesis can drive cell proliferation and oncogenic transformation, Cell 2008
+
+## ER+ BC
+
+-   75% of cancers
+
+-   treatments - SERM or SERD
+
+-   endocrine resistance
+
+-   ERa nuclear receptor, ERE
+
+-   Thus, ERα is implicated in the control of Pol III transcription in MCF-7 cells.
+
 ## FOXA1 Expression and ERα+ Breast Cancer
 
-## tRNAs and Gene Expression
+"\~ 95% of ER- regulated genes require FOXA1 co-occurrence, a pioneer whose experimental ablation in vivo is detrimental to ER binding capacity [9, 10].
+
+"Early studies reported that FoxA1-binding sites overlap with 50% of ER-binding sites (Carroll et al., 2005) and that FoxA1 is required for at least half of all ER-binding events in MCF-7 breast cancer cells (Carroll et al., 2005; Laganie\`re et al., 2005). Later findings via genome-wide analysis (Carroll et al., 2006; Lupien et al., 2008; Hurtado et al., 2011) have been interpreted in support of this general model. In addition, it has been reported that inhibition of ER produces no change in FoxA1 genomic binding patterns (Lupien et al., 2008; Hurtado et al., 2011). These investigations have either focused on a small number of binding locations or compared FoxA1 binding only between unstimu- lated cells and cells treated with an ER antagonist (Hurtado et al., 2011; Lupien et al., 2008). Contrary to these findings, an independent study reported that upon knockdown of ER, FoxA1 binding is lost at many unstimulated ER-binding sites (Caizzi et al., 2014), evidence that ER may in fact regulate binding of FoxA1.."
+
+You are specifically investigating if overexpression of FOXA1 leads to increased tDNA occupancy (more tDNAs bound +/or stronger binding by FOXA1) & activation, as inferred from H3K27ac.
 
 ------------------------------------------------------------------------
 
@@ -83,6 +121,7 @@ citation_count <-
 ## Acquisition of Public ChIP-seq Datasets
 
 ChIP-seq was performed on genetically modified MCF7L cells (*insertion, using a lentiviral cDNA delivery system to express Dox-inducible FOXA1*) [@fu2019].
+
 Datasets were deposited into the National Centre for Biotechnology Information (NCBI) Sequence Read Archive (SRA)[@leinonen2010] under accession no.
 PRJNA512997 (Table \@ref(tab:data)).
 Using "Genetic Manipulation Tools" within the Galaxy[@thegala2022] environment (v 23.0.rc1), SRAs were converted to FastQ files.
@@ -192,11 +231,11 @@ This was confirmed by average signal intensity plots of FOXA1 and H3K27ac bindin
 Input reads generated minimal peak enrichment (Supplementary Figure X).
 
 Peaks were classified as binding events if Q-values exceeded input values (Figure \@ref(fig:results-1)C).
-FOXA1 interacted with 329 (79.1%) of tRNA genes and H3K27ac with 293 (70.4%) of tRNA genes.
+FOXA1 interacts with 329 tRNA genes and H3K27ac with 293 tRNA genes.
 FOXA1 co-binds with 89.4% of H3K27ac sites.
-Upon FOXA1 OE, FOXA1 binding decreased to 319 tDNAs (76.7%).
-H3K27ac decreased to 266 (63.9%) Here, FOXA1 co-binds represents 92.5% of H3K27ac sites.
-Co-binding events represent 62% (262) of high confidence tDNAs, decreasing to 59.1% (246) when FOXA1 is overexpressed; these subsets differ by 28 genes.
+Upon FOXA1 OE, 40 FOXA1 binding sites are lost and 30 are gained.
+H3K27ac sites are lost at 50 tDNAs, and 23 are gained.
+Here, FOXA1 co-binding represents 92.5% of H3K27ac sites.
 
 Upon FOXA1 OE, mean Q-values significantly increased 1.18-fold for FOXA1 binding (p \< 0.0001), and significantly decreased 0.86-fold for H3K27ac (p \< 0.01) (Supplementary Figures X).
 However, FOXA1 OE leads to a significant difference in FOXA1 and H3K27ac binding between individual tDNAs (p \<0.0001) (Figure \@ref(fig:results-1)D).
@@ -213,15 +252,15 @@ knitr::include_graphics("../images/results-01.png")
 
 How does FOXA1 alter H3K27ac binding?
 
-Using Q-values, tRNAs that are differently enriched upon FOXA1 OE were categorised as 'GAIN' or 'LOSS'.
-This discovered substantially more tRNAs with increased (GAIN) than decreased (LOSS) FOXA1 (92 vs. 21) (Figure \@ref(fig:results-2)A).
+Using Q-values, tRNAs that are differently enriched upon FOXA1 OE were categorised as 'UP' or 'DN' (FOXA1 = .
 
-However, for H3K27ac, the number of tRNAs with an increase (GAIN) was comparable to those with a decrease (LOSS) (41 vs. 44) (Figure \@ref(fig:results-2)B).
+This discovered substantially more tRNAs with increased (UP) than decreased (DN) FOXA1 (92 vs. 21) (Figure \@ref(fig:results-2)A).
+However, for H3K27ac, the number of tRNAs with an increase (UP) was comparable to those with a decrease (DN) (41 vs. 44) (Figure \@ref(fig:results-2)B).
 
-Of the tDNAs which GAIN H3k27ac, 51% (21) also gain (GAIN) FOXA1; none lose (LOSS) FOXA1.
-Of the tDNAs which lose (LOSS) H3k27ac, 22.7% (10) also lose FOXA1, with just 1 tDNA gaining FOXA1 (Figure \@ref(fig:results-2)C).
+Of the tDNAs which gain (UP) H3k27ac, 51% (21) also gain (UP) FOXA1; none lose (DN) FOXA1.
 
-FOXA1-H3K27ac colocalisation events represent 63% (262) of -Dox tDNAs, and 59.1% (246) of +Dox tDNAs.
+Of the tDNAs which lose (DN) H3k27ac, 22.7% (10) also lose FOXA1, with just 1 tDNA gaining FOXA1 (Figure \@ref(fig:results-2)C).
+
 Examples of these tRNAs are shown in Figure \@ref(fig:results-2)D.
 
 ### 
@@ -350,6 +389,8 @@ knitr::kable(
     -   p300
 
 -   FOXA1 moves nucleosomes to make other TF accessible?
+
+-   Brf1 required for iMET txn
 
 -   Loses fox = weak binding?
 

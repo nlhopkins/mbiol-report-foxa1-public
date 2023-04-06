@@ -79,13 +79,13 @@ x <- binding %>%
     filter(binding == "h3k27ac") %>%
     filter(bound == "1") %>%
     filter(condition == "ed") %>%
-    select(name) %>% unique()
+    select(name, h3_status) %>% unique()
 
 y <- binding %>%
     filter(binding == "fox") %>%
     filter(bound == "1") %>%
     filter(condition == "ed") %>%
-    select(name) %>% unique()
+    select(name, fox_status) %>% unique()
 
 z <- inner_join(x, y)
 
@@ -94,13 +94,13 @@ x <- binding %>%
     filter(binding == "h3k27ac") %>%
     filter(bound == "1") %>%
     filter(condition == "dox") %>%
-    select(name) %>% unique()
+    select(name, h3_status) %>% unique()
 
 y <- binding %>%
     filter(binding == "fox") %>%
     filter(bound == "1") %>%
     filter(condition == "dox") %>%
-    select(name) %>% unique()
+    select(name, fox_status) %>% unique()
 
 a <- inner_join(x, y)
 

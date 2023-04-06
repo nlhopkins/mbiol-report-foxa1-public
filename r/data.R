@@ -24,24 +24,6 @@ activity_threshold <- raw %>%
     filter(treatment == "ed_h3k27ac") %>%
     pull(2)
 
-# ed_biding_threshold <- raw %>%
-#     pivot_longer(cols = contains(c("input")),
-#                  names_to = "input",
-#                  values_to = "input_value") %>%
-#     group_by(input) %>%
-#     summarise_at("input_value", median) %>%
-#     filter(input == "ed_input") %>%
-#     pull(2)
-#
-# dox_biding_threshold <- raw %>%
-#     pivot_longer(cols = contains(c("input")),
-#                  names_to = "input",
-#                  values_to = "input_value") %>%
-#     group_by(input) %>%
-#     summarise_at("input_value", median) %>%
-#     filter(input == "dox_input") %>%
-#     pull(2)
-
 
 data <- raw %>%
     mutate(across(contains("ed"), ~ .x / ed_input)) %>%
@@ -56,18 +38,24 @@ data <- raw %>%
                                            dox_h3k27ac > 1, '1', '0')) %>%
     mutate(fox_fold = dox_foxa1_high / ed_foxa1) %>%
     mutate(h3_fold = dox_h3k27ac / ed_h3k27ac)  %>%
-    mutate(
-        h3_status = ifelse(
-            ed_h3k27ac < activity_threshold & dox_h3k27ac > activity_threshold,
-            'gain',
-            ifelse(
-                ed_h3k27ac > activity_threshold &
-                    dox_h3k27ac < activity_threshold,
-                'loss',
-                'shared'
-            )
+    mutate(h3_status = ifelse(
+        ed_h3k27ac_bound == "0" & dox_h3k27ac_bound == "1",
+        'gain',
+        ifelse(
+            ed_h3k27ac_bound == "1" &
+                dox_h3k27ac_bound == "0",
+            'loss',
+            'shared'
         )
-    ) %>%
+    )) %>%
+    mutate(fox_status = ifelse(
+        ed_fox_bound == "0" & dox_fox_bound == "1",
+        'gain',
+        ifelse(ed_fox_bound == "1" &
+                   dox_fox_bound == "0",
+               'loss',
+               'shared')
+    )) %>%
     pivot_longer(cols = contains(c("_foxa1", "_h3k27ac")) &
                      !contains("bound"),
                  names_to = "treatment") %>%
@@ -88,9 +76,8 @@ volcano_fox <- data %>%
         values_from = "value",
         id_cols = c("name")
     ) %>%
+    filter(fox_status != "shared") %>% 
     select(c(name, ed_foxa1, dox_foxa1_high)) %>%
-    filter(ed_foxa1 > 1 |
-               dox_foxa1_high > 1) %>%
     mutate(p_value = -log10(pmap_dbl(select(., -1),  ~ chisq.test(c(
         ...
     ))$p.value))) %>%
@@ -101,46 +88,42 @@ volcano_fox <- data %>%
 # add a column of NAs
 volcano_fox$diffexpressed <- "NS"
 
-# if log2Foldchange > 4 and pvalue < .000000001, set as "GAIN"
+# if log2Foldchange > 4 and pvalue < .000000001, set as "UP"
 volcano_fox$diffexpressed[volcano_fox$fox_fold > log2(1.5) &
                               volcano_fox$p_value > .001] <-
-    "GAIN"
+    "UP"
 
-# if log2Foldchange < -4 and pvalue < .000000001, set as "LOSS"
+# if log2Foldchange < -4 and pvalue < .000000001, set as "DN"
 volcano_fox$diffexpressed[volcano_fox$fox_fold < -log2(1.5) &
                               volcano_fox$p_value > .001] <-
-    "LOSS"
+    "DN"
 
 #### h3 volcano ####
 volcano_h3 <- data %>%
-    pivot_wider(
-        names_from = "treatment",
-        values_from = "value",
-        id_cols = c("name")
-    ) %>%
-    select(c(name, ed_h3k27ac, dox_h3k27ac)) %>%
-    filter(ed_h3k27ac > 1 |
-               dox_h3k27ac > 1) %>%
+    pivot_wider(names_from = "treatment",
+                values_from = "value") %>%
+    filter(h3_status != "shared") %>%
+    select(c(name, ed_h3k27ac, dox_h3k27ac))  %>%
     mutate(p_value = -log10(pmap_dbl(select(., -1),  ~ chisq.test(c(
         ...
     ))$p.value))) %>%
     mutate(h3_fold = log2(dox_h3k27ac / ed_h3k27ac)) %>%
     filter(h3_fold != "Inf") %>%
-    unique()
+    distinct()
 
 
 # add a column of NAs
 volcano_h3$diffexpressed <- "NS"
 
-# if log2Foldchange > 4 and pvalue < .000000001, set as "GAIN"
+# if log2Foldchange > 4 and pvalue < .000000001, set as "UP"
 volcano_h3$diffexpressed[volcano_h3$h3_fold > log2(1.5) &
                              volcano_h3$p_value > .001] <-
-    "GAIN"
+    "UP"
 
-# if log2Foldchange < -4 and pvalue < .000000001, set as "LOSS"
+# if log2Foldchange < -4 and pvalue < .000000001, set as "DN"
 volcano_h3$diffexpressed[volcano_h3$h3_fold < -log2(1.5) &
                              volcano_h3$p_value > .001] <-
-    "LOSS"
+    "DN"
 
 
 diffexpressed <-
@@ -157,17 +140,17 @@ diffexpressed <-
 #### Venn ####
 
 fox_loss <-
-    length(grep("LOSS", volcano_fox$diffexpressed)) %>% as.numeric()
+    length(grep("DN", volcano_fox$diffexpressed)) %>% as.numeric()
 
 h3_loss <-
-    length(grep("LOSS", volcano_h3$diffexpressed)) %>% as.numeric()
+    length(grep("DN", volcano_h3$diffexpressed)) %>% as.numeric()
 
 x <- volcano_fox %>%
-    filter(diffexpressed == "LOSS") %>%
+    filter(diffexpressed == "DN") %>%
     select(name)
 
 y <- volcano_h3 %>%
-    filter(diffexpressed == "LOSS") %>%
+    filter(diffexpressed == "DN") %>%
     select(name)
 
 loss_loss <- inner_join(x, y) %>% nrow() %>% as.numeric()
@@ -176,16 +159,16 @@ loss_loss <- inner_join(x, y) %>% nrow() %>% as.numeric()
 
 
 fox_gain <-
-    length(grep("GAIN", volcano_fox$diffexpressed)) %>% as.numeric()
+    length(grep("UP", volcano_fox$diffexpressed)) %>% as.numeric()
 h3_gain <-
-    length(grep("GAIN", volcano_h3$diffexpressed)) %>% as.numeric()
+    length(grep("UP", volcano_h3$diffexpressed)) %>% as.numeric()
 
 x <- volcano_fox %>%
-    filter(diffexpressed == "GAIN") %>%
+    filter(diffexpressed == "UP") %>%
     select(name)
 
 y <- volcano_h3 %>%
-    filter(diffexpressed == "GAIN") %>%
+    filter(diffexpressed == "UP") %>%
     select(name)
 
 gain_gain <- inner_join(x, y) %>% nrow() %>% as.numeric()
@@ -193,22 +176,22 @@ gain_gain <- inner_join(x, y) %>% nrow() %>% as.numeric()
 
 
 x <- volcano_fox %>%
-    filter(diffexpressed == "GAIN") %>%
+    filter(diffexpressed == "UP") %>%
     select(name)
 
 y <- volcano_h3 %>%
-    filter(diffexpressed == "LOSS") %>%
+    filter(diffexpressed == "DN") %>%
     select(name)
 
 gain_loss <- inner_join(x, y) %>% nrow() %>% as.numeric()
 
 
 x <- volcano_fox %>%
-    filter(diffexpressed == "LOSS") %>%
+    filter(diffexpressed == "DN") %>%
     select(name)
 
 y <- volcano_h3 %>%
-    filter(diffexpressed == "GAIN") %>%
+    filter(diffexpressed == "UP") %>%
     select(name)
 
 loss_gain <- inner_join(x, y) %>% nrow() %>% as.numeric()
@@ -260,4 +243,3 @@ total <- total
 total <- merge(diffexpressed, total, by = "name")
 
 save.image(file = 'environments/data.RData')
-

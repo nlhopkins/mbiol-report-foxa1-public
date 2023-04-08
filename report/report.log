@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.3.21)  6 APR 2023 21:49
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.3.21)  8 APR 2023 23:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -956,9 +956,7 @@ File: upxmia.fd 2000/12/14 v1.0
 LaTeX Font Info:    Trying to load font information for U+pxsyc on input line 3.
 (/Users/natashahopkins/Library/TinyTeX/texmf-dist/tex/latex/pxfonts/upxsyc.fd
 File: upxsyc.fd 2000/12/14 v1.0
-)
-Missing character: There is no α ("3B1) in font epigrafican8r!
-)
+))
 \tf@toc=\write3
 \openout3 = `report.toc'.
 
@@ -972,18 +970,19 @@ Underfull \hbox (badness 10000) in paragraph at lines 182--184
 
  []
 
-LaTeX Font Info:    Trying to load font information for TS1+epigrafica on input line 190.
-LaTeX Font Info:    No file TS1epigrafica.fd. on input line 190.
+LaTeX Font Info:    Trying to load font information for TS1+epigrafica on input line 199.
+LaTeX Font Info:    No file TS1epigrafica.fd. on input line 199.
 
 LaTeX Font Warning: Font shape `TS1/epigrafica/m/n' undefined
 (Font)              using `TS1/cmr/m/n' instead
-(Font)              for symbol `textbullet' on input line 190.
+(Font)              for symbol `textbullet' on input line 199.
 
 (/Users/natashahopkins/Library/TinyTeX/texmf-dist/tex/latex/microtype/mt-cmr.cfg
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman (RS)
-) [1]
+)
 Missing character: There is no α ("3B1) in font epigrafican8r!
-Missing character: There is no α ("3B1) in font epigraficab8r!
+[1]
+Missing character: There is no α ("3B1) in font epigrafican8r!
 [2] [3]
 File: ../images/results-01.png Graphic file (type bmp)
 <../images/results-01.png>
@@ -1003,41 +1002,11 @@ Overfull \vbox (10.29398pt too high) has occurred while \output is active []
 File: ../images/results-04.png Graphic file (type bmp)
 <../images/results-04.png>
 [10] [11] [12]
-Underfull \hbox (badness 10000) in paragraph at lines 548--551
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 552--555
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 556--559
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 560--563
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 564--567
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 568--571
-
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 572--575
 
  []
 
-[13]
+
 Underfull \hbox (badness 10000) in paragraph at lines 576--579
 
  []
@@ -1062,7 +1031,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 592--595
 
  []
 
-
+[13]
 Underfull \hbox (badness 10000) in paragraph at lines 596--599
 
  []
@@ -1082,21 +1051,114 @@ Underfull \hbox (badness 10000) in paragraph at lines 608--611
 
  []
 
-[14] (./report.aux)
+
+Underfull \hbox (badness 10000) in paragraph at lines 612--615
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 616--619
+
+ []
+
+Missing character: There is no α ("3B1) in font epigrafican8r!
+
+Underfull \hbox (badness 10000) in paragraph at lines 620--623
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 624--627
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 628--631
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 632--635
+
+ []
+
+[14]
+Underfull \hbox (badness 10000) in paragraph at lines 636--639
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 640--643
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 644--647
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 648--651
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 652--655
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 656--659
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 660--663
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 664--667
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 668--671
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 672--675
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 676--679
+
+ []
+
+[15]
+Underfull \hbox (badness 10000) in paragraph at lines 680--683
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 684--687
+
+ []
+
+[16] (./report.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
- 24166 strings out of 478682
- 443724 string characters out of 5847468
- 1851018 words of memory out of 5000000
- 43893 multiletter control sequences out of 15000+600000
+ 24160 strings out of 478682
+ 443639 string characters out of 5847468
+ 1852018 words of memory out of 5000000
+ 43887 multiletter control sequences out of 15000+600000
  527048 words of font info for 94 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 86i,10n,122p,1058b,484s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 86i,10n,122p,1003b,482s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on report.pdf (16 pages).
+Output written on report.pdf (18 pages).

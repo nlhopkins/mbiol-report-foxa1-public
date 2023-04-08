@@ -24,7 +24,7 @@ volcano_fox %>%
     geom_vline(xintercept = c(-log2(1.5), log2(1.5)), col = "grey") +
     geom_hline(yintercept = (.01), col = "grey") +
     scale_color_manual(values =
-                           c("#94C773","#7B52AE", "grey")) +
+                           c("#94C773", "grey","#7B52AE")) +
     scale_x_continuous(limits = c(-5, 5),
                        breaks = seq(-5, 5, by = 1)) +
     scale_y_continuous(

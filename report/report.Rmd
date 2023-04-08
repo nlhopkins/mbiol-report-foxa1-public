@@ -76,43 +76,63 @@ citation_count <-
 ```
 # Introduction
 
--   txn by polymerases
+In Eukaryotes, transcription of DNA is tightly-regulated by three RNA polymerase enzymes.
+RNA Polymerase III (Pol III), the largest of the three at 17-subunits[@vannini2012], produces a series of non-coding RNAs, including U6 snRNA, 5S rRNA and transfer RNA (tRNA)[@dieci2007].
+Approximately 80% of Pol III binding resides at tRNAs[@Raha2010a] --- adapters required to translate mRNAs into the amino acid protein sequence.
+Initiation of tRNA transcription requires the binding of TFIIIC, a multisubunit complex, to internal tRNA promoters, the A and B boxes, which are located downstream of the transcription start site [@Schramm2002; @Lassar1983].
+This protein-protein interaction enables the recruitment of the TFIIIB promoter, composed of the TATA-box-binding protein (TBP), BDP1, and BRF1 polypeptides [@schramm2000].
+TFIIIB occupies the region upstream of the transcription start site and binds to Pol III directly through BRF[@Khoo1994], positioning it at the initiation region [@kassavetis1990].
 
--   pol iii
-
--   pol iii synthesises RNAs, e.g
-
--   "Recruitment of Pol III to its target genes requires TFIIIB, which is in most cases recruited by TFIIIC, a six-subunit complex that binds two internal promoter motifs, termed the A and B boxes, downstream of the [transcription start site](https://www.sciencedirect.com/topics/biochemistry-genetics-and-molecular-biology/transcription-initiation-site "Learn more about transcription start site from ScienceDirect's AI-generated Topic Pages") of tRNA genes ([Ramsay and Vannini, 2018](https://www.sciencedirect.com/science/article/pii/S0378111922000993?via%3Dihub#b0170), [Schramm and Hernandez, 2002](https://www.sciencedirect.com/science/article/pii/S0378111922000993?via%3Dihub#b0200))."
-
-# Pol III & cancer
-
--   aberrant expression = cancers
+Dysregulation of tRNAs is associated with cancers
 
 -   pol ii products linked to cancer e.g.s (tRNAs)
 
--   tumours express tRNAs that are absent from the normal tissue of origin (Tumour-specific phenylalanine tRNA contains two supernumary methylated bases, Nature)
+-   tumours express tRNAs that are absent from the normal tissue of origin [@kuchino1978].
 
--   Elevated tRNA~i~^Met^ synthesis can drive cell proliferation and oncogenic transformation, Cell 2008
+-    proliferative and oncogenic effects can result from small increases in levels of tRNA~i~^Met^, the tRNA that mediates translation initiation [@marshall2008].
 
-## ER+ BC
+-   For example, half of the tRNA genes were considered unbound by Pol III in one analysis of HeLa cells^[11](https://www.nature.com/articles/nrg3001#ref-CR11 "Oler, A. J. et al. Human RNA polymerase III transcriptomes and relationships to Pol II promoter chromatin and enhancer-binding factors. Nature Struct. Mol. Biol. 17, 620–628 (2010).")^.
 
--   75% of cancers
+```{=html}
+<!-- -->
+```
+-   Breast cancer
+
+-   ER positive
+
+    -   75% of cancers [@allred2004]
 
 -   treatments - SERM or SERD
 
--   endocrine resistance
-
--   ERa nuclear receptor, ERE
+    -   endocrine resistance
 
 -   Thus, ERα is implicated in the control of Pol III transcription in MCF-7 cells.
 
-## FOXA1 Expression and ERα+ Breast Cancer
+-   
 
-"\~ 95% of ER- regulated genes require FOXA1 co-occurrence, a pioneer whose experimental ablation in vivo is detrimental to ER binding capacity [9, 10].
+Early studies demonstrated that FOXA1 overlaps with \~50% of ER-chromatin binding sites prior to ER binding, suggesting that binding is facilitated by chromatin opening by FOXA1 [@carroll2005; @laganière2005].
 
-"Early studies reported that FoxA1-binding sites overlap with 50% of ER-binding sites (Carroll et al., 2005) and that FoxA1 is required for at least half of all ER-binding events in MCF-7 breast cancer cells (Carroll et al., 2005; Laganie\`re et al., 2005). Later findings via genome-wide analysis (Carroll et al., 2006; Lupien et al., 2008; Hurtado et al., 2011) have been interpreted in support of this general model. In addition, it has been reported that inhibition of ER produces no change in FoxA1 genomic binding patterns (Lupien et al., 2008; Hurtado et al., 2011). These investigations have either focused on a small number of binding locations or compared FoxA1 binding only between unstimu- lated cells and cells treated with an ER antagonist (Hurtado et al., 2011; Lupien et al., 2008). Contrary to these findings, an independent study reported that upon knockdown of ER, FoxA1 binding is lost at many unstimulated ER-binding sites (Caizzi et al., 2014), evidence that ER may in fact regulate binding of FoxA1.."
+-   Additionally, silencing of FOXA1 reduced 90% ER binding events
 
-You are specifically investigating if overexpression of FOXA1 leads to increased tDNA occupancy (more tDNAs bound +/or stronger binding by FOXA1) & activation, as inferred from H3K27ac.
+-   FOXA1 Determines Treatment Response in ER+ Breast Cancer
+
+    -   FOXA1 Recruits Growth Inhibitors in ER+
+
+    -   ERα-positive breast cancer with high FOXA1 expression shows favorable sensitivity to endocrine therapy [[**56**](https://www.mdpi.com/2072-6694/9/3/22#B56-cancers-09-00022)]
+
+    -   TAM-R
+
+Summarise paper
+
+Investigating if overexpression of FOXA1 leads to increased tDNA occupancy (more tDNAs bound +/or stronger binding by FOXA1) & activation, as inferred from H3K27ac.
+
+-   methods
+
+-   findings
+
+-   suggests
+
+-   possible explanations/discussion
 
 ------------------------------------------------------------------------
 
@@ -252,10 +272,12 @@ knitr::include_graphics("../images/results-01.png")
 
 How does FOXA1 alter H3K27ac binding?
 
-Using Q-values, tRNAs that are differently enriched upon FOXA1 OE were categorised as 'UP' or 'DN' (FOXA1 = .
+Using Q-values, tRNAs that are differently enriched upon FOXA1 OE were categorised as 'UP' or 'DN' (FOXA1 = 359, H3K27ac = 315).
 
 This discovered substantially more tRNAs with increased (UP) than decreased (DN) FOXA1 (92 vs. 21) (Figure \@ref(fig:results-2)A).
 However, for H3K27ac, the number of tRNAs with an increase (UP) was comparable to those with a decrease (DN) (41 vs. 44) (Figure \@ref(fig:results-2)B).
+
+#REWRITE %s
 
 Of the tDNAs which gain (UP) H3k27ac, 51% (21) also gain (UP) FOXA1; none lose (DN) FOXA1.
 
@@ -389,6 +411,8 @@ knitr::kable(
     -   p300
 
 -   FOXA1 moves nucleosomes to make other TF accessible?
+
+-   Differences in nucleosome positioning will contribute to the distinct distribution patterns of modified histones, as nucleosomes are excluded from active tRNA promoters and enriched in flanking regions^[8](https://www.nature.com/articles/nrg3001#ref-CR8 "Barski, A. et al. Pol II and its associated epigenetic marks are present at Pol III-transcribed noncoding RNA genes. Nature Struct. Mol. Biol. 17, 629–634 (2010).")^.
 
 -   Brf1 required for iMET txn
 

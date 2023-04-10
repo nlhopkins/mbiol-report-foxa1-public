@@ -76,7 +76,7 @@ volcano_fox <- data %>%
         values_from = "value",
         id_cols = c("name")
     ) %>%
-    filter(fox_status != "shared") %>% 
+    filter("fox_status" != "shared") %>%
     select(c(name, ed_foxa1, dox_foxa1_high)) %>%
     mutate(p_value = -log10(pmap_dbl(select(., -1),  ~ chisq.test(c(
         ...
@@ -100,16 +100,19 @@ volcano_fox$diffexpressed[volcano_fox$fox_fold < -log2(1.5) &
 
 #### h3 volcano ####
 volcano_h3 <- data %>%
-    pivot_wider(names_from = "treatment",
-                values_from = "value") %>%
-    filter(h3_status != "shared") %>%
-    select(c(name, ed_h3k27ac, dox_h3k27ac))  %>%
+    pivot_wider(
+        names_from = "treatment",
+        values_from = "value",
+        id_cols = c("name")
+    ) %>%
+    filter("h3_status" != "shared") %>%
+    select(c(name, ed_h3k27ac, dox_h3k27ac)) %>%
     mutate(p_value = -log10(pmap_dbl(select(., -1),  ~ chisq.test(c(
         ...
     ))$p.value))) %>%
     mutate(h3_fold = log2(dox_h3k27ac / ed_h3k27ac)) %>%
     filter(h3_fold != "Inf") %>%
-    distinct()
+    unique()
 
 
 # add a column of NAs
@@ -210,36 +213,43 @@ downstream <- read.delim("data/raw/downstream.txt") %>%
 
 
 total <- full_join(upstream,
-                   downstream)
+                   downstream) %>%
+    mutate(across(contains("ed"), ~ .x / ed_input)) %>%
+    mutate(across(contains("dox"), ~ .x / dox_input)) %>%
+    mutate(ed_fox_bound = ifelse(ed_foxa1 > 1, '1', '0')) %>%
+    mutate(dox_h3k27ac_bound = ifelse(dox_h3k27ac > 1, '1', '0')) %>%
+    mutate(ed_h3k27ac_bound = ifelse(ed_h3k27ac > 1, '1', '0')) %>%
+    mutate(dox_fox_bound = ifelse(dox_foxa1_high > 1, '1', '0')) %>%
+    mutate(ed_overlaid_bound = ifelse(ed_foxa1 > 1 &
+                                          ed_h3k27ac > 1, '1', '0')) %>%
+    mutate(dox_overlaid_bound = ifelse(dox_foxa1_high > 1 &
+                                           dox_h3k27ac > 1, '1', '0')) %>%
+    pivot_longer(cols = contains(c("_foxa1", "_h3k27ac")) &
+                     !contains("bound"),
+                 names_to = "treatment") %>%
+    filter(treatment != "dox_foxa1_low") %>%
+    mutate(condition = str_extract(treatment, "[^_]+")) %>%
+    pivot_longer(cols = contains("bound"),
+                 names_to = "target",
+                 values_to = "bound") %>% 
+    drop_na(bound) %>% 
+    filter(value != "Inf")
 
-pos_activity_threshold <- total %>%
+
+total_activity_threshold <- full_join(upstream,
+                                      downstream) %>%
+    mutate(across(contains("ed"), ~ .x / ed_input)) %>%
+    mutate(across(contains("dox"), ~ .x / dox_input)) %>%
     pivot_longer(cols = contains(c("_foxa1", "_h3k27ac")),
                  names_to = "treatment") %>%
     group_by(treatment) %>%
-    summarise_at("value", median) %>%
-    filter(treatment == "ed_h3k27ac")
-
-pos_ed_biding_threshold <- total %>%
-    pivot_longer(cols = contains(c("input")),
-                 names_to = "input",
-                 values_to = "input_value") %>%
-    group_by(input) %>%
-    summarise_at("input_value", median) %>%
-    filter(input == "ed_input") %>%
-    pull(2)
-
-pos_dox_biding_threshold <- total %>%
-    pivot_longer(cols = contains(c("input")),
-                 names_to = "input",
-                 values_to = "input_value") %>%
-    group_by(input) %>%
-    summarise_at("input_value", median) %>%
-    filter(input == "ed_input") %>%
+    summarise_at("value", median, na.rm = TRUE) %>%
+    filter(treatment == "ed_h3k27ac") %>%
     pull(2)
 
 
-total <- total
 
-total <- merge(diffexpressed, total, by = "name")
+
 
 save.image(file = 'environments/data.RData')
+

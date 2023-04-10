@@ -204,3 +204,71 @@ data %>%
 
 #### save ####
 save.image(file = 'environments/barchart.RData')
+
+
+#### bound genes by position ####
+binding <- total %>%
+    select(!"treatment") %>%
+    mutate(binding = case_when(
+        grepl("fox", target) ~ "fox",
+        grepl("h3k27ac", target) ~ "h3k27ac",
+        grepl("overlaid", target) ~ "co-bound"
+    )) %>%
+    group_by(condition,target, bound, position) %>%
+    mutate(bound_count = n()) %>%
+    ungroup() %>%
+    mutate(bound_count = bound_count / n_distinct(condition)) %>%
+    mutate(gene_count = n_distinct(name)) %>%
+    filter(bound == "1")
+
+
+
+
+binding %>% ggplot(aes(
+    x = factor(
+        condition,
+        levels = c("ed", "dox"),
+        labels = c("-Dox", "+Dox")
+    ),
+    y = bound_count / gene_count * 100,
+    fill = position
+)) +
+    geom_bar(position = "dodge", stat = "identity") +
+    xlab("") +
+    ylab("% of Bound High Confidence hg19 tDNAs") +
+    scale_fill_discrete(name = "") +
+    theme_classic(base_size = 15) +
+    theme(
+        legend.position = "none",
+        strip.placement = "outside",
+        strip.background = element_rect(color = NA),
+        panel.spacing = unit(0, "lines")
+    ) +
+    scale_y_continuous(
+        limits = c(0, 100),
+        expand = c(0, 0),
+        breaks = seq(0, 100, by = 20)
+    ) +
+    geom_text(
+        position = position_dodge(width = 1),
+        aes(
+            label = paste(
+                bound_count,
+                "\n",
+                "(",
+                round(bound_count / gene_count * 100, digits = 1),
+                "%)",
+                sep = ""
+            ),
+            y = (bound_count / gene_count * 100 / 2)
+        ),
+        size = 4,
+        colour = "white",
+        check_overlap = T
+    ) +
+    facet_wrap(vars(factor(
+        binding,
+        levels = c("fox", "h3k27ac", "co-bound") ,
+        labels = c("FOXA1", "H3K27ac", "Co-bound")
+    )),
+    strip.position = "bottom")

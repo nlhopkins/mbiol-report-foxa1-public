@@ -35,9 +35,10 @@ binding %>% ggplot(aes(
 )) +
     geom_bar(position = "dodge", stat = "identity") +
     xlab("") +
-    ylab("% of Bound High Confidence hg19 tDNAs") +
-    scale_fill_discrete(name = "") +
-    theme_classic(base_size = 15) +
+    ylab("% of Bound tDNAs") +
+    scale_fill_manual(name = "",
+                      values = qualitative_hcl(2, palette = "Cold")) +
+    theme_classic(base_size = 20) +
     theme(
         legend.position = "none",
         strip.placement = "outside",
@@ -62,7 +63,7 @@ binding %>% ggplot(aes(
             ),
             y = bound_count / gene_count * 100 / 2
         ),
-        size = 4,
+        size = 5,
         colour = "white",
         check_overlap = T
     ) +
@@ -108,7 +109,7 @@ b <- anti_join(a, z)
 
 #### active genes ####
 
-data %>%
+x <- data %>%
     filter(grepl("h3k27ac", treatment)) %>%
     mutate(activity = ifelse(value > activity_threshold, '1', '0')) %>%
     group_by(condition, activity) %>%
@@ -127,8 +128,11 @@ data %>%
     geom_bar(position = "dodge", stat = "identity") +
     xlab("") +
     ylab("% of High Confidence hg19 tDNAs") +
-    scale_fill_discrete(name = "",
-                        labels = c('Inactive', 'Active')) +
+    scale_fill_manual(
+        name = "",
+        labels = c('Inactive', 'Active'),
+        values = qualitative_hcl(2, palette = "Cold")
+    ) +
     theme_classic(base_size = 15) +
     theme(legend.title = element_blank(),
           legend.position = "top") +
@@ -174,7 +178,9 @@ data %>%
     )) +
     geom_bar(position = "dodge", stat = "identity") +
     xlab("") +
-    scale_fill_discrete(name = "") +
+    ylab("No. Active tDNAs")+
+    scale_fill_manual(name = "",
+                      values = qualitative_hcl(3, palette = "Cold")) +
     theme_classic(base_size = 15) +
     theme(legend.position = "none") +
     scale_y_continuous(
@@ -208,18 +214,19 @@ save.image(file = 'environments/barchart.RData')
 
 #### bound genes by position ####
 binding <- total %>%
-    select(!"treatment") %>%
     mutate(binding = case_when(
         grepl("fox", target) ~ "fox",
         grepl("h3k27ac", target) ~ "h3k27ac",
         grepl("overlaid", target) ~ "co-bound"
     )) %>%
-    group_by(condition,target, bound, position) %>%
+    group_by(position, target, bound) %>%
     mutate(bound_count = n()) %>%
     ungroup() %>%
-    mutate(bound_count = bound_count / n_distinct(condition)) %>%
+    group_by(binding, position) %>%
     mutate(gene_count = n_distinct(name)) %>%
-    filter(bound == "1")
+    ungroup() %>%
+    filter(bound == "1") %>%
+    mutate(condition = str_extract(target, "[^_]+"))
 
 
 
@@ -236,7 +243,8 @@ binding %>% ggplot(aes(
     geom_bar(position = "dodge", stat = "identity") +
     xlab("") +
     ylab("% of Bound High Confidence hg19 tDNAs") +
-    scale_fill_discrete(name = "") +
+    scale_fill_manual(name = "",
+                      values = qualitative_hcl(2, palette = "Cold")) +
     theme_classic(base_size = 15) +
     theme(
         legend.position = "none",

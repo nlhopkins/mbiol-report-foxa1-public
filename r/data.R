@@ -7,6 +7,7 @@ library(ggpubr)
 library(purrr)
 library(ggpmisc)
 library(ggstatsplot)
+library(colorspace)
 
 options(scipen = 999)
 
@@ -65,10 +66,6 @@ data <- raw %>%
 
 
 
-means <- data %>% group_by(treatment) %>%
-    summarise_at("value", mean)
-
-
 #### fox volcano ####
 volcano_fox <- data %>%
     pivot_wider(
@@ -76,7 +73,6 @@ volcano_fox <- data %>%
         values_from = "value",
         id_cols = c("name")
     ) %>%
-    filter("fox_status" != "shared") %>%
     select(c(name, ed_foxa1, dox_foxa1_high)) %>%
     mutate(p_value = -log10(pmap_dbl(select(., -1),  ~ chisq.test(c(
         ...
@@ -105,7 +101,6 @@ volcano_h3 <- data %>%
         values_from = "value",
         id_cols = c("name")
     ) %>%
-    filter("h3_status" != "shared") %>%
     select(c(name, ed_h3k27ac, dox_h3k27ac)) %>%
     mutate(p_value = -log10(pmap_dbl(select(., -1),  ~ chisq.test(c(
         ...
@@ -216,6 +211,7 @@ total <- full_join(upstream,
                    downstream) %>%
     mutate(across(contains("ed"), ~ .x / ed_input)) %>%
     mutate(across(contains("dox"), ~ .x / dox_input)) %>%
+    filter_all(all_vars(!is.infinite(.))) %>%
     mutate(ed_fox_bound = ifelse(ed_foxa1 > 1, '1', '0')) %>%
     mutate(dox_h3k27ac_bound = ifelse(dox_h3k27ac > 1, '1', '0')) %>%
     mutate(ed_h3k27ac_bound = ifelse(ed_h3k27ac > 1, '1', '0')) %>%
@@ -228,13 +224,12 @@ total <- full_join(upstream,
                      !contains("bound"),
                  names_to = "treatment") %>%
     filter(treatment != "dox_foxa1_low") %>%
-    mutate(condition = str_extract(treatment, "[^_]+")) %>%
+    select(!c("treatment", "value")) %>%
+    distinct() %>%
     pivot_longer(cols = contains("bound"),
                  names_to = "target",
-                 values_to = "bound") %>% 
-    drop_na(bound) %>% 
-    filter(value != "Inf")
-
+                 values_to = "bound") %>%
+    drop_na(bound)
 
 total_activity_threshold <- full_join(upstream,
                                       downstream) %>%
@@ -252,4 +247,3 @@ total_activity_threshold <- full_join(upstream,
 
 
 save.image(file = 'environments/data.RData')
-

@@ -41,7 +41,7 @@ editor_options:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, fig.align = "center", fig.pos = "H", out.width = '100%')
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, fig.align = "center", fig.pos = "p", out.width = '100%', fig.fullwidth = TRUE)
 ```
 
 ```{r load-pkgs, include=FALSE}
@@ -106,7 +106,7 @@ Presence of ERα is generally prognostic of positive outcomes, due to it's use a
 Estrogen levels are lowered using endocrine therapies with aromatase inhibitors; fulvestrant, a selective estrogen receptor down regulator (SERD) which binds and degrades the ER, and tamoxifen, a selective estrogen receptor modulator (SERM) which competes with estrogen for binding to ER[@Johnston2018].
 However, resistance to endocrine therapy occurs in 40-50% of tumours from 5 years of diagnosis[@Anurag2018].
 
-Forkhead box A1 (FOXA1) is a pioneer factor capable of directly initiating chromatin opening, facilliating binding of ERα and other transcription factors[@Costa1989; @Cirillo2002;@carroll2005; @laganière2005].
+Forkhead box A1 (FOXA1) is a pioneer factor capable of directly initiating chromatin opening, facilliating binding of ERα and other transcription factors[@Costa1989; @Cirillo2002; @carroll2005; @laganière2005].
 Early studies demonstrated that FOXA1 maps to \~50% of ER-chromatin binding sites.
 Futhermore, silencing of FOXA1 reduces \~95% ER binding events [@Hurtado2011; @carroll2005].
 

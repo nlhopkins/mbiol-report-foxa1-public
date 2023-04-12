@@ -23,7 +23,7 @@ volcano_fox %>%
     geom_hline(yintercept = (.01), col = "grey") +
     scale_color_manual(name = "",
                        values =
-                           c("#EBB2BD", "grey", "#5BBD92")) +
+                           c("#3ec1b6", "grey", "#aca4e0")) +
     scale_x_continuous(limits = c(-4, 4),
                        breaks = seq(-4, 4, by = 2)) +
     scale_y_continuous(
@@ -48,7 +48,6 @@ top_h3 = volcano_h3 %>%
     head(., 10)
 
 
-
 # Add column label, containing the gene name for the top hits or nothing for all others
 volcano_h3$label = if_else(volcano_h3$name %in% top_h3$name,
                            volcano_h3$name, NA)
@@ -67,7 +66,7 @@ volcano_h3 %>%
     geom_hline(yintercept = (.01), col = "grey") +
     scale_color_manual(name = "",
                        values =
-                           c("#EBB2BD", "grey", "#5BBD92")) +
+                           c("#adb364", "grey", "#dc9c87")) +
     scale_x_continuous(limits = c(-4, 4)) +
     scale_y_continuous(
         limits = c(-0.2, 2),

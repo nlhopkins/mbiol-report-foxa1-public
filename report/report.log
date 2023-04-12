@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.4.10)  11 APR 2023 21:09
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.4.10)  12 APR 2023 18:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -987,9 +987,6 @@ File: ../images/results-01.png Graphic file (type bmp)
 File: ../images/results-02.png Graphic file (type bmp)
 <../images/results-02.png>
 Missing character: There is no − ("2212) in font epigrafican8r!
-
-LaTeX Warning: Float too large for page by 44.69402pt on input line 398.
-
 File: ../images/results-03.png Graphic file (type bmp)
 <../images/results-03.png>
 

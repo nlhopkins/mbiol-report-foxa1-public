@@ -31,13 +31,11 @@ binding %>% ggplot(aes(
         labels = c("-Dox", "+Dox")
     ),
     y = bound_count / gene_count * 100,
-    fill = condition
+    fill = target
 )) +
     geom_bar(position = "dodge", stat = "identity") +
     xlab("") +
     ylab("% of Bound tDNAs") +
-    scale_fill_manual(name = "",
-                      values = qualitative_hcl(2, palette = "Cold")) +
     theme_classic(base_size = 20) +
     theme(
         legend.position = "none",
@@ -72,7 +70,16 @@ binding %>% ggplot(aes(
         levels = c("fox", "h3k27ac", "co-bound") ,
         labels = c("FOXA1", "H3K27ac", "Co-bound")
     )),
-    strip.position = "bottom")
+    strip.position = "bottom") +
+    scale_fill_manual(
+        name = "",
+        values = c(dox_fox_bound = "#aca4e0", 
+                   ed_fox_bound = "#3ec1b6", 
+                   dox_h3k27ac_bound = "#dc9c87", 
+                   ed_h3k27ac_bound = "#adb364", 
+                   ed_overlaid_bound = "#86B976", 
+                   dox_overlaid_bound = "#DB95C5")
+    )
 
 
 
@@ -178,7 +185,7 @@ data %>%
     )) +
     geom_bar(position = "dodge", stat = "identity") +
     xlab("") +
-    ylab("No. Active tDNAs")+
+    ylab("No. Active tDNAs") +
     scale_fill_manual(name = "",
                       values = qualitative_hcl(3, palette = "Cold")) +
     theme_classic(base_size = 15) +

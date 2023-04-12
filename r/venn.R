@@ -2,7 +2,7 @@ load('environments/data.RData')
 
 eulerr_options(labels = list(cex = 1.5))
 
-euler(
+plot <- euler(
     c(
         Fox_Gain = fox_gain,
         H3K27ac_Gain = h3_gain,
@@ -16,12 +16,18 @@ euler(
 ) %>% plot(
     quantities = list(type = c("counts"), cex = 1.5),
     lty = 0,
-    fills = colorspace::rainbow_hcl(n = 4, alpha = 0.75),
+    alpha = 0.75,
+    fills = c(
+        Fox_Gain = "#aca4e0",
+        Fox_Loss = "#3ec1b6",
+        H3K27ac_Gain = "#dc9c87",
+        H3K27ac_Loss = "#adb364"
+    ),
     labels = c(
-        "FOXA1 UP",
-        "H3K27ac UP",
-        "FOXA1 DN",
-        "H3K27ac DN"
+        Fox_Gain = "FOXA1 UP",
+        H3K27ac_Gain = "H3K27ac UP",
+        Fox_Loss = "FOXA1 DN",
+        H3K27ac_Loss = "H3K27ac DN"
     )
 )
 
@@ -32,7 +38,8 @@ tags <- do.call(grid::gList, lapply(tags, function(x) {
     x$children[[2]]$hjust <- 0.5
     x$children[[2]]$vjust <- 1
     x$children[[1]]$vjust <- .75
-    x}))
+    x
+}))
 
 plot$children[[1]]$children[[1]]$children$tags$children <- tags
 

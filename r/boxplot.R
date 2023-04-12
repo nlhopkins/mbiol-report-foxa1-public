@@ -9,10 +9,18 @@ data  %>%
     ggplot(aes(
         x = factor(variable, levels = c("ed", "dox")),
         y = log2(value),
-        color = variable
+        fill = treatment
     )) +
-    scale_colour_manual(values = qualitative_hcl(2, palette = "Cold")) +
-    geom_violin(trim = FALSE) +
+    scale_fill_manual(
+        values = c(
+            dox_foxa1_high = "#aca4e0",
+            ed_foxa1 = "#3ec1b6",
+            dox_h3k27ac = "#dc9c87",
+            ed_h3k27ac = "#adb364"
+        )
+    ) +
+    geom_violin(trim = FALSE,
+                color = NA) +
     facet_wrap(vars(factor(
         target,
         levels = c("fox", "h3") ,
@@ -69,18 +77,35 @@ data  %>%
 
 data %>%
     merge(diffexpressed, by = "name") %>%
-    mutate(target = case_when(str_detect(treatment, "fox") ~ "fox", TRUE ~ "h3")) %>%
-    mutate(variable = case_when(str_detect(treatment, "dox") ~ "dox", TRUE ~ "ed"))  %>%
-    filter(grepl("h3k27ac", treatment)) %>%
+    mutate(target = case_when(str_detect(comparison, "fox") ~ "FOXA1", TRUE ~ "H3K27ac")) %>%
+    mutate(variable = case_when(str_detect(treatment, "dox") ~ "dox", TRUE ~ "ed")) %>%
+    mutate(target = target, factor(target, levels = c("FOXA1", "H3K27ac"))) %>%
     filter(!grepl("NS", diffexpressed)) %>%
+    unite('tag', c("comparison", "diffexpressed"), remove = F) %>%
+    unite('colour', c("tag", "variable"), remove = F) %>%
     ggplot(aes(
-        color = variable,
+        group = interaction(variable, condition),
+        fill = colour,
         x = factor(variable, levels = c("ed", "dox")),
         y = log2(value)
     )) +
-    scale_colour_manual(values = qualitative_hcl(2, palette = "Cold")) +
-    geom_violin(trim = FALSE) +
-    facet_wrap(vars(diffexpressed), strip.position = "bottom") +
+    geom_violin(trim = FALSE,
+                color = NA)  +
+    scale_fill_manual(
+        values = c(
+            "#aca4e0",
+            "#3ec1b6",
+            "#dc9c87",
+            "#adb364",
+            "#aca4e0",
+            "#3ec1b6",
+            "#dc9c87",
+            "#adb364"
+        )
+    ) +
+    facet_wrap(target ~ diffexpressed,
+               nrow = 1,
+               strip.position = "bottom") +
     stat_summary(
         fun.data = "mean_sdl",
         fun.args = list(mult = 1),
@@ -97,6 +122,7 @@ data %>%
         panel.spacing = unit(0, "lines")
     ) +
     stat_compare_means(
+        aes(group = variable),
         comparisons = list(c("ed", "dox")),
         method = "wilcox.test",
         label = "p.signif",
@@ -114,7 +140,6 @@ data %>%
         breaks = seq(-6, 9, by = 3)
     ) +
     scale_x_discrete(labels = c("ed" = "-Dox", "dox" = "+Dox"))
-
 
 
 

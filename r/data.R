@@ -79,7 +79,7 @@ volcano_fox <- data %>%
     ))$p.value))) %>%
     mutate(fox_fold = log2(dox_foxa1_high / ed_foxa1)) %>%
     filter(fox_fold != "Inf") %>%
-    unique()
+    distinct()
 
 # add a column of NAs
 volcano_fox$diffexpressed <- "NS"
@@ -107,7 +107,7 @@ volcano_h3 <- data %>%
     ))$p.value))) %>%
     mutate(h3_fold = log2(dox_h3k27ac / ed_h3k27ac)) %>%
     filter(h3_fold != "Inf") %>%
-    unique()
+    distinct()
 
 
 # add a column of NAs
@@ -125,7 +125,7 @@ volcano_h3$diffexpressed[volcano_h3$h3_fold < -log2(1.5) &
 
 
 diffexpressed <-
-    merge(volcano_fox, volcano_h3, by = "name") %>%
+    full_join(volcano_fox, volcano_h3, by = "name", copy = T) %>%
     pivot_longer(cols = contains(c("diffexpressed.x", "diffexpressed.y")),
                  names_to = "comparison",
                  values_to = "diffexpressed") %>%
@@ -223,8 +223,8 @@ total <- full_join(upstream,
     pivot_longer(cols = contains(c("_foxa1", "_h3k27ac")) &
                      !contains("bound"),
                  names_to = "treatment") %>%
+    mutate(condition = str_extract(treatment, "[^_]+")) %>%
     filter(treatment != "dox_foxa1_low") %>%
-    select(!c("treatment", "value")) %>%
     distinct() %>%
     pivot_longer(cols = contains("bound"),
                  names_to = "target",

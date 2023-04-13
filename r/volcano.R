@@ -14,11 +14,11 @@ volcano_fox$label = if_else(volcano_fox$name %in% top_fox$name,
 
 volcano_fox %>%
     add_count(diffexpressed) %>%
-    mutate(diffexpressed = paste0(diffexpressed, ' (', n, ')')) %>%
+    mutate(diffexpressed = paste0(diffexpressed, ' (', n, ')')) %>% 
     ggplot(aes(x = fox_fold,
                y = p_value,
                colour = diffexpressed)) +
-    geom_point(size = 1.5) +
+    geom_point(size = 3) +
     geom_vline(xintercept = c(-log2(1.5), log2(1.5)), col = "grey") +
     geom_hline(yintercept = (.01), col = "grey") +
     scale_color_manual(name = "",
@@ -31,7 +31,7 @@ volcano_fox %>%
         expand = c(0, 0),
         breaks = seq(0, 2, by = 0.5)
     ) +
-    theme_classic(base_size = 20) +
+    theme_classic(base_size = 40) +
     theme(
         legend.position = "top",
         strip.placement = "outside",
@@ -61,7 +61,7 @@ volcano_h3 %>%
     ggplot(aes(x = h3_fold,
                y = p_value,
                colour = diffexpressed)) +
-    geom_point(size = 1.5) +
+    geom_point(size = 3) +
     geom_vline(xintercept = c(-log2(1.5), log2(1.5)), col = "grey") +
     geom_hline(yintercept = (.01), col = "grey") +
     scale_color_manual(name = "",
@@ -73,7 +73,7 @@ volcano_h3 %>%
         expand = c(0, 0),
         breaks = seq(0, 2, by = 0.5)
     ) +
-    theme_classic(base_size = 20) +
+    theme_classic(base_size = 40) +
     theme(
         legend.position = "top",
         strip.placement = "outside",

@@ -9,16 +9,16 @@
 \contentsline {subsection}{ChIP-Seq and ChIP-qPCR}{4}{section*.11}%
 \contentsline {section}{Results}{4}{section*.12}%
 \contentsline {subsection}{Localisation of FOXA1 and H3k27ac to tRNA Genes}{4}{section*.13}%
-\contentsline {subsection}{Figure 2}{5}{section*.15}%
-\contentsline {subsubsection}{Why?}{5}{section*.16}%
-\contentsline {subsubsection}{}{5}{section*.17}%
-\contentsline {subsection}{Figure 3}{5}{section*.19}%
-\contentsline {subsection}{Figure ?}{5}{section*.21}%
-\contentsline {subsection}{Figure 4}{5}{section*.22}%
-\contentsline {paragraph}{Why?}{5}{section*.23}%
-\contentsline {subsubsection}{What?}{9}{section*.24}%
-\contentsline {paragraph}{Suggests?}{9}{figure.caption.26}%
-\contentsline {subsection}{Figure 5}{9}{section*.27}%
-\contentsline {section}{Discussion}{10}{section*.28}%
-\contentsline {section}{Conclusion}{10}{section*.29}%
-\contentsline {section}{References}{10}{section*.30}%
+\contentsline {subsection}{Figure 2}{7}{section*.15}%
+\contentsline {subsubsection}{Why?}{7}{section*.16}%
+\contentsline {subsubsection}{}{8}{section*.17}%
+\contentsline {subsection}{Figure 3}{9}{section*.19}%
+\contentsline {subsection}{Figure ?}{10}{section*.21}%
+\contentsline {subsection}{Figure 4}{11}{section*.22}%
+\contentsline {paragraph}{Why?}{11}{section*.23}%
+\contentsline {subsubsection}{What?}{11}{section*.24}%
+\contentsline {paragraph}{Suggests?}{13}{figure.caption.26}%
+\contentsline {subsection}{Figure 5}{13}{section*.27}%
+\contentsline {section}{Discussion}{13}{section*.28}%
+\contentsline {section}{Conclusion}{14}{section*.29}%
+\contentsline {section}{References}{14}{section*.30}%

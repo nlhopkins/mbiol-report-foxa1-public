@@ -36,7 +36,7 @@ binding %>% ggplot(aes(
     geom_bar(position = "dodge", stat = "identity") +
     xlab("") +
     ylab("% of Bound tDNAs") +
-    theme_classic(base_size = 20) +
+    theme_classic(base_size = 40) +
     theme(
         legend.position = "none",
         strip.placement = "outside",
@@ -61,7 +61,7 @@ binding %>% ggplot(aes(
             ),
             y = bound_count / gene_count * 100 / 2
         ),
-        size = 5,
+        size = 10,
         colour = "white",
         check_overlap = T
     ) +
@@ -73,12 +73,14 @@ binding %>% ggplot(aes(
     strip.position = "bottom") +
     scale_fill_manual(
         name = "",
-        values = c(dox_fox_bound = "#aca4e0", 
-                   ed_fox_bound = "#3ec1b6", 
-                   dox_h3k27ac_bound = "#dc9c87", 
-                   ed_h3k27ac_bound = "#adb364", 
-                   ed_overlaid_bound = "#86B976", 
-                   dox_overlaid_bound = "#DB95C5")
+        values = c(
+            dox_fox_bound = "#ACA4E1",
+            ed_fox_bound = "#39BDB1",
+            dox_h3k27ac_bound = "#DB9D85",
+            ed_h3k27ac_bound = "#ABB064",
+            ed_overlaid_bound = "#E092C3",
+            dox_overlaid_bound = "#86B875"
+        )
     )
 
 
@@ -116,7 +118,7 @@ b <- anti_join(a, z)
 
 #### active genes ####
 
-x <- data %>%
+data %>%
     filter(grepl("h3k27ac", treatment)) %>%
     mutate(activity = ifelse(value > activity_threshold, '1', '0')) %>%
     group_by(condition, activity) %>%
@@ -134,13 +136,13 @@ x <- data %>%
     )) +
     geom_bar(position = "dodge", stat = "identity") +
     xlab("") +
-    ylab("% of High Confidence hg19 tDNAs") +
+    ylab("% of tDNAs") +
     scale_fill_manual(
         name = "",
         labels = c('Inactive', 'Active'),
-        values = qualitative_hcl(2, palette = "Cold")
+        values = c("#DB9D85", "#86B875")
     ) +
-    theme_classic(base_size = 15) +
+    theme_classic(base_size = 40) +
     theme(legend.title = element_blank(),
           legend.position = "top") +
     scale_y_continuous(
@@ -161,7 +163,7 @@ x <- data %>%
             ),
             y = active_count / gene_count * 100 / 2
         ),
-        size = 4,
+        size = 10,
         colour = "white",
         check_overlap = T
     )
@@ -187,8 +189,8 @@ data %>%
     xlab("") +
     ylab("No. Active tDNAs") +
     scale_fill_manual(name = "",
-                      values = qualitative_hcl(3, palette = "Cold")) +
-    theme_classic(base_size = 15) +
+                      values = c("#86B875", "#E092C3", "grey")) +
+    theme_classic(base_size = 40) +
     theme(legend.position = "none") +
     scale_y_continuous(
         limits = c(0, 400),
@@ -208,7 +210,7 @@ data %>%
             ),
             y = active_count / 2
         ),
-        size = 4,
+        size = 10,
         colour = "white",
         check_overlap = T
     )
@@ -221,20 +223,26 @@ save.image(file = 'environments/barchart.RData')
 
 #### bound genes by position ####
 binding <- total %>%
+    mutate(condition = case_when(grepl("ed", target) ~ "ed",
+                                 grepl("dox", target) ~ "dox")) %>%
+    unique() %>%
+    filter(bound == "1") %>%
+    select(!"bound") %>%
+    distinct() %>%
     mutate(binding = case_when(
         grepl("fox", target) ~ "fox",
         grepl("h3k27ac", target) ~ "h3k27ac",
         grepl("overlaid", target) ~ "co-bound"
     )) %>%
-    group_by(position, target, bound) %>%
+    group_by(position, treatment, target, condition, binding) %>%
     mutate(bound_count = n()) %>%
     ungroup() %>%
-    group_by(binding, position) %>%
+    group_by(binding) %>%
     mutate(gene_count = n_distinct(name)) %>%
-    ungroup() %>%
-    filter(bound == "1") %>%
-    mutate(condition = str_extract(target, "[^_]+"))
-
+    mutate(binding = factor(binding,
+                            levels = c("fox",
+                                       "h3k27ac",
+                                       "co-bound")))
 
 
 
@@ -245,16 +253,21 @@ binding %>% ggplot(aes(
         labels = c("-Dox", "+Dox")
     ),
     y = bound_count / gene_count * 100,
-    fill = position
+    fill = factor(
+        position,
+        levels = c("upstream", "downstream"),
+        labels = c("Upstream", "Downstream")
+    )
 )) +
     geom_bar(position = "dodge", stat = "identity") +
     xlab("") +
-    ylab("% of Bound High Confidence hg19 tDNAs") +
+    ylab("% of Bound tDNAs") +
     scale_fill_manual(name = "",
-                      values = qualitative_hcl(2, palette = "Cold")) +
-    theme_classic(base_size = 15) +
+                      values = c("#D995CF",
+                                 "#64B5D6")) +
+    theme_classic(base_size = 40) +
     theme(
-        legend.position = "none",
+        legend.position = "top",
         strip.placement = "outside",
         strip.background = element_rect(color = NA),
         panel.spacing = unit(0, "lines")
@@ -277,13 +290,15 @@ binding %>% ggplot(aes(
             ),
             y = (bound_count / gene_count * 100 / 2)
         ),
-        size = 4,
+        size = 10,
         colour = "white",
         check_overlap = T
     ) +
     facet_wrap(vars(factor(
         binding,
-        levels = c("fox", "h3k27ac", "co-bound") ,
+        levels = c("fox", "h3k27ac", "co-bound"),
         labels = c("FOXA1", "H3K27ac", "Co-bound")
     )),
+    nrow = 1,
     strip.position = "bottom")
+

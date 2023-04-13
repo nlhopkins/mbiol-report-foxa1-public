@@ -4,19 +4,18 @@ load('environments/data.RData')
 #### q values ####
 data  %>%
     mutate(target = case_when(str_detect(treatment, "fox") ~ "fox", TRUE ~ "h3")) %>%
-    mutate(variable = case_when(str_detect(treatment, "dox") ~ "dox", TRUE ~ "ed"))  %>%
     filter(!grepl("dox_foxa1_low", treatment)) %>%
     ggplot(aes(
-        x = factor(variable, levels = c("ed", "dox")),
+        x = factor(condition, levels = c("ed", "dox")),
         y = log2(value),
         fill = treatment
     )) +
     scale_fill_manual(
         values = c(
-            dox_foxa1_high = "#aca4e0",
-            ed_foxa1 = "#3ec1b6",
-            dox_h3k27ac = "#dc9c87",
-            ed_h3k27ac = "#adb364"
+            dox_foxa1_high = "#ACA4E1",
+            ed_foxa1 = "#39BDB1",
+            dox_h3k27ac = "#DB9D85",
+            ed_h3k27ac = "#ABB064"
         )
     ) +
     geom_violin(trim = FALSE,
@@ -33,7 +32,7 @@ data  %>%
         geom = "pointrange",
         color = "black"
     ) +
-    theme_classic(base_size = 20) +
+    theme_classic(base_size = 40) +
     xlab("") +
     ylab("log2(Q-Value)") +
     stat_compare_means(
@@ -46,7 +45,7 @@ data  %>%
         label.y = 5,
         hide.ns = T,
         bracket.size = 0,
-        size = 7
+        size = 14
     ) +
     labs(subtitle = "Wilcoxon") +
     theme(
@@ -65,8 +64,6 @@ data  %>%
 
 #### medians ####
 data  %>%
-    mutate(target = case_when(str_detect(treatment, "fox") ~ "fox", TRUE ~ "h3")) %>%
-    mutate(variable = case_when(str_detect(treatment, "dox") ~ "dox", TRUE ~ "ed"))  %>%
     filter(!grepl("dox_foxa1_low|h3k27ac", treatment)) %>%
     group_by(treatment) %>%
     summarise_at("value", median)
@@ -77,35 +74,89 @@ data  %>%
 
 data %>%
     merge(diffexpressed, by = "name") %>%
-    mutate(target = case_when(str_detect(comparison, "fox") ~ "FOXA1", TRUE ~ "H3K27ac")) %>%
-    mutate(variable = case_when(str_detect(treatment, "dox") ~ "dox", TRUE ~ "ed")) %>%
-    mutate(target = target, factor(target, levels = c("FOXA1", "H3K27ac"))) %>%
-    filter(!grepl("NS", diffexpressed)) %>%
-    unite('tag', c("comparison", "diffexpressed"), remove = F) %>%
-    unite('colour', c("tag", "variable"), remove = F) %>%
+    filter(diffexpressed != "NS") %>%
+    select(c(
+        "name",
+        "value",
+        "diffexpressed",
+        "treatment",
+        "comparison",
+        "condition"
+    )) %>%
+    drop_na() %>%
     ggplot(aes(
-        group = interaction(variable, condition),
-        fill = colour,
-        x = factor(variable, levels = c("ed", "dox")),
+        fill = factor(
+            condition,
+            levels = c("ed", "dox"),
+            labels = c("-Dox", "+Dox")
+        ),
+        x = diffexpressed,
         y = log2(value)
     )) +
     geom_violin(trim = FALSE,
                 color = NA)  +
-    scale_fill_manual(
-        values = c(
-            "#aca4e0",
-            "#3ec1b6",
-            "#dc9c87",
-            "#adb364",
-            "#aca4e0",
-            "#3ec1b6",
-            "#dc9c87",
-            "#adb364"
-        )
+    scale_fill_manual(name = "",
+                      values = c("#ACA4E1",
+                                 "#39BDB1")) +
+    facet_wrap(vars(factor(
+        comparison,
+        levels = c("fox_diff", "h3_diff"),
+        labels = c("FOXA1", "H3K27ac")
+    )),
+    nrow = 1,
+    strip.position = "bottom") +
+    stat_summary(
+        fun.data = "mean_sdl",
+        fun.args = list(mult = 1),
+        geom = "pointrange",
+        color = "black",
+        position = position_dodge(0.9)
     ) +
-    facet_wrap(target ~ diffexpressed,
-               nrow = 1,
-               strip.position = "bottom") +
+    xlab("") +
+    ylab("Q-Value") +
+    theme_classic(base_size = 40) +
+    theme(
+        legend.position = "top",
+        strip.placement = "outside",
+        strip.background = element_rect(color = NA),
+        panel.spacing = unit(0, "lines")
+    ) +
+    stat_compare_means(
+        aes(group = condition),
+        method = "wilcox.test",
+        label = "p.signif",
+        paired = F,
+        label.x = 1.5,
+        label.y = 6,
+        hide.ns = T,
+        size = 14,
+        na.rm = T
+    ) +
+    labs(subtitle = "Mann-Whitney U") +
+    scale_y_continuous(
+        limits = c(-6, 9),
+        expand = c(0, 0),
+        breaks = seq(-6, 9, by = 3)
+    )
+
+#### active genes ####
+data %>%
+    filter(grepl("h3k27ac", treatment)) %>%
+    mutate(activity = ifelse(value > activity_threshold, '1', '0')) %>%
+    ggplot(aes(
+        fill = condition,
+        x = factor(condition, levels = c("ed", "dox")),
+        y = log2(value)
+    )) +
+    geom_violin(trim = FALSE,
+                color = NA)  +
+    scale_fill_manual(values = c("#E092C3", "#72BB83")) +
+    facet_wrap(vars(factor(
+        activity, labels = c("0" = "Inactive", "1" = "Active")
+    )),
+    nrow = 1,
+    strip.position = "bottom") +
+    
     stat_summary(
         fun.data = "mean_sdl",
         fun.args = list(mult = 1),
@@ -113,8 +164,8 @@ data %>%
         color = "black"
     ) +
     xlab("") +
-    ylab("Q-Value") +
-    theme_classic(base_size = 20) +
+    ylab("log2(Q-Value)") +
+    theme_classic(base_size = 40) +
     theme(
         legend.position = "none",
         strip.placement = "outside",
@@ -122,7 +173,7 @@ data %>%
         panel.spacing = unit(0, "lines")
     ) +
     stat_compare_means(
-        aes(group = variable),
+        aes(group = condition),
         comparisons = list(c("ed", "dox")),
         method = "wilcox.test",
         label = "p.signif",
@@ -130,7 +181,7 @@ data %>%
         label.x = 1.5,
         hide.ns = T,
         bracket.size = 0,
-        size = 7
+        size = 14
     ) +
     labs(subtitle = "Mann-Whitney U") +
     theme(legend.position = "none") +
@@ -142,6 +193,138 @@ data %>%
     scale_x_discrete(labels = c("ed" = "-Dox", "dox" = "+Dox"))
 
 
+### inactive vs active active foxa1
+data %>%
+    drop_na() %>%
+    filter(treatment == c("ed_foxa1", "dox_foxa1_high")) %>%
+    ggplot(aes(
+        fill = condition,
+        x = factor(condition, levels = c("ed", "dox")),
+        y = log2(value)
+    )) +
+    geom_violin(trim = FALSE,
+                color = NA)  +
+    scale_fill_manual(values = c("#ACA4E1", "#39BDB1")) +
+    facet_wrap(vars(factor(
+        h3_status,
+        levels = c("loss", "shared", "gain"),
+        labels = c("Loss", "Shared", "Gain")
+    )),
+    nrow = 1,
+    strip.position = "bottom") +
+    
+    stat_summary(
+        fun.data = "mean_sdl",
+        fun.args = list(mult = 1),
+        geom = "pointrange",
+        color = "black"
+    ) +
+    xlab("") +
+    ylab("log2(Q-Value)") +
+    theme_classic(base_size = 40) +
+    theme(
+        legend.position = "none",
+        strip.placement = "outside",
+        strip.background = element_rect(color = NA),
+        panel.spacing = unit(0, "lines")
+    ) +
+    stat_compare_means(
+        aes(group = condition),
+        comparisons = list(c("ed", "dox")),
+        method = "wilcox.test",
+        label = "p.signif",
+        paired = F,
+        label.x = 1.5,
+        hide.ns = T,
+        bracket.size = 0,
+        size = 14
+    ) +
+    labs(subtitle = "Mann-Whitney U") +
+    theme(legend.position = "none") +
+    scale_y_continuous(
+        limits = c(-6, 9),
+        expand = c(0, 0),
+        breaks = seq(-6, 9, by = 3)
+    ) +
+    scale_x_discrete(labels = c("ed" = "-Dox", "dox" = "+Dox"))
+
+#### upstream and downstream
+total %>%
+    mutate(
+        target = case_when(
+            grepl("ed_fox_bound", target) ~ "ed_foxa1",
+            grepl("ed_h3k27ac_bound", target) ~ "ed_h3k27ac",
+            grepl("dox_fox_bound", target) ~ "dox_foxa1_high",
+            grepl("dox_h3k27ac_bound", target) ~ "dox_h3k27ac"
+        )
+    ) %>%
+    filter(target == treatment) %>%
+    drop_na() %>%
+    filter(bound == "1") %>%
+    mutate(target = case_when(
+        grepl("ed_foxa1", target) ~ "foxa1",
+        grepl("ed_h3k27ac", target) ~ "h3k27ac",
+        grepl("dox_foxa1_high", target) ~ "foxa1",
+        grepl("dox_h3k27ac", target) ~ "h3k27ac"
+    )) %>%
+    distinct() %>%
+    ggplot(aes(
+        fill = factor(
+            position,
+            levels = c("upstream", "downstream"),
+            labels = c("Upstream", "Downstream")
+        ),
+        x = factor(condition,
+                   levels = c("ed", "dox"),
+                   labels = c("-Dox", "+Dox")
+        ),
+        y = log2(value)
+    )) +
+    geom_violin(trim = FALSE,
+                color = NA)  +
+    scale_fill_manual(name = "",
+                      values = c("#D995CF",
+                                 "#64B5D6")) +
+    facet_wrap(vars(factor(
+        target,
+        levels = c("foxa1", "h3k27ac"),
+        labels = c("FOXA1", "H3K27ac")
+    )),
+    nrow = 1,
+    strip.position = "bottom") +
+    stat_summary(
+        fun.data = "mean_sdl",
+        fun.args = list(mult = 1),
+        geom = "pointrange",
+        color = "black",
+        position = position_dodge(0.9)
+    ) +
+    xlab("") +
+    ylab("Q-Value") +
+    theme_classic(base_size = 40) +
+    theme(
+        legend.position = "top",
+        strip.placement = "outside",
+        strip.background = element_rect(color = NA),
+        panel.spacing = unit(0, "lines")
+    ) +
+    stat_compare_means(
+        aes(group = position),
+        method = "wilcox.test",
+        label = "p.signif",
+        paired = F,
+        label.x = 1.5,
+        label.y = 6,
+        hide.ns = T,
+        size = 14,
+        na.rm = T
+    ) +
+    labs(subtitle = "Mann-Whitney U") +
+    scale_y_continuous(
+        limits = c(-6, 9),
+        expand = c(0, 0),
+        breaks = seq(-6, 9, by = 3)
+    )
 
 ### save ####
 save.image(file = 'environments/boxplot.RData')

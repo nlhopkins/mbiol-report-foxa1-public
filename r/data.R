@@ -41,20 +41,28 @@ data <- raw %>%
     mutate(h3_fold = dox_h3k27ac / ed_h3k27ac)  %>%
     mutate(h3_status = ifelse(
         ed_h3k27ac_bound == "0" & dox_h3k27ac_bound == "1",
-        'gain',
+        "GAIN",
         ifelse(
             ed_h3k27ac_bound == "1" &
                 dox_h3k27ac_bound == "0",
-            'loss',
-            'shared'
+            "LOSS",
+            "NC"
         )
     )) %>%
     mutate(fox_status = ifelse(
         ed_fox_bound == "0" & dox_fox_bound == "1",
-        'gain',
+        "UP",
         ifelse(ed_fox_bound == "1" &
                    dox_fox_bound == "0",
-               'loss',
+               "DN",
+               'shared')
+    )) %>%
+    mutate(co_status = ifelse(
+        ed_overlaid_bound == "0" & dox_overlaid_bound == "1",
+        "UP",
+        ifelse(ed_overlaid_bound == "1" &
+                   dox_overlaid_bound == "0",
+               "DN",
                'shared')
     )) %>%
     pivot_longer(cols = contains(c("_foxa1", "_h3k27ac")) &

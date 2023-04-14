@@ -11,7 +11,7 @@ output:
             header.sty
 geometry: "left=2.5cm,right=2.5cm,top=2cm,bottom=2cm"
 linestretch: 1.2
-fontsize: 11pt
+fontsize: 12pt
 indent: true
 mainfont: Charter
 bibliography: refs.bib
@@ -139,10 +139,10 @@ Here, identification of FOXA1 and H3K72ac co-localisation at tDNAs may provide i
 
 ## ChIP-seq Data from NCBI
 
-ChIP-seq was performed on genetically modified MCF7L cells (*insertion, using a lentiviral cDNA delivery system to express Dox-inducible FOXA1*) by the lab of Xiaoyong Fu, Baylor College of Medicine, and made publicly available on Dec 18 2019.[@fu2019].
-Datasets were deposited into the National Centre for Biotechnology Information (NCBI) Sequence Read Archive (SRA) Run Selector under the accession number PRJNA513000 (Available at <https://www.ncbi.nlm.nih.gov/sra> ; Table \@ref(tab:data)).
+FOXA1 and H3K27ac ChIP-seq was performed on genetically modified MCF7L cells (*insertion, using a lentiviral cDNA delivery system to express Dox-inducible FOXA1*) by the lab of Xiaoyong Fu, Baylor College of Medicine, and made publicly available on Dec 18 2019[@fu2019].
+Datasets were deposited into the National Centre for Biotechnology Information (NCBI) Sequence Read Archive (SRA) Run Selector[@leinonen2010] under the accession number PRJNA513000 (Available at <https://www.ncbi.nlm.nih.gov/sra> ; Table \@ref(tab:data)).
 Using "Genetic Manipulation Tools" within the Galaxy[@thegala2022] environment (v 23.0.rc1), SRAs were converted to FastQ files.
-FastQ files were then aligned to the human genome assembly GRCh37 (hg19) using Bowtie2 (v 2.5.0)[@langmead2012] to output BAM files.
+FastQ files were then aligned to the human genome assembly GRCh37 (hg19) by Bowtie2 (v 2.5.0)[@langmead2012] to output BAM files.
 
 ```{r data}
 kbl(
@@ -210,15 +210,16 @@ Signal peak intensities surrounding tRNAs were quantified using the EaSeq "quant
 Here the default settings "Normalize to reads per million" and "Normalize counts to DNA-fragments" were left checked.
 The default setting "Normalise to a signal of 1000 bp" was unchecked.
 The window size was offset ±500bp from the start of each tRNA gene.
-Outputs are referred to as "Q-values".
+Generated values are referred to as "Q-values".
+
 To quantify upstream and downstream signals, the "quantify" tool was used with adjusted window sizes.
 The upstream region was defined as 500 bp preceding and the first nucleotide of tRNA loci.
 Thus, the start position was offset to 0 bp, and the end position was offset to -500 bp.
 The downstream region constitutes the 500 bp region beginning with the first nucleotide of tRNA gene body.
 The start position was offset to 1 bp, and the end position was offset to 500 bp.
-Following quantification, tRNA binding events were arranged in ascending order -DOX Q-value and visualised as heatmaps.
-Data was also visualised with "average", and "overlay" EaSeq tools.
 
+Following quantification, tRNA binding events were arranged in ascending order of -Dox Q-value and visualised as heatmaps.
+Data was also visualised with the "heatmap", "average", "overlay", and "filltrack" tools.
 EaSeq[@lerdrup2016] is avaiable at <http://easeq.net>.
 
 ## Motif Analysis
@@ -232,8 +233,9 @@ Multiple EM for Motif Elicitation ChIP (MEME) Suite
 
 ## Statistics
 
-Statistical analysis and visualisation was generated with R[@r] (v 4.2.3).
-Significant difference was determined by Mann-Whitney U, Wilcoxon signed-rank test, and the Chi-squared test.
+Statistical analysis and visualisation was generated with R[@r] (v 4.2.3) with the tidyverse[@wickham2019] and ggpubr[@ggpubr] packages.
+
+Group differences were determined by Mann-Whitney U, Wilcoxon signed-rank test, and the Chi-squared test.
 
 ## ChIP-Seq and ChIP-qPCR
 
@@ -260,90 +262,94 @@ Real time quantitative PCR (qPCR) was perfomed using the KAPA Library Quantifica
 
 # Results
 
-## Localisation of FOXA1 and H3k27ac to tRNA Genes
+## Localisation of FOXA1 and H3k27ac at tRNA genes in MCF-7 cells
 
-Mapped reads of FOXA1 and H3K27ac binding were visualised as heatmaps and ordered by increasing -DOX Q-value.
-This revealed a concentration of FOXA1 and H3k27ac at approximately half of tRNAs, relative to ±10 kb flanking regions.
-FOXA1 OE increased FOXA1 binding at a small proportion of tRNAs genes, and H3K27ac binding decreases at approximately half of tRNA genes (Figure \@ref(fig:results-1)A).
+Estrogen stimulates the production of tRNAs [@Hah2011].
+The estrogen receptor is dependent on FOXA1; ChIP-seq analysis has shown that FOXA1 reprograms chromatin in MCF-7 cells[@fu2016].
+To investigate whether FOXA1 enhances tDNA expression, a doxycycline (Dox) inducible OE system in MCF-7 cells was used to achieve expression comparable to tamoxifen-resistant cells (TamR).
+ChIP-seq analysis was carried out for FOXA1 and H3K27ac; open, H3K27ac denotes accessible chromatin and is used to identify active promoters.
+
+It was expected that FOXA1 would alter tDNA activity.
+Mapped reads of FOXA1 and H3K27ac binding was quantified (Q-values) relative to ±500 bp flanking regions.
+Binding events were visualised as heatmaps and ordered by increasing -DOX Q-value.
+This revealed a concentration of FOXA1 and H3k27ac at approximately half of tDNAs, relative to ±10 kb flanking regions.
+
+Upon FOXA1 induction, FOXA1 binding increases at a small proportion of tRNAs genes.
+H3K27ac binding decreases at approximately half of tRNA genes (Figure \@ref(fig:results-1)A).
 This was confirmed by average signal intensity plots of FOXA1 and H3K27ac binding (Figure \@ref(fig:results-1)B).
 Input reads generated minimal peak enrichment (Supplementary Figure X).
 
-Peaks were classified as binding events if Q-values exceeded input values (Figure \@ref(fig:results-1)C).
-FOXA1 interacts with 329 tRNA genes and H3K27ac with 293 tRNA genes.
-FOXA1 co-binds with 89.4% of H3K27ac sites.
-Upon FOXA1 OE, 40 FOXA1 binding sites are lost and 30 are gained.
-H3K27ac sites are lost at 50 tDNAs, and 23 are gained.
-Here, FOXA1 co-binding represents 92.5% of H3K27ac sites.
+Peaks were classified as binding events if Q-values exceeded input values (log~2~(Q-value fold-change) \>0) (Figure \@ref(fig:results-1)C).
+Before FOXA1 OE, FOXA1 interacts with 329 tRNA genes and H3K27ac with 293 tRNA genes.
+The majority of these events are co-binding, with both FOXA1 and H3K27ac binding to 262 tDNAs.
+Upon FOXA1 OE, the number of FOXA1 binding sites decrease to 319; 40 are lost and 30 are gained, whilst 309 pre-existing sites remained.
+H3K27ac sites also decrease to 266 tDNAs; 50 are lost and 23 are gained, whilst 239 pre-existing sites remained.
+Correspondingly, co-binding events lower to 246; 44 are lost and 28 are gained, whilst 230 pre-existing sites remained.
 
-Upon FOXA1 OE, mean Q-values significantly increased 1.18-fold for FOXA1 binding (p \< 0.0001), and significantly decreased 0.86-fold for H3K27ac (p \< 0.01) (Supplementary Figures X).
-However, FOXA1 OE leads to a significant difference in FOXA1 and H3K27ac binding between individual tDNAs (p \<0.0001) (Figure \@ref(fig:results-1)D).
+In response to FOXA1 induction, FOXA1 density statistically increased.
+Median FOXA1 q-values were (Figure \@ref(fig:results-1)D) increased 1.11-fold (p = 0.00079).
+For H3K27ac, median q-values decreased by 0.99-fold, however this change was not statistically significant (Figure \@ref(fig:results-1)D).
+Together, these results support the notion that FOXA1 and H3K27ac bind to tDNAs.
 
-Together, these results support the notion that FOXA1 overexpression alters the binding landscape of FOXA1 and H3K27ac at tRNAs.
-
-```{r results-1, out.width = '100%', fig.cap = "Comparisons of FOXA1 and H3K27ac binding at tDNAs, with and without Dox.(A) Heatmaps of FOXA1 and H3K27ac across hg19 tRNA genes in MCF-7 cells. Genes arranged in order of increasing -Dox Q-value. Ratiometric heatmaps represent the log2 ratio between -Dox and +Dox peaks. Windows represent ±10kb from the centre of the gene.(B) Average signal intensity overlay of FOXA1 and H3K27ac. Windows represent ±10kb from the centre of the gene. (C) Bar plots of the percentage of cells bound by FOXA1 and H3K27ac. (D) Violin plots of FOXA1 and H3K27ac Q-values within ±500bp of the gene body. *p < 0.05; ***p < 0.001; ****p < 0.0001."}
+```{r results-1, out.width = '100%', fig.cap = "Comparisons of FOXA1 and H3K27ac binding at tDNAs, with and without Dox.(A) Heatmaps of FOXA1 and H3K27ac across hg19 tRNA genes in MCF-7 cells. Genes arranged in order of increasing -Dox Q-value. Ratiometric heatmaps represent the log2 ratio between -Dox and +Dox peaks. Windows represent ±10kb from the centre of the gene. N = 416. (B) Average signal intensity overlay of FOXA1 and H3K27ac. Windows represent ±10kb from the centre of the gene. (C) Bar plots of the percentage of cells bound by FOXA1 and H3K27ac. (D) Violin plots of FOXA1 and H3K27ac Q-values within ±500bp of the gene body. *p < 0.05."}
 knitr::include_graphics("../images/results-01.png")
 ```
 
-## Figure 2
+## FOXA1 alters H3K27ac binding levels
 
-### Why?
+To elucidate how FOXA1 impacts tDNA levels, tDNAs that were differently enriched upon FOXA1 OE were categorised as gained (UP) and lost (DN) (fold-change \> 1.5, *P*-value \> 1e-3).
+This discovered that substantially more tDNAs gained (UP) FOXA1 binding than lost (DN) (96 vs. 62), whilst 258 tDNAs remained relatively unchanged (Figure \@ref(fig:results-2)A, left).
+For H3K27ac, 54 tDNAs gained (UP) and 124 lost (DN) H3K27ac (Figure \@ref(fig:results-2)A, right), whereas 236 tDNAs remained relatively unchanged.
+As expected, median q-values were significantly gained or lost at GAIN and LOSS tDNAs, respectively (Figure \@ref(fig:results-2)B).
 
-How does FOXA1 alter H3K27ac binding?
+Focusing on GAIN tDNAs, 95 gain (UP) FOXA1 and 54 gain (UP) H3K27ac (Figure \@ref(fig:results-2)C).
+Of this subset (n = 150), 14% gain both FOXA1 and H3K27ac.
+Examples of exclusive and co-bound tDNAs are shown in Figure \@ref(fig:results-2)D.
 
-Using Q-values, tRNAs that are differently enriched upon FOXA1 OE were categorised as 'UP' or 'DN' (FOXA1 = 359, H3K27ac = 315).
+SUMMARY
 
-This discovered substantially more tRNAs with increased (UP) than decreased (DN) FOXA1 (92 vs. 21) (Figure \@ref(fig:results-2)A).
-However, for H3K27ac, the number of tRNAs with an increase (UP) was comparable to those with a decrease (DN) (41 vs. 44) (Figure \@ref(fig:results-2)B).
-
-#REWRITE %s
-
-Of the tDNAs which gain (UP) H3k27ac, 51% (21) also gain (UP) FOXA1; none lose (DN) FOXA1.
-
-Of the tDNAs which lose (DN) H3k27ac, 22.7% (10) also lose FOXA1, with just 1 tDNA gaining FOXA1 (Figure \@ref(fig:results-2)C).
-
-Examples of these tRNAs are shown in Figure \@ref(fig:results-2)D.
-
-### 
-
-```{r results-2, out.width='100%', fig.cap = "FOXA1 OE impacts binding of FOXA1 and H3K27ac at tDNAs. (A and B) Volcano plots of FOXA1 (A) and H3K27ac (B) Q-values with and without Dox. The purple and green dots correspond to the regions with UP and DN expression in +Dox vs. −Dox cells, respectively. (C) Venn diagram representing the overlap between Dox-induced FOXA1 and H3K27ac UP and DN regions. (D). (E)"}
+```{r results-2, out.width='100%', fig.cap = "FOXA1 OE impacts binding of FOXA1 and H3K27ac at tRNA genes. (A) Volcano plots of FOXA1 (n = 416) and H3K27ac (n = 414) q-values in +Dox vs. −Dox cells. (Left) The purple and green dots correspond to the regions with UP and DN FOXA1, respectively. (Right) The orange and green dots correspond to the regions with UP and DN H3K27ac, respectively. The threhold for calling was set fold-change > 1.5 and P < 1e-3. (B) Violin plots of the q-values of GAIN or LOSS tRNA genes. ****p < 0.0001. (C) Venn diagram representing the overlap between FOXA1 and H3K27ac GAIN regions. (D) Filltrack examples of seperate and co-occuring FOXA1 and H3K27ac GAIN events within ± 2 kb of tDNAs. The black line represents the gene body."}
 knitr::include_graphics("../images/results-02.png")
 ```
 
-## Figure 3
+## Activated tDNAs are bound by FOXA1
 
-The next step was to investigate the impact of FOXA1 on the number of active genes.
+The next step was to investigate the impact of FOXA1 on tDNA activity.
 Almost half of human tDNAs are silent or poorly expressed [@Torres2019].
-Thus, tRNAs were classified as 'active' if H3K27ac Q-values exceeded the median -DOX value (Q \> 1.808).
+Thus, tDNAs were classified as 'active' if H3K27ac Q-values exceeded the median -DOX value (Q \> 1.808).
+The q-value density of inactive tDNAs was somewhat altered (p = 0.043), with median FOXA1 q-values decreasing 0.81-fold (Figure \@ref(fig:results-3)A).
+The density of active tDNAsdid not significantly change, though the median q-value did decrease 0.81-fold.
 
-When FOXA1 is over-expressed, the activity status of the majority (87.3%) of genes remain unchanged.
-The number of of tDNAs that lose and gain activity are 27 and 26, respectively.
+Overexpression of FOXA1 altered the number of active and inactive tDNAs by just 1 (Supplementary Figures X).
+However, 50 tDNAs became inactive (LOSS) and 25 became activate (GAIN), whilst the activity status of 343 (82.5%) tDNAs remained not changed (NC) (Figure \@ref(fig:results-3)B).
+As expected, the q-value density of lost, gained, and no-change tDNAs was changed upon FOXA1 OE (Figure \@ref(fig:results-3)C).
+Q-values decreased 0.59-fold for LOSS, 0.92-fold for NC tDNAs, and 1.95-fold for GAIN tDNAs.
 
-Of the +Dox activated genes, 12 also gained FOXA1.
+Superimposing GAIN and LOSS tDNAs with UP and DOWN tDNAs (Figure \@ref(fig:results-2)C) revealed 23 tDNAs that become active upon FOXA1 OE, 17 also reasonably gained H3K27ac (Figure \@ref(fig:results-3)D).
+However, only 9 tDNAs gained both H3K27ac and FOXA1; examples of these tDNAs are shown in Figure \@ref(fig:results-3)E.
 
-FOXA1 alone is insufficient in increasing tRNA activity.
+SUMMARY
 
-Suggests?
-
-```{r results-3, out.width = '100%', fig.cap = "."}
+```{r results-3, out.width = '100%', fig.cap = "(A) Violin plot of H3K27ac q-values within ±500bp of the gene body of inactive and active tDNAs. *p < 0.05. (B) Barplot of tDNAs catagorised by activity change upon FOXA1 OE. tDNAs are classed as inactivated (LOSS), no-change (NC), and activated(GAIN). (C) Violin plot of tDNA Q-values, catagorised as they are in B. *p < 0.05, **p < 0.01. (D) Venn diagram representing the overlap between tDNAs classed as GAIN and UP. (E). Filltrack examples of co-occuring FOXA1 UP and H3K27ac GAIN events within ± 2 kb of tDNAs. The black line represents the gene body."}
 knitr::include_graphics("../images/results-03.png")
 ```
 
-## Figure ?
+## Relative Position
 
 -   Relative position (not very interesting)
 
 -   Binding at isotopes?
     Certain AA more up than others?
 
-## Figure 4
+## Motif Analysis
 
 #### Why?
 
 ### What?
 
-MEME CentriMo to identify de novo motifs that are enriched at tRNAs which gain both FOXA1 and H3k27ac
+MEME CentriMo to identify de novo motifs that are enriched at tDNAs which gain both FOXA1 and H3k27ac
 
--   relative to other tRNAS (gain/lose, lose/lose, lose/gain)
+-   relative to other tDNAS (gain/lose, lose/lose, lose/gain)
 
 -   FOXA1 not enriched
 
@@ -356,19 +362,19 @@ MEME CentriMo to identify de novo motifs that are enriched at tRNAs which gain b
 
     -   All downstream
 
-    -   tRNAs where 'matching sequences' all best matches = code for valine
+    -   tDNAs where 'matching sequences' all best matches = code for valine
 
     -   Branched amino acids associated with lower BC risk
 
 #### Suggests?
 
-```{r results-4, out.width = '100%', fig.cap = ""}
+```{r results-4, out.width = '100%', fig.cap = "(A) . (B). (C)"}
 knitr::include_graphics("../images/results-04.png")
 ```
 
 ## Figure 5
 
--   Localisation of FOXA1 at individual tRNA genes in MCF-7 cells
+-   Localisation of FOXA1 at individual tDNA genes in MCF-7 cells
 
 Why?
 
@@ -430,7 +436,7 @@ knitr::kable(
 
 -   FOXA1 moves nucleosomes to make other TF accessible?
 
--   Differences in nucleosome positioning will contribute to the distinct distribution patterns of modified histones, as nucleosomes are excluded from active tRNA promoters and enriched in flanking regions^[8](https://www.nature.com/articles/nrg3001#ref-CR8 "Barski, A. et al. Pol II and its associated epigenetic marks are present at Pol III-transcribed noncoding RNA genes. Nature Struct. Mol. Biol. 17, 629–634 (2010).")^.
+-   Differences in nucleosome positioning will contribute to the distinct density patterns of modified histones, as nucleosomes are excluded from active tRNA promoters and enriched in flanking regions^[8](https://www.nature.com/articles/nrg3001#ref-CR8 "Barski, A. et al. Pol II and its associated epigenetic marks are present at Pol III-transcribed noncoding RNA genes. Nature Struct. Mol. Biol. 17, 629–634 (2010).")^.
 
 -   Brf1 required for iMET txn
 

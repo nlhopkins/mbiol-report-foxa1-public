@@ -26,12 +26,9 @@ data  %>%
         labels = c("FOXA1", "H3K27ac")
     )),
     strip.position = "bottom") +
-    stat_summary(
-        fun.data = "mean_sdl",
-        fun.args = list(mult = 1),
-        geom = "pointrange",
-        color = "black"
-    ) +
+    stat_summary(fun.data = "median_iqr",
+                 geom = "pointrange",
+                 color = "black") +
     theme_classic(base_size = 40) +
     xlab("") +
     ylab("log2(Q-Value)") +
@@ -47,7 +44,7 @@ data  %>%
         bracket.size = 0,
         size = 14
     ) +
-    labs(subtitle = "Wilcoxon") +
+    labs(subtitle = "Mann-Whitney U") +
     theme(
         legend.position = "none",
         strip.placement = "outside",
@@ -63,9 +60,9 @@ data  %>%
 
 
 #### medians ####
-data  %>%
-    filter(!grepl("dox_foxa1_low|h3k27ac", treatment)) %>%
-    group_by(treatment) %>%
+data %>% mutate(target = case_when(str_detect(treatment, "fox") ~ "fox", TRUE ~ "h3")) %>%
+    filter(!grepl("dox_foxa1_low", treatment)) %>%
+    group_by(condition, target) %>%
     summarise_at("value", median)
 
 
@@ -106,8 +103,7 @@ data %>%
     nrow = 1,
     strip.position = "bottom") +
     stat_summary(
-        fun.data = "mean_sdl",
-        fun.args = list(mult = 1),
+        fun.data = "median_iqr",
         geom = "pointrange",
         color = "black",
         position = position_dodge(0.9)
@@ -139,6 +135,26 @@ data %>%
         breaks = seq(-6, 9, by = 3)
     )
 
+
+data %>%
+    merge(diffexpressed, by = "name") %>%
+    filter(diffexpressed != "NS") %>%
+    select(c(
+        "name",
+        "value",
+        "diffexpressed",
+        "treatment",
+        "comparison",
+        "condition"
+    )) %>%
+    drop_na() %>%
+    group_by(diffexpressed, comparison) %>%
+    summarise_at("value", median)
+
+
+
+
+
 #### active genes ####
 data %>%
     filter(grepl("h3k27ac", treatment)) %>%
@@ -150,19 +166,17 @@ data %>%
     )) +
     geom_violin(trim = FALSE,
                 color = NA)  +
-    scale_fill_manual(values = c("#E092C3", "#72BB83")) +
+    scale_fill_manual(values = c("#adb364", "#dc9c87")) +
     facet_wrap(vars(factor(
         activity, labels = c("0" = "Inactive", "1" = "Active")
     )),
     nrow = 1,
     strip.position = "bottom") +
     
-    stat_summary(
-        fun.data = "mean_sdl",
-        fun.args = list(mult = 1),
-        geom = "pointrange",
-        color = "black"
-    ) +
+    stat_summary(fun.data = "median_iqr",
+                 
+                 geom = "pointrange",
+                 color = "black") +
     xlab("") +
     ylab("log2(Q-Value)") +
     theme_classic(base_size = 40) +
@@ -191,6 +205,15 @@ data %>%
         breaks = seq(-6, 9, by = 3)
     ) +
     scale_x_discrete(labels = c("ed" = "-Dox", "dox" = "+Dox"))
+
+
+
+
+data %>%
+    filter(grepl("h3k27ac", treatment)) %>%
+    mutate(activity = ifelse(value > activity_threshold, '1', '0')) %>%
+    group_by(condition, activity) %>%
+    summarise_at("value", median)
 
 
 ### inactive vs active active foxa1
@@ -204,21 +227,16 @@ data %>%
     )) +
     geom_violin(trim = FALSE,
                 color = NA)  +
-    scale_fill_manual(values = c("#ACA4E1", "#39BDB1")) +
-    facet_wrap(vars(factor(
-        h3_status,
-        levels = c("loss", "shared", "gain"),
-        labels = c("Loss", "Shared", "Gain")
-    )),
-    nrow = 1,
-    strip.position = "bottom") +
+    scale_fill_manual(values = c("#adb364", "#dc9c87")) +
+    facet_wrap(vars(factor(h3_status,
+                           levels = c("LOSS", "NC", "GAIN"))),
+               nrow = 1,
+               strip.position = "bottom") +
     
-    stat_summary(
-        fun.data = "mean_sdl",
-        fun.args = list(mult = 1),
-        geom = "pointrange",
-        color = "black"
-    ) +
+    stat_summary(fun.data = "median_iqr",
+                 
+                 geom = "pointrange",
+                 color = "black") +
     xlab("") +
     ylab("log2(Q-Value)") +
     theme_classic(base_size = 40) +
@@ -247,6 +265,15 @@ data %>%
         breaks = seq(-6, 9, by = 3)
     ) +
     scale_x_discrete(labels = c("ed" = "-Dox", "dox" = "+Dox"))
+
+data %>%
+    filter(grepl("h3k27ac", treatment)) %>%
+    mutate(activity = ifelse(value > activity_threshold, '1', '0')) %>%
+    group_by(condition, h3_status) %>%
+    summarise_at("value", median)
+
+
+
 
 #### upstream and downstream
 total %>%
@@ -274,17 +301,17 @@ total %>%
             levels = c("upstream", "downstream"),
             labels = c("Upstream", "Downstream")
         ),
-        x = factor(condition,
-                   levels = c("ed", "dox"),
-                   labels = c("-Dox", "+Dox")
+        x = factor(
+            condition,
+            levels = c("ed", "dox"),
+            labels = c("-Dox", "+Dox")
         ),
         y = log2(value)
     )) +
     geom_violin(trim = FALSE,
                 color = NA)  +
     scale_fill_manual(name = "",
-                      values = c("#D995CF",
-                                 "#64B5D6")) +
+                      values = c("#ACA4E1", "#39BDB1")) +
     facet_wrap(vars(factor(
         target,
         levels = c("foxa1", "h3k27ac"),
@@ -293,8 +320,8 @@ total %>%
     nrow = 1,
     strip.position = "bottom") +
     stat_summary(
-        fun.data = "mean_sdl",
-        fun.args = list(mult = 1),
+        fun.data = "median_iqr",
+        
         geom = "pointrange",
         color = "black",
         position = position_dodge(0.9)

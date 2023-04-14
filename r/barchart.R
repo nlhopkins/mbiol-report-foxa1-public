@@ -263,8 +263,7 @@ binding %>% ggplot(aes(
     xlab("") +
     ylab("% of Bound tDNAs") +
     scale_fill_manual(name = "",
-                      values = c("#D995CF",
-                                 "#64B5D6")) +
+                      values = c("#ACA4E1","#39BDB1")) +
     theme_classic(base_size = 40) +
     theme(
         legend.position = "top",
@@ -301,4 +300,5 @@ binding %>% ggplot(aes(
     )),
     nrow = 1,
     strip.position = "bottom")
+
 

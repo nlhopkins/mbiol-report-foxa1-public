@@ -14,7 +14,9 @@ volcano_fox$label = if_else(volcano_fox$name %in% top_fox$name,
 
 volcano_fox %>%
     add_count(diffexpressed) %>%
-    mutate(diffexpressed = paste0(diffexpressed, ' (', n, ')')) %>% 
+    mutate(diffexpressed = factor(diffexpressed,
+                                  levels = c("DN", "NS", "UP"))) %>%
+    mutate(diffexpressed = paste0(diffexpressed, ' (', n, ')')) %>%
     ggplot(aes(x = fox_fold,
                y = p_value,
                colour = diffexpressed)) +
@@ -39,7 +41,8 @@ volcano_fox %>%
         panel.spacing = unit(0, "lines")
     ) +
     xlab("log2(FOXA1 Fold Change)") +
-    ylab("-log10(P-value)")
+    ylab("-log10(P-value)") + guides(colour = guide_legend(override.aes = list(size =
+                                                                                   10)))
 
 
 top_h3 = volcano_h3 %>%
@@ -57,6 +60,8 @@ volcano_h3$label = if_else(volcano_h3$name %in% top_h3$name,
 
 volcano_h3 %>%
     add_count(diffexpressed) %>%
+    mutate(diffexpressed = factor(diffexpressed,
+                                  levels = c("DN", "NS", "UP"))) %>% 
     mutate(diffexpressed = paste0(diffexpressed, ' (', n, ')')) %>%
     ggplot(aes(x = h3_fold,
                y = p_value,
@@ -81,7 +86,8 @@ volcano_h3 %>%
         panel.spacing = unit(0, "lines")
     ) +
     xlab("log2(H3K27ac Fold Change)") +
-    ylab("-log10(P-value)")
+    ylab("-log10(P-value)") + guides(colour = guide_legend(override.aes = list(size =
+                                                                                   10)))
 
 
 top_fox = volcano_fox %>%

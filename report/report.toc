@@ -1,24 +1,22 @@
 \contentsline {section}{Introduction}{1}{section*.3}%
 \contentsline {subsection}{tRNAs and Carcinogenesis}{1}{section*.4}%
-\contentsline {subsection}{ER+ Breast Cancer and FOXA1}{1}{section*.5}%
-\contentsline {section}{Materials \& Methods}{2}{section*.6}%
-\contentsline {subsection}{ChIP-seq Data from NCBI}{2}{section*.7}%
+\contentsline {subsection}{ER+ Breast Cancer and FOXA1}{2}{section*.5}%
+\contentsline {section}{Materials \& Methods}{3}{section*.6}%
+\contentsline {subsection}{ChIP-seq Data from NCBI}{3}{section*.7}%
 \contentsline {subsubsection}{EaSeq for the Quantification of Signals at tDNAs}{3}{section*.8}%
-\contentsline {subsection}{Motif Analysis}{3}{section*.9}%
-\contentsline {subsection}{Statistics}{3}{section*.10}%
+\contentsline {subsection}{Motif Analysis}{4}{section*.9}%
+\contentsline {subsection}{Statistics}{4}{section*.10}%
 \contentsline {subsection}{ChIP-Seq and ChIP-qPCR}{4}{section*.11}%
-\contentsline {section}{Results}{4}{section*.12}%
-\contentsline {subsection}{Localisation of FOXA1 and H3k27ac to tRNA Genes}{4}{section*.13}%
-\contentsline {subsection}{Figure 2}{7}{section*.15}%
-\contentsline {subsubsection}{Why?}{7}{section*.16}%
-\contentsline {subsubsection}{}{8}{section*.17}%
-\contentsline {subsection}{Figure 3}{9}{section*.19}%
-\contentsline {subsection}{Figure ?}{10}{section*.21}%
-\contentsline {subsection}{Figure 4}{11}{section*.22}%
-\contentsline {paragraph}{Why?}{11}{section*.23}%
-\contentsline {subsubsection}{What?}{11}{section*.24}%
-\contentsline {paragraph}{Suggests?}{13}{figure.caption.26}%
-\contentsline {subsection}{Figure 5}{13}{section*.27}%
-\contentsline {section}{Discussion}{13}{section*.28}%
-\contentsline {section}{Conclusion}{14}{section*.29}%
-\contentsline {section}{References}{14}{section*.30}%
+\contentsline {section}{Results}{5}{section*.12}%
+\contentsline {subsection}{Localisation of FOXA1 and H3k27ac at tRNA genes in MCF-7 cells}{5}{section*.13}%
+\contentsline {subsection}{FOXA1 alters H3K27ac binding levels}{7}{section*.15}%
+\contentsline {subsection}{Activated tDNAs are bound by FOXA1}{9}{section*.17}%
+\contentsline {subsection}{Relative Position}{11}{section*.19}%
+\contentsline {subsection}{Motif Analysis}{11}{section*.20}%
+\contentsline {paragraph}{Why?}{11}{section*.21}%
+\contentsline {subsubsection}{What?}{11}{section*.22}%
+\contentsline {paragraph}{Suggests?}{12}{figure.caption.24}%
+\contentsline {subsection}{Figure 5}{12}{section*.25}%
+\contentsline {section}{Discussion}{13}{section*.26}%
+\contentsline {section}{Conclusion}{13}{section*.27}%
+\contentsline {section}{References}{14}{section*.28}%

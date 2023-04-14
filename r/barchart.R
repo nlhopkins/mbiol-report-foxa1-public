@@ -245,7 +245,6 @@ binding <- total %>%
                                        "co-bound")))
 
 
-
 binding %>% ggplot(aes(
     x = factor(
         condition,
@@ -263,7 +262,7 @@ binding %>% ggplot(aes(
     xlab("") +
     ylab("% of Bound tDNAs") +
     scale_fill_manual(name = "",
-                      values = c("#ACA4E1","#39BDB1")) +
+                      values = c("#ACA4E1", "#39BDB1")) +
     theme_classic(base_size = 40) +
     theme(
         legend.position = "top",
@@ -302,3 +301,10 @@ binding %>% ggplot(aes(
     strip.position = "bottom")
 
 
+x <- binding %>%
+    select(c("position", "bound_count", "target")) %>% 
+    unique() %>% 
+    pivot_wider(names_from = "target", values_from = "bound_count", id_cols = c("position")) 
+
+x %>% filter(position == "upstream") %>% bind_cols(x %>% filter(position == "downstream")) %>% 
+    summarise(pval = chisq.test(ed_fox_bound)$p.value)

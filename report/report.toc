@@ -12,10 +12,10 @@
 \contentsline {subsection}{FOXA1 alters H3K27ac binding levels}{7}{section*.15}%
 \contentsline {subsection}{Activated tDNAs are bound by FOXA1}{9}{section*.17}%
 \contentsline {subsection}{Relative Position}{11}{section*.19}%
-\contentsline {subsection}{Motif Analysis}{11}{section*.20}%
-\contentsline {paragraph}{Why?}{11}{section*.21}%
-\contentsline {subsubsection}{What?}{11}{section*.22}%
-\contentsline {paragraph}{Suggests?}{12}{figure.caption.24}%
+\contentsline {subsection}{Motif Analysis}{11}{section*.21}%
+\contentsline {paragraph}{Why?}{11}{section*.22}%
+\contentsline {subsubsection}{What?}{12}{section*.23}%
+\contentsline {paragraph}{Suggests?}{12}{section*.24}%
 \contentsline {subsection}{Figure 5}{12}{section*.25}%
 \contentsline {section}{Discussion}{13}{section*.26}%
 \contentsline {section}{Conclusion}{13}{section*.27}%

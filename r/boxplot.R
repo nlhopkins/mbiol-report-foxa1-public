@@ -31,7 +31,7 @@ data  %>%
                  color = "black") +
     theme_classic(base_size = 40) +
     xlab("") +
-    ylab("log2(Q-Value)") +
+    ylab("log2(Q-value)") +
     stat_compare_means(
         comparisons = list(c("ed", "dox")),
         method = "wilcox.test",
@@ -109,7 +109,7 @@ data %>%
         position = position_dodge(0.9)
     ) +
     xlab("") +
-    ylab("Q-Value") +
+    ylab("log2(Q-value") +
     theme_classic(base_size = 40) +
     theme(
         legend.position = "top",
@@ -178,7 +178,7 @@ data %>%
                  geom = "pointrange",
                  color = "black") +
     xlab("") +
-    ylab("log2(Q-Value)") +
+    ylab("log2(Q-value)") +
     theme_classic(base_size = 40) +
     theme(
         legend.position = "none",
@@ -208,14 +208,6 @@ data %>%
 
 
 
-
-data %>%
-    filter(grepl("h3k27ac", treatment)) %>%
-    mutate(activity = ifelse(value > activity_threshold, '1', '0')) %>%
-    group_by(condition, activity) %>%
-    summarise_at("value", median)
-
-
 ### inactive vs active active foxa1
 data %>%
     drop_na() %>%
@@ -238,7 +230,7 @@ data %>%
                  geom = "pointrange",
                  color = "black") +
     xlab("") +
-    ylab("log2(Q-Value)") +
+    ylab("log2(Q-value)") +
     theme_classic(base_size = 40) +
     theme(
         legend.position = "none",
@@ -297,14 +289,14 @@ total %>%
     distinct() %>%
     ggplot(aes(
         fill = factor(
-            position,
-            levels = c("upstream", "downstream"),
-            labels = c("Upstream", "Downstream")
-        ),
-        x = factor(
             condition,
             levels = c("ed", "dox"),
             labels = c("-Dox", "+Dox")
+        ),
+        x = factor(
+            position,
+            levels = c("upstream", "downstream"),
+            labels = c("Upstream", "Downstream")
         ),
         y = log2(value)
     )) +
@@ -327,7 +319,7 @@ total %>%
         position = position_dodge(0.9)
     ) +
     xlab("") +
-    ylab("Q-Value") +
+    ylab("log2(Q-value)") +
     theme_classic(base_size = 40) +
     theme(
         legend.position = "top",
@@ -336,7 +328,7 @@ total %>%
         panel.spacing = unit(0, "lines")
     ) +
     stat_compare_means(
-        aes(group = position),
+        aes(group = condition),
         method = "wilcox.test",
         label = "p.signif",
         paired = F,

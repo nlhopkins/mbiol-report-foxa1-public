@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.4.10)  14 APR 2023 21:54
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.4.10)  14 APR 2023 23:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -991,20 +991,25 @@ Missing character: There is no − ("2212) in font epigrafican8r!
 [7] [8]
 File: ../images/results-03.png Graphic file (type bmp)
 <../images/results-03.png>
-[9]
-LaTeX Font Info:    Trying to load font information for TS1+epigrafica on input line 419.
-LaTeX Font Info:    No file TS1epigrafica.fd. on input line 419.
+[9] [10]
+File: ../images/results-04.png Graphic file (type bmp)
+<../images/results-04.png>
+[11]
+LaTeX Font Info:    Trying to load font information for TS1+epigrafica on input line 438.
+LaTeX Font Info:    No file TS1epigrafica.fd. on input line 438.
 
 LaTeX Font Warning: Font shape `TS1/epigrafica/m/n' undefined
 (Font)              using `TS1/cmr/m/n' instead
-(Font)              for symbol `textbullet' on input line 419.
+(Font)              for symbol `textbullet' on input line 438.
 
 (/Users/natashahopkins/Library/TinyTeX/texmf-dist/tex/latex/microtype/mt-cmr.cfg
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman (RS)
-) [10]
-File: ../images/results-04.png Graphic file (type bmp)
-<../images/results-04.png>
-[11] [12]
+) [12]
+Underfull \hbox (badness 10000) in paragraph at lines 556--559
+
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 560--563
 
  []
@@ -1089,12 +1094,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 624--627
 
  []
 
-
+[14]
 Underfull \hbox (badness 10000) in paragraph at lines 628--631
 
  []
 
-[14]
+
 Underfull \hbox (badness 10000) in paragraph at lines 632--635
 
  []
@@ -1179,13 +1184,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 696--699
 
  []
 
+[15]
+Missing character: There is no α ("3B1) in font epigrafican8r!
 
 Underfull \hbox (badness 10000) in paragraph at lines 700--703
 
  []
 
-[15]
-Missing character: There is no α ("3B1) in font epigrafican8r!
 
 Underfull \hbox (badness 10000) in paragraph at lines 704--707
 
@@ -1266,12 +1271,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 764--767
 
  []
 
-
+[16]
 Underfull \hbox (badness 10000) in paragraph at lines 768--771
 
  []
 
-[16]
+
 Underfull \hbox (badness 10000) in paragraph at lines 772--775
 
  []
@@ -1298,11 +1303,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 788--791
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 792--795
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 796--799
 
  []
 

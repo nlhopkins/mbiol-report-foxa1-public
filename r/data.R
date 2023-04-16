@@ -41,10 +41,10 @@ data <- raw %>%
     mutate(h3_fold = dox_h3k27ac / ed_h3k27ac)  %>%
     mutate(h3_status = ifelse(
         ed_h3k27ac_bound == "0" & dox_h3k27ac_bound == "1",
-        "GAIN",
+        "UP",
         ifelse(ed_h3k27ac_bound == "1" &
                    dox_h3k27ac_bound == "0",
-               "LOSS",
+               "DN",
                "NC")
     )) %>%
     mutate(fox_status = ifelse(
@@ -150,10 +150,9 @@ diffexpressed <-
     pivot_longer(cols = contains(c("diffexpressed.x", "diffexpressed.y")),
                  names_to = "comparison",
                  values_to = "diffexpressed") %>%
-    select(c("name", "comparison", "diffexpressed")) %>%
     mutate(comparison = str_replace(comparison, "diffexpressed.x", "fox_diff")) %>%
     mutate(comparison = str_replace(comparison, "diffexpressed.y", "h3_diff")) %>%
-    distinct()
+    distinct() 
 
 
 #### Venn ####
@@ -305,3 +304,4 @@ total <- full_join(upstream,
 
 
 save.image(file = 'environments/data.RData')
+

@@ -329,7 +329,8 @@ Q-values increased 65.4% for GAIN tDNAs, decreased 14.2% for LOSS, decreased 8.3
 However, these changes were not significant for the last two catagories.
 
 Superimposing GAIN and LOSS tDNAs with UP and DOWN tDNAs (Figure \@ref(fig:results-2)C) revealed that, of the 26 tDNAs that become active upon FOXA1 OE, 19 also reasonably gained H3K27ac (H3K27ac UP), and 13 reasonably gain FOXA1 (FOXA1 UP) (Figure \@ref(fig:results-3)D).
-However, only 9 tDNAs gained both H3K27ac and FOXA1.
+Whereas 16 tDNAs gained both H3K27ac and FOXA1.
+9 activated tDNAs gain (UP) both H3K27ac and FOXA1 binding.
 Examples of activated tDNAs with increased H3K27ac, FOXA1, or both, are shown in Figure \@ref(fig:results-3)E.
 
 SUMMARY

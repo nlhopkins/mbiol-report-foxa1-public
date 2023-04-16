@@ -42,12 +42,10 @@ data <- raw %>%
     mutate(h3_status = ifelse(
         ed_h3k27ac_bound == "0" & dox_h3k27ac_bound == "1",
         "GAIN",
-        ifelse(
-            ed_h3k27ac_bound == "1" &
-                dox_h3k27ac_bound == "0",
-            "LOSS",
-            "NC"
-        )
+        ifelse(ed_h3k27ac_bound == "1" &
+                   dox_h3k27ac_bound == "0",
+               "LOSS",
+               "NC")
     )) %>%
     mutate(fox_status = ifelse(
         ed_fox_bound == "0" & dox_fox_bound == "1",
@@ -60,17 +58,32 @@ data <- raw %>%
     mutate(co_status = ifelse(
         ed_overlaid_bound == "0" & dox_overlaid_bound == "1",
         "UP",
-        ifelse(ed_overlaid_bound == "1" &
-                   dox_overlaid_bound == "0",
-               "DN",
-               'shared')
+        ifelse(
+            ed_overlaid_bound == "1" &
+                dox_overlaid_bound == "0",
+            "DN",
+            'shared'
+        )
     )) %>%
+    mutate(
+        activity_status = ifelse(
+            ed_h3k27ac < activity_threshold & dox_h3k27ac > activity_threshold,
+            "GAIN",
+            ifelse(
+                ed_h3k27ac > activity_threshold &
+                    dox_h3k27ac < activity_threshold,
+                "LOSS",
+                "NC"
+            )
+        )
+    ) %>%
     pivot_longer(cols = contains(c("_foxa1", "_h3k27ac")) &
                      !contains("bound"),
                  names_to = "treatment") %>%
     filter(treatment != "dox_foxa1_low") %>%
     mutate(condition = str_extract(treatment, "[^_]+")) %>%
-    mutate(amino = str_replace(name, "^(([^-]+-){1}[^-]+)-.*", "\\1"))
+    mutate(amino = str_replace(name, "^(([^-]+-){1}[^-]+)-.*", "\\1")) %>%
+    mutate(activity = ifelse(value > activity_threshold, '1', '0'))
 
 
 
@@ -214,6 +227,17 @@ downstream <- read.delim("data/raw/downstream.txt") %>%
     janitor::clean_names() %>%
     mutate(position = "downstream")
 
+total_activity_threshold <- full_join(upstream,
+                                      downstream) %>%
+    mutate(across(contains("ed"), ~ .x / ed_input)) %>%
+    mutate(across(contains("dox"), ~ .x / dox_input)) %>%
+    pivot_longer(cols = contains(c("_foxa1", "_h3k27ac")),
+                 names_to = "treatment") %>%
+    group_by(treatment) %>%
+    summarise_at("value", median, na.rm = TRUE) %>%
+    filter(treatment == "ed_h3k27ac") %>%
+    pull(2)
+
 
 total <- full_join(upstream,
                    downstream) %>%
@@ -228,6 +252,44 @@ total <- full_join(upstream,
                                           ed_h3k27ac > 1, '1', '0')) %>%
     mutate(dox_overlaid_bound = ifelse(dox_foxa1_high > 1 &
                                            dox_h3k27ac > 1, '1', '0')) %>%
+    mutate(h3_status = ifelse(
+        ed_h3k27ac_bound == "0" & dox_h3k27ac_bound == "1",
+        "GAIN",
+        ifelse(ed_h3k27ac_bound == "1" &
+                   dox_h3k27ac_bound == "0",
+               "LOSS",
+               "NC")
+    )) %>%
+    mutate(fox_status = ifelse(
+        ed_fox_bound == "0" & dox_fox_bound == "1",
+        "UP",
+        ifelse(ed_fox_bound == "1" &
+                   dox_fox_bound == "0",
+               "DN",
+               'shared')
+    )) %>%
+    mutate(co_status = ifelse(
+        ed_overlaid_bound == "0" & dox_overlaid_bound == "1",
+        "UP",
+        ifelse(
+            ed_overlaid_bound == "1" &
+                dox_overlaid_bound == "0",
+            "DN",
+            'shared'
+        )
+    )) %>%
+    mutate(
+        activity_status = ifelse(
+            ed_h3k27ac < total_activity_threshold & dox_h3k27ac > total_activity_threshold,
+            "GAIN",
+            ifelse(
+                ed_h3k27ac > total_activity_threshold &
+                    dox_h3k27ac < total_activity_threshold,
+                "LOSS",
+                "NC"
+            )
+        )
+    ) %>%
     pivot_longer(cols = contains(c("_foxa1", "_h3k27ac")) &
                      !contains("bound"),
                  names_to = "treatment") %>%
@@ -237,20 +299,8 @@ total <- full_join(upstream,
     pivot_longer(cols = contains("bound"),
                  names_to = "target",
                  values_to = "bound") %>%
-    drop_na(bound)
-
-total_activity_threshold <- full_join(upstream,
-                                      downstream) %>%
-    mutate(across(contains("ed"), ~ .x / ed_input)) %>%
-    mutate(across(contains("dox"), ~ .x / dox_input)) %>%
-    pivot_longer(cols = contains(c("_foxa1", "_h3k27ac")),
-                 names_to = "treatment") %>%
-    group_by(treatment) %>%
-    summarise_at("value", median, na.rm = TRUE) %>%
-    filter(treatment == "ed_h3k27ac") %>%
-    pull(2)
-
-
+    drop_na(bound) %>%
+    mutate(activity = ifelse(value > total_activity_threshold, '1', '0'))
 
 
 

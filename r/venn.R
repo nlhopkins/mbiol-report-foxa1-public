@@ -35,7 +35,6 @@ z <- inner_join(x, y, by = "name")
 
 ### Active UP
 p <- data  %>%
-    mutate(activity = ifelse(value > activity_threshold, '1', '0')) %>%
     merge(diffexpressed, by = "name") %>%
     pivot_wider(names_from = "comparison",
                 values_from = "diffexpressed")
@@ -44,14 +43,14 @@ p <- data  %>%
 
 euler(
     c(
-        GAIN = 23,
-        FOXUP = 25,
+        GAIN = 26,
+        FOXUP = 96,
         H3UP = 54,
-        "GAIN&FOXUP" = 12,
-        "GAIN&H3UP" = 17,
+        "GAIN&FOXUP" = 13,
+        "GAIN&H3UP" = 19,
         "GAIN&FOXUP&H3UP" = 9
     ),
-    shape = "ellipse"
+    shape = "circle"
 )  %>%
     plot(
         quantities = list(type = c("counts"), cex = 3),
@@ -66,29 +65,3 @@ euler(
                    FOXUP = "FOXA1\nUP",
                    H3UP = "H3K27ac\nUP")
     )
-
-
-data.frame(
-    group = c("FOX UP",
-              "FOX DN",
-              "FOX NS",
-              "H3 UP",
-              "H3 DN",
-              "H3 NS",
-              "Co UP",
-              "Co DN"),
-    value = c(12,
-              0,
-              11,
-              17,
-              0,
-              5,
-              9,
-              0)
-) %>% ggplot(aes(x = "", y = value, fill =
-                     group)) +
-    geom_bar(stat = "identity", width = 1) +
-    coord_polar("y", start = 0)
-
-
-save.image(file = 'environments/venn.RData')

@@ -279,19 +279,19 @@ H3K27ac binding decreases at approximately half of tRNA genes (Figure \@ref(fig:
 This was confirmed by average signal intensity plots of FOXA1 and H3K27ac binding (Figure \@ref(fig:results-1)B).
 Input reads generated minimal peak enrichment (Supplementary Figure X).
 
+FOXA1 density statistically increased in response to FOXA1 induction.
+Median FOXA1 Q-values were (Figure \@ref(fig:results-1)D) increased 10.9% (p = 0.021).
+For H3K27ac, median Q-values decreased by 1.1%, however this change was not statistically significant (Figure \@ref(fig:results-1)D).
+
 Peaks were classified as binding events if Q-values exceeded input values (log~2~(Q-value fold-change) \>0) (Figure \@ref(fig:results-1)C).
 Before FOXA1 OE, FOXA1 interacts with 329 tRNA genes and H3K27ac with 293 tRNA genes.
 The majority of these events are co-binding, with both FOXA1 and H3K27ac binding to 262 tDNAs.
 Upon FOXA1 OE, the number of FOXA1 binding sites decrease to 319; 40 are lost and 30 are gained, whilst 309 pre-existing sites remained.
 H3K27ac sites also decrease to 266 tDNAs; 50 are lost and 23 are gained, whilst 239 pre-existing sites remained.
 Correspondingly, co-binding events lower to 246; 44 are lost and 28 are gained, whilst 230 pre-existing sites remained.
-
-In response to FOXA1 induction, FOXA1 density statistically increased.
-Median FOXA1 Q-values were (Figure \@ref(fig:results-1)D) increased 1.11-fold (p = 0.00079).
-For H3K27ac, median Q-values decreased by 0.99-fold, however this change was not statistically significant (Figure \@ref(fig:results-1)D).
 Together, these results support the notion that FOXA1 and H3K27ac bind to tDNAs.
 
-```{r results-1, out.width = '100%', fig.cap = "Comparisons of FOXA1 and H3K27ac binding at tDNAs, with and without Dox.(A) Heatmaps of FOXA1 and H3K27ac across hg19 tRNA genes in MCF-7 cells. Genes arranged in order of increasing -Dox Q-value. Ratiometric heatmaps represent the log2 ratio between -Dox and +Dox peaks. Windows represent ±10kb from the centre of the gene. N = 416. (B) Average signal intensity overlay of FOXA1 and H3K27ac. Windows represent ±10kb from the centre of the gene. (C) Bar plots of the percentage of cells bound by FOXA1 and H3K27ac. (D) Violin plots of FOXA1 and H3K27ac Q-values within ±500bp of the gene body. *p < 0.05."}
+```{r results-1, out.width = '100%', fig.cap = "Comparisons of FOXA1 and H3K27ac binding at tDNAs, with and without Dox.(A) Heatmaps of FOXA1 and H3K27ac across hg19 tRNA genes in MCF-7 cells. Genes arranged in order of increasing -Dox Q-value. Ratiometric heatmaps represent the log2 ratio between -Dox and +Dox peaks. Windows represent ±10kb from the centre of the gene. N = 416. (B) Average signal intensity overlay of FOXA1 and H3K27ac. Windows represent ±10kb from the centre of the gene. (C) Violin plots of FOXA1 and H3K27ac Q-values within ±500bp of the gene body. *p < 0.05.(D) Bar plots of the percentage of cells bound by FOXA1 and H3K27ac. "}
 knitr::include_graphics("../images/results-01.png")
 ```
 
@@ -300,9 +300,11 @@ knitr::include_graphics("../images/results-01.png")
 To elucidate how FOXA1 impacts tDNA levels, tDNAs that were differently enriched upon FOXA1 OE were categorised as gained (UP) and lost (DN) (fold-change \> 1.5, *P*-value \> 1e-3).
 This discovered that substantially more tDNAs gained (UP) FOXA1 binding than lost (DN) (96 vs. 62), whilst 258 tDNAs remained relatively unchanged (Figure \@ref(fig:results-2)A, left).
 For H3K27ac, 54 tDNAs gained (UP) and 124 lost (DN) H3K27ac (Figure \@ref(fig:results-2)A, right), whereas 236 tDNAs remained relatively unchanged.
-As expected, median Q-values were significantly gained or lost at GAIN and LOSS tDNAs, respectively (Figure \@ref(fig:results-2)B).
+As expected, Q-values density was significantly increased or decreased at UP and DN tDNAs, respectively (Figure \@ref(fig:results-2)B).
+For FOXA1, median Q-values decreased 42.7% at DN tDNAs, and increased 90% at UP tDNAs.
+For H3K27ac, median Q-values decreased 26.4% at DN tDNAs, and increased 81.5% at UP tDNAs.
 
-Focusing on GAIN tDNAs, 95 gain (UP) FOXA1 and 54 gain (UP) H3K27ac (Figure \@ref(fig:results-2)C).
+Focusing on UP tDNAs, 95 gain (UP) FOXA1 and 54 gain (UP) H3K27ac (Figure \@ref(fig:results-2)C).
 Of this subset (n = 150), 14% gain both FOXA1 and H3K27ac.
 Examples of exclusive and co-bound tDNAs are shown in Figure \@ref(fig:results-2)D.
 
@@ -312,21 +314,23 @@ SUMMARY
 knitr::include_graphics("../images/results-02.png")
 ```
 
-## Activated tDNAs are bound by FOXA1
+## tDNAs are activated by FOXA1 OE
 
 The next step was to investigate the impact of FOXA1 on tDNA activity.
 Almost half of human tDNAs are silent or poorly expressed [@Torres2019].
 Thus, tDNAs were classified as 'active' if H3K27ac Q-values exceeded the median -DOX value (Q \> 1.808).
-The Q-value density of inactive tDNAs was somewhat altered (p = 0.043), with median FOXA1 Q-values decreasing 0.81-fold (Figure \@ref(fig:results-3)A).
-The density of active tDNAs did not significantly change, though the median Q-value did decrease 0.81-fold.
+The Q-value density of inactive tDNAs was somewhat altered (p = 0.043), with median FOXA1 Q-values decreasing 4.9% (Figure \@ref(fig:results-3)A).
+The density of active tDNAs did not significantly change, though the median Q-value did decrease 18.9%.
 
 Overexpression of FOXA1 altered the number of active and inactive tDNAs by just 1 (Supplementary Figures X).
-However, 50 tDNAs became inactive (LOSS) and 25 became activate (GAIN), whilst the activity status of 343 (82.5%) tDNAs remained not changed (NC) (Figure \@ref(fig:results-3)B).
-As expected, the Q-value density of lost (LOSS), gained (GAIN), and no-change (NC) tDNAs was changed upon FOXA1 OE (Figure \@ref(fig:results-3)C).
-Q-values decreased 0.59-fold for LOSS, 0.92-fold for NC tDNAs, and 1.95-fold for GAIN tDNAs.
+However, 27 tDNAs became inactive (LOSS) and 26 became activate (GAIN), whilst the activity status of 363 (87.3%) tDNAs remained not changed (NC) (Figure \@ref(fig:results-3)B).
+As expected, the Q-value density of activated (GAIN) tDNAs was changed upon FOXA1 OE (Figure \@ref(fig:results-3)C).
+Q-values increased 65.4% for GAIN tDNAs, decreased 14.2% for LOSS, decreased 8.3% for NC tDNAs.
+However, these changes were not significant for the last two catagories.
 
-Superimposing GAIN and LOSS tDNAs with UP and DOWN tDNAs (Figure \@ref(fig:results-2)C) revealed 23 tDNAs that become active upon FOXA1 OE, 17 also reasonably gained H3K27ac (Figure \@ref(fig:results-3)D).
-However, only 9 tDNAs gained both H3K27ac and FOXA1; examples of these tDNAs are shown in Figure \@ref(fig:results-3)E.
+Superimposing GAIN and LOSS tDNAs with UP and DOWN tDNAs (Figure \@ref(fig:results-2)C) revealed that, of the 26 tDNAs that become active upon FOXA1 OE, 19 also reasonably gained H3K27ac (H3K27ac UP), and 13 reasonably gain FOXA1 (FOXA1 UP) (Figure \@ref(fig:results-3)D).
+However, only 9 tDNAs gained both H3K27ac and FOXA1.
+Examples of activated tDNAs with increased H3K27ac, FOXA1, or both, are shown in Figure \@ref(fig:results-3)E.
 
 SUMMARY
 
@@ -334,13 +338,16 @@ SUMMARY
 knitr::include_graphics("../images/results-03.png")
 ```
 
-## Relative Position
+## FOXA1 OE influences the binding location of FOXA1 and H3K27ac
 
-The levels of FOXA1 and H3K27ac at upstream and downstream regions was quantified within a ± 500 bp (Figure \@ref(fig:results-4)A).
-The upstream window was classified as the transcription start site (TSS) and preceding 500 bp region.
-In contrast, the commencing 500 bp defined the downstream region.
+To assess FOXA1 and H3K27ac binding preference, the levels of FOXA1 and H3K27ac at upstream and downstream regions was quantified within a ± 500 bp (Figure \@ref(fig:results-4)A).
+The upstream window was classified as the 500 bp region preceding the tDNA loci, including the the TSS.
+In contrast, the 500 bp region preceding the TSS defined the downstream region.
 
-Q-value density was was significantly altered for H3K27ac binding upon FOXA1 OE.
+FOXA1 was found to be bound at more downstream sites than upstream sites, both with FOXA1 OE and without (-DOX 307 vs 319; +Dox 297 vs 331) (Figure \@ref(fig:results-4)B) .
+However, FOXA1 did not significantly change the number of FOXA1 bound DNAs upstream or downstream (Figure \@ref(fig:results-4)C).
+On the other hand, significantly more H3K27ac binding events occured downstream (-DOX 284 vs 280; +Dox 276 vs 240) (Figure \@ref(fig:results-4)B).
+This pattern of H3K27ac binding was further perpetuated by FOXA1 OE; Q-values significantly decreased 3.8%% upstream and 14.3% downstream (Figure \@ref(fig:results-4)C).
 
 ```{r results-4, out.width = '100%', fig.cap = "(A) Schematic of the independent quantification of the upstream and downstream regions of tDNAs. Windows were confined to the ±500 bp, including the gene body. Binding events were counted if Q-values exceeded the input values. (B) Violin plot of the upstream and downstream Q-values for FOXA1 and H3K27ac, with or without Dox. (C)"}
 knitr::include_graphics("../images/results-04.png")

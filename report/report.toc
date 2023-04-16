@@ -10,13 +10,13 @@
 \contentsline {section}{Results}{5}{section*.12}%
 \contentsline {subsection}{Localisation of FOXA1 and H3k27ac at tRNA genes in MCF-7 cells}{5}{section*.13}%
 \contentsline {subsection}{FOXA1 alters H3K27ac binding levels}{7}{section*.15}%
-\contentsline {subsection}{Activated tDNAs are bound by FOXA1}{9}{section*.17}%
-\contentsline {subsection}{Relative Position}{11}{section*.19}%
-\contentsline {subsection}{Motif Analysis}{11}{section*.21}%
-\contentsline {paragraph}{Why?}{11}{section*.22}%
+\contentsline {subsection}{tDNAs are activated by FOXA1 OE}{9}{section*.17}%
+\contentsline {subsection}{FOXA1 OE influences the binding location of FOXA1 and H3K27ac}{11}{section*.19}%
+\contentsline {subsection}{Motif Analysis}{12}{section*.21}%
+\contentsline {paragraph}{Why?}{12}{section*.22}%
 \contentsline {subsubsection}{What?}{12}{section*.23}%
-\contentsline {paragraph}{Suggests?}{12}{section*.24}%
-\contentsline {subsection}{Figure 5}{12}{section*.25}%
-\contentsline {section}{Discussion}{13}{section*.26}%
-\contentsline {section}{Conclusion}{13}{section*.27}%
+\contentsline {paragraph}{Suggests?}{13}{section*.24}%
+\contentsline {subsection}{Figure 5}{13}{section*.25}%
+\contentsline {section}{Discussion}{14}{section*.26}%
+\contentsline {section}{Conclusion}{14}{section*.27}%
 \contentsline {section}{References}{14}{section*.28}%

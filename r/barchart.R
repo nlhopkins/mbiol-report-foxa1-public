@@ -85,7 +85,7 @@ binding %>% ggplot(aes(
 
 
 
-x <- binding %>%
+binding %>%
     filter(binding == "h3k27ac") %>%
     filter(bound == "1") %>%
     filter(condition == "ed") %>%
@@ -120,7 +120,6 @@ b <- anti_join(a, z)
 
 data %>%
     filter(grepl("h3k27ac", treatment)) %>%
-    mutate(activity = ifelse(value > activity_threshold, '1', '0')) %>%
     group_by(condition, activity) %>%
     mutate(active_count = n()) %>%
     ungroup() %>%
@@ -171,19 +170,15 @@ data %>%
 
 data %>%
     filter(grepl("h3k27ac", treatment)) %>%
-    mutate(activity = ifelse(value > activity_threshold, '1', '0')) %>%
-    group_by(condition, h3_status) %>%
+    group_by(condition, activity_status) %>%
     mutate(active_count = n()) %>%
     ungroup() %>%
     mutate(gene_count = n_distinct(name)) %>%
     ggplot(aes(
-        x = factor(
-            h3_status,
-            levels = c("loss", "shared", "gain"),
-            labels = c("Loss", "Shared", "Gain")
-        ),
+        x = factor(activity_status,
+                   levels = c("LOSS", "NC", "GAIN")),
         y = active_count,
-        fill = h3_status
+        fill = activity_status
     )) +
     geom_bar(position = "dodge", stat = "identity") +
     xlab("") +
@@ -217,10 +212,6 @@ data %>%
 
 
 
-#### save ####
-save.image(file = 'environments/barchart.RData')
-
-
 #### bound genes by position ####
 binding <- total %>%
     mutate(condition = case_when(grepl("ed", target) ~ "ed",
@@ -242,8 +233,74 @@ binding <- total %>%
     mutate(binding = factor(binding,
                             levels = c("fox",
                                        "h3k27ac",
-                                       "co-bound")))
+                                       "co-bound"))) %>%
+    filter(
+        grepl("ed_fox", treatment) & grepl("ed_fox", target) |
+            grepl("ed_h3k27ac", treatment) &
+            grepl("ed_h3k27ac", target) |
+            grepl("dox_fox", treatment) & grepl("dox_fox", target) |
+            grepl("dox_h3k27ac", treatment) &
+            grepl("dox_h3k27ac", target)
+    ) %>% mutate(star = case_when(grepl("h3k", target) ~ "***"))
 
+
+binding %>% ggplot(aes(
+    x = factor(
+        position,
+        levels = c("upstream", "downstream"),
+        labels = c("Upstream", "Downstream")
+    ),
+    y = bound_count / gene_count * 100,
+    fill = factor(
+        condition,
+        levels = c("ed", "dox"),
+        labels = c("-Dox", "+Dox")
+    )
+)) +
+    geom_bar(position = "dodge", stat = "identity") +
+    xlab("") +
+    ylab("% of Bound tDNAs") +
+    scale_fill_manual(name = "",
+                      values = c("#ACA4E1", "#39BDB1")) +
+    theme_classic(base_size = 40) +
+    theme(
+        legend.position = "top",
+        strip.placement = "outside",
+        strip.background = element_rect(color = NA),
+        panel.spacing = unit(0, "lines")
+    ) +
+    scale_y_continuous(
+        limits = c(0, 100),
+        expand = c(0, 0),
+        breaks = seq(0, 100, by = 20)
+    ) +
+    geom_text(
+        position = position_dodge(width = 1),
+        aes(
+            label = paste(
+                bound_count,
+                "\n",
+                "(",
+                round(bound_count / gene_count * 100, digits = 1),
+                "%)",
+                sep = ""
+            ),
+            y = (bound_count / gene_count * 100 / 2)
+        ),
+        size = 7,
+        colour = "white",
+        check_overlap = T
+    ) +
+    facet_wrap(vars(factor(
+        binding,
+        levels = c("fox", "h3k27ac", "co-bound"),
+        labels = c("FOXA1", "H3K27ac", "Co-bound")
+    )),
+    nrow = 1,
+    strip.position = "bottom") +
+    geom_text(aes(label = star, y = 90),
+              colour = "black",
+              size = 10)
 
 binding %>% ggplot(aes(
     x = factor(
@@ -288,7 +345,7 @@ binding %>% ggplot(aes(
             ),
             y = (bound_count / gene_count * 100 / 2)
         ),
-        size = 10,
+        size = 6,
         colour = "white",
         check_overlap = T
     ) +
@@ -298,13 +355,88 @@ binding %>% ggplot(aes(
         labels = c("FOXA1", "H3K27ac", "Co-bound")
     )),
     nrow = 1,
-    strip.position = "bottom")
+    strip.position = "bottom") +
+    geom_text(aes(label = "****", y = 90),
+              colour = "black",
+              size = 10)
 
 
-x <- binding %>%
-    select(c("position", "bound_count", "target")) %>% 
-    unique() %>% 
-    pivot_wider(names_from = "target", values_from = "bound_count", id_cols = c("position")) 
 
-x %>% filter(position == "upstream") %>% bind_cols(x %>% filter(position == "downstream")) %>% 
-    summarise(pval = chisq.test(ed_fox_bound)$p.value)
+
+
+
+x <- upstream  %>%
+    mutate(across(contains("ed"), ~ .x / ed_input)) %>%
+    mutate(across(contains("dox"), ~ .x / dox_input)) %>%
+    filter_all(all_vars(!is.infinite(.))) %>%
+    mutate(ed_overlaid = ifelse(ed_foxa1 > 1 &
+                                    ed_h3k27ac > 1, '1', '0')) %>%
+    mutate(dox_overlaid = ifelse(dox_foxa1_high > 1 &
+                                     dox_h3k27ac > 1, '1', '0')) %>%
+    mutate(ed_foxa1 = ifelse(ed_foxa1 > 1, '1', '0')) %>%
+    mutate(dox_h3k27ac = ifelse(dox_h3k27ac > 1, '1', '0')) %>%
+    mutate(ed_h3k27ac = ifelse(ed_h3k27ac > 1, '1', '0')) %>%
+    mutate(dox_foxa1_high = ifelse(dox_foxa1_high > 1, '1', '0')) %>%
+    select(
+        c(
+            "ed_foxa1",
+            "dox_h3k27ac",
+            "ed_h3k27ac",
+            "dox_foxa1_high",
+            "ed_overlaid",
+            "dox_overlaid",
+        )
+    ) %>% tibble::rownames_to_column()
+
+
+
+
+
+y <- downstream %>%
+    mutate(across(contains("ed"), ~ .x / ed_input)) %>%
+    mutate(across(contains("dox"), ~ .x / dox_input)) %>%
+    filter_all(all_vars(!is.infinite(.))) %>%
+    mutate(ed_overlaid = ifelse(ed_foxa1 > 1 &
+                                    ed_h3k27ac > 1, '1', '0')) %>%
+    mutate(dox_overlaid = ifelse(dox_foxa1_high > 1 &
+                                     dox_h3k27ac > 1, '1', '0')) %>%
+    mutate(ed_foxa1 = ifelse(ed_foxa1 > 1, '1', '0')) %>%
+    mutate(dox_h3k27ac = ifelse(dox_h3k27ac > 1, '1', '0')) %>%
+    mutate(ed_h3k27ac = ifelse(ed_h3k27ac > 1, '1', '0')) %>%
+    mutate(dox_foxa1_high = ifelse(dox_foxa1_high > 1, '1', '0')) %>%
+    select(
+        c(
+            "ed_foxa1",
+            "dox_h3k27ac",
+            "ed_h3k27ac",
+            "dox_foxa1_high",
+            "ed_overlaid",
+            "dox_overlaid"
+        )
+    ) %>% tibble::rownames_to_column()
+
+z <- full_join(x,
+               y,
+               keep = T,
+               suffix = c(".x", ".y"),
+               by = "rowname") %>% select(!c("rowname.x", "rowname.y"))
+
+
+library(rstatix)
+
+
+
+chisq_test(z$ed_h3k27ac.x, z$ed_h3k27ac.y)
+chisq_test(z$dox_h3k27ac.x, z$dox_h3k27ac.y)
+chisq_test(z$ed_foxa1.x, z$ed_foxa1.y)
+chisq_test(z$dox_foxa1_high.x, z$dox_foxa1_high.y)
+
+chisq_test(z$ed_h3k27ac.x, z$dox_h3k27ac.x)
+chisq_test(z$ed_foxa1.x, z$dox_foxa1_high.x)
+chisq_test(z$ed_h3k27ac.x, z$dox_h3k27ac.x)
+chisq_test(z$ed_foxa1.x, z$dox_foxa1_high.x)
+
+chisq_test(z$ed_h3k27ac.y, z$dox_h3k27ac.y)
+chisq_test(z$ed_foxa1.y, z$dox_foxa1_high.y)
+chisq_test(z$ed_h3k27ac.y, z$dox_h3k27ac.y)
+chisq_test(z$ed_foxa1.y, z$dox_foxa1_high.y)

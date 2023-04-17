@@ -46,7 +46,7 @@ knitr::opts_chunk$set(
     message = FALSE,
     warning = FALSE,
     fig.align = "top",
-    fig.pos = "H",
+    fig.pos = "p",
     out.width = '100%',
     fig.fullwidth = TRUE,
     fig.show = 'hold'
@@ -90,7 +90,7 @@ citation_count <-
 In Eukaryotes, transcription of DNA is tightly-regulated by three RNA polymerase enzymes.
 RNA Polymerase III (Pol III), the largest of the three at 17-subunits[@vannini2012], produces a series of short non-coding RNAs, including U6 snRNA, 5S rRNA and transfer RNA (tRNA)[@dieci2007].
 Approximately 80% of Pol III binding resides at tRNAs[@Raha2010a] --- adapters required to translate mRNAs into the amino acid protein sequence.
-Initiation of tRNA transcription requires the binding of TFIIIC, a multisubunit complex, to internal tRNA promoters, the A and B boxes, which are located downstream of the transcription start site [@Schramm2002; @Lassar1983; @Galli1981].
+Initiation of tRNA transcription requires the binding of TFIIIC, a multi-subunit complex, to internal tRNA promoters, the A and B boxes, which are located downstream of the transcription start site [@Schramm2002; @Lassar1983; @Galli1981].
 This protein-protein interaction enables the recruitment of the TFIIIB promoter, composed of the TATA-box-binding protein (TBP), BDP1, and BRF1 polypeptides [@schramm2000].
 TFIIIB occupies the region upstream of the transcription start site and binds to Pol III directly through BRF[@Khoo1994], positioning it at the initiation region [@kassavetis1990].
 
@@ -115,9 +115,9 @@ Presence of ERα is generally prognostic of positive outcomes, due to it's use a
 Estrogen levels are lowered using endocrine therapies with aromatase inhibitors; fulvestrant, a selective estrogen receptor down regulator (SERD) which binds and degrades the ER, and tamoxifen, a selective estrogen receptor modulator (SERM) which competes with estrogen for binding to ER[@Johnston2018].
 However, resistance to endocrine therapy occurs in 40-50% of tumours from 5 years of diagnosis[@Anurag2018].
 
-Forkhead box A1 (FOXA1) is a pioneer factor capable of directly initiating chromatin opening, facilliating binding of ERα and other transcription factors[@Costa1989; @Cirillo2002; @carroll2005; @laganière2005].
+Forkhead box A1 (FOXA1) is a pioneer factor capable of directly initiating chromatin opening, facilitating binding of ERα and other transcription factors[@Costa1989; @Cirillo2002; @carroll2005; @laganière2005].
 Early studies demonstrated that FOXA1 maps to \~50% of ER-chromatin binding sites.
-Futhermore, silencing of FOXA1 reduces \~95% ER binding events [@Hurtado2011; @carroll2005].
+Furthermore, silencing of FOXA1 reduces \~95% ER binding events [@Hurtado2011; @carroll2005].
 
 ~~FOXA1 is an established growth inhibitor in both ER+ breast cancer cells and ER- cells with forced ER expression[@Wolf2007]. Though binding to p27^kip1^, FOXA1 is also involved in recruiting tumour suppressor BRCA1[@Williamson2006; @Tsuchiya1999; @Fredersdorf1997].~~
 
@@ -130,7 +130,7 @@ Upon stimulation by estrogen, ERα+ breast cancer cells undergo extensive transc
 Additionally, ERα amplifies alcohol-induced deregulation of tRNA^Leu^ by in MCF-7 cells[@zhong2014].
 
 As ERα+ BC is reliant on FOXA1, the aim of this study was to determine whether FOXA1 elevates tDNA expression.
-To achieve this, a bioinformatics approach was taken to analyse publically available FOXA1 and H3K27ac ChIP-seq datasets from Fu et al. (2019)[@fu2019] in the context of the MCF-7 cell line.
+To achieve this, a bioinformatics approach was taken to analyse publicly available FOXA1 and H3K27ac ChIP-seq datasets from Fu et al. (2019)[@fu2019] in the context of the MCF-7 cell line.
 Here, identification of FOXA1 and H3K72ac co-localisation at tDNAs may provide insight into FOXA1's relevance in the altered tRNA expression associated with poor prognosis in ERα+ breast cancer.
 
 ------------------------------------------------------------------------
@@ -217,10 +217,13 @@ The upstream region was defined as 500 bp preceding and the first nucleotide of 
 Thus, the start position was offset to 0 bp, and the end position was offset to -500 bp.
 The downstream region constitutes the 500 bp region beginning with the first nucleotide of tRNA gene body.
 The start position was offset to 1 bp, and the end position was offset to 500 bp.
-
 Following quantification, tRNA binding events were arranged in ascending order of -Dox Q-value and visualised as heatmaps.
-Data was also visualised with the "heatmap", "average", "overlay", and "filltrack" tools.
-EaSeq[@lerdrup2016] is avaiable at <http://easeq.net>.
+Data was also visualised with the "heatmap", "average", "overlay", and "fill-track" tools (Figure \@ref(fig:methods)).
+EaSeq[@lerdrup2016] is available at <http://easeq.net>.
+
+```{r methods, out.width = '100%', fig.cap = "Overview of bioinformatic pipeline. "}
+knitr::include_graphics("../images/methods.png")
+```
 
 ## Motif Analysis
 
@@ -240,10 +243,10 @@ Group differences were determined by Mann-Whitney U, Wilcoxon signed-rank test, 
 ## ChIP-Seq and ChIP-qPCR
 
 MCF-7L cells were grown in PRF medium with 5% CS-FBS and −/+ Dox.Cells were cross-linked with 1% formaldehyde for 10 mins.
-Corss-linking was inhibited by quenching (1/20V, 125 mM glycine).
+Cross-linking was inhibited by quenching (1/20V, 125 mM glycine).
 Cells were washed in cold PBS and harvested in cold PBS with protease inhibitors (Roche).
-Pelleted cells were resuspended in cytosolic and then lysed in nuclear lysis buffer (10-20 min), and sheared at high output (Bioruptor, Diagenode; 4 °C, 30s per sonication cycle for 20 min).
-Sonicated lysates were cleared by centrifugation (20,000 × g, 10 min) and diluted (4 times) before preincubation with protein-A/G beads (Santa Cruz; 4 °C, 30 min).
+Pelleted cells were re-suspended in cytosolic and then lysed in nuclear lysis buffer (10-20 min), and sheared at high output (Bioruptor, Diagenode; 4 °C, 30s per sonication cycle for 20 min).
+Sonicated lysates were cleared by centrifugation (20,000 × g, 10 min) and diluted (4 times) before pre-incubation with protein-A/G beads (Santa Cruz; 4 °C, 30 min).
 
 ChIP was performed by overnight incubation (4 °C) with antibody against human FOXA1 (Abcam, ab23738) or H3K27ac (Active Motif, #39134), followed by an additional incubation with protein-A/G beads (1h).
 For FOXA1 ChIP-seq, spike-in Drosophila melanogaster chromatin was added with the antibody against histone variant H2Av (Active Motif, \# 61752).
@@ -266,7 +269,7 @@ Real time quantitative PCR (qPCR) was perfomed using the KAPA Library Quantifica
 
 Estrogen stimulates the production of tRNAs [@Hah2011].
 The estrogen receptor is dependent on FOXA1; ChIP-seq analysis has shown that FOXA1 reprograms chromatin in MCF-7 cells[@fu2016].
-To investigate whether FOXA1 enhances tDNA expression, a doxycycline (Dox) inducible OE system in MCF-7 cells was used to achieve expression comparable to tamoxifen-resistant cells (TamR).
+To investigate whether FOXA1 enhances tDNA expression, a doxycycline (Dox) inducible OE system in MCF-7 cells was used to achieve FOXA1 OE comparable to endogenous MCF7 tamoxifen-resistant cells (TamR).
 ChIP-seq analysis was carried out for FOXA1 and H3K27ac; open, H3K27ac denotes accessible chromatin and is used to identify active promoters.
 
 It was expected that FOXA1 would alter tDNA activity.
@@ -360,100 +363,75 @@ knitr::include_graphics("../images/results-04.png")
 
 ### What?
 
-MEME CentriMo to identify de novo motifs that are enriched at tDNAs which gain both FOXA1 and H3k27ac
+-   MEME SEA of GAIN UP UP tDNAs (n = 9)
 
--   relative to other tDNAS (gain/lose, lose/lose, lose/gain)
+-   27 de novo identified
 
--   FOXA1 not enriched
+-   A and B box motifs as a control
 
--   Look at ERE, AP-1, others?
+-   p-values
 
--   Top 3 motifs (fisher E values) - IRF7, ERR3, NR4A1
-
--   A and B box motifs as a control?
-    How?
-
-    -   All downstream
-
-    -   tDNAs where 'matching sequences' all best matches = code for valine
-
-    -   Branched amino acids associated with lower BC risk
+-   mention AR motif also enriches/ any other established fox interactions
 
 #### Suggests?
+
+```{r motifs, out.width = '100%', fig.cap = ""}
+knitr::include_graphics("../images/results-05.png")
+```
 
 ## Figure 5
 
 -   Localisation of FOXA1 at individual tDNA genes in MCF-7 cells
-
-Why?
-
--   tRNAs implicated in cancer
-
--   Are they upregulated?
-
--   Look at gain function/gain h3/fox
-
--   Motif ontology
-
--   
-
-What?
+-   why - tRNAs implicated in cancer
+-   Largely unchanged
+-   mention exceptions
+-   examples of NC, UP, DOWN or 1 example from each family/cluster?
 
 Suggests?
 
 ```{r clusters}
-knitr::kable(
-  data.frame(
-    "Group" = c(
-      "ALOXE",
-      "Ebersole",
-      "HES7",
-      "Per1",
-      "TMEM107",
-      "Arg-CCG",
-      "Glu-TTC",
-      "iMET",
-      "Met",
-      "SeC"
-    ),
-    "Function" = c(
-      "Insulator Function[@raab2011; @sizer2022]",
-      "Insulator Function[@Ebersole2011; @sizer2022]",
-      "",
-      "",
-      "Insulator Function [@raab2011; @sizer2022]",
-      "Implicated in Cancer Progression[@Goodarzi2016]",
-      "Implicated in Cancer Progression[@Goodarzi2016]",
-      "Proliferation of Breast Cancer",
-      "iMet Control",
-      "Involved in REDOX [@Sangha2022]"
-    )
-  ),
-  booktabs = TRUE,
-  caption = ".",
-  format = "markdown"
-) 
+load("../environments/trna.RData")
+kbl(data.frame(
+    "Family" = clusters,
+    "Function" = func,
+    "tRNAs" = trnas,
+    "-DOX Activity" = ed,
+    "+Dox Activity" = dox,
+    "FOXA1 Fold Change" = fox,
+    "H2K27ac Fold Change" = h3),
+    booktabs = TRUE,
+    caption = ".",
+    format = "markdown"
+)
 ```
 
 ------------------------------------------------------------------------
 
 # Discussion
 
--   FOXA1 alone not efficient to increase activity
+-   fox binding upstream = h3k27ac binding downstream
 
-    -   p300
+    -   briefly reiterate results
 
--   FOXA1 moves nucleosomes to make other TF accessible?
-
--   Differences in nucleosome positioning will contribute to the distinct density patterns of modified histones, as nucleosomes are excluded from active tRNA promoters and enriched in flanking regions^[8](https://www.nature.com/articles/nrg3001#ref-CR8 "Barski, A. et al. Pol II and its associated epigenetic marks are present at Pol III-transcribed noncoding RNA genes. Nature Struct. Mol. Biol. 17, 629–634 (2010).")^.
-
--   Brf1 required for iMET txn
+    -   binding intensity decreases
 
 -   Loses fox = weak binding?
 
+-   explain input peak
+
 -   Dynamic vs stable marks
 
+-   motifs interaction with ERa
+
+-   foxa1 looping
+
+Future -
+
 -   ATAC-seq
+
+-   h3kme3 along with h3k27ac
+
+-   look at DN tdnas
 
 # Conclusion
 

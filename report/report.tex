@@ -192,7 +192,7 @@ Abstract
 In Eukaryotes, transcription of DNA is tightly-regulated by three RNA polymerase enzymes.
 RNA Polymerase III (Pol III), the largest of the three at 17-subunits\textsuperscript{\protect\hyperlink{ref-vannini2012}{1}}, produces a series of short non-coding RNAs, including U6 snRNA, 5S rRNA and transfer RNA (tRNA)\textsuperscript{\protect\hyperlink{ref-dieci2007}{2}}.
 Approximately 80\% of Pol III binding resides at tRNAs\textsuperscript{\protect\hyperlink{ref-Raha2010a}{3}} --- adapters required to translate mRNAs into the amino acid protein sequence.
-Initiation of tRNA transcription requires the binding of TFIIIC, a multisubunit complex, to internal tRNA promoters, the A and B boxes, which are located downstream of the transcription start site\textsuperscript{\protect\hyperlink{ref-Schramm2002}{4}--\protect\hyperlink{ref-Galli1981}{6}}.
+Initiation of tRNA transcription requires the binding of TFIIIC, a multi-subunit complex, to internal tRNA promoters, the A and B boxes, which are located downstream of the transcription start site\textsuperscript{\protect\hyperlink{ref-Schramm2002}{4}--\protect\hyperlink{ref-Galli1981}{6}}.
 This protein-protein interaction enables the recruitment of the TFIIIB promoter, composed of the TATA-box-binding protein (TBP), BDP1, and BRF1 polypeptides\textsuperscript{\protect\hyperlink{ref-schramm2000}{7}}.
 TFIIIB occupies the region upstream of the transcription start site and binds to Pol III directly through BRF\textsuperscript{\protect\hyperlink{ref-Khoo1994}{8}}, positioning it at the initiation region\textsuperscript{\protect\hyperlink{ref-kassavetis1990}{9}}.
 
@@ -218,9 +218,9 @@ Presence of ERα is generally prognostic of positive outcomes, due to it's use a
 Estrogen levels are lowered using endocrine therapies with aromatase inhibitors; fulvestrant, a selective estrogen receptor down regulator (SERD) which binds and degrades the ER, and tamoxifen, a selective estrogen receptor modulator (SERM) which competes with estrogen for binding to ER\textsuperscript{\protect\hyperlink{ref-Johnston2018}{32}}.
 However, resistance to endocrine therapy occurs in 40-50\% of tumours from 5 years of diagnosis\textsuperscript{\protect\hyperlink{ref-Anurag2018}{33}}.
 
-Forkhead box A1 (FOXA1) is a pioneer factor capable of directly initiating chromatin opening, facilliating binding of ERα and other transcription factors\textsuperscript{\protect\hyperlink{ref-Costa1989}{34}--\protect\hyperlink{ref-laganiuxe8re2005}{37}}.
+Forkhead box A1 (FOXA1) is a pioneer factor capable of directly initiating chromatin opening, facilitating binding of ERα and other transcription factors\textsuperscript{\protect\hyperlink{ref-Costa1989}{34}--\protect\hyperlink{ref-laganiuxe8re2005}{37}}.
 Early studies demonstrated that FOXA1 maps to \textasciitilde50\% of ER-chromatin binding sites.
-Futhermore, silencing of FOXA1 reduces \textasciitilde95\% ER binding events\textsuperscript{\protect\hyperlink{ref-carroll2005}{36},\protect\hyperlink{ref-Hurtado2011}{38}}.
+Furthermore, silencing of FOXA1 reduces \textasciitilde95\% ER binding events\textsuperscript{\protect\hyperlink{ref-carroll2005}{36},\protect\hyperlink{ref-Hurtado2011}{38}}.
 
 \sout{FOXA1 is an established growth inhibitor in both ER+ breast cancer cells and ER- cells with forced ER expression\textsuperscript{\protect\hyperlink{ref-Wolf2007}{39}}. Though binding to p27\textsuperscript{kip1}, FOXA1 is also involved in recruiting tumour suppressor BRCA1\textsuperscript{\protect\hyperlink{ref-Williamson2006}{40}--\protect\hyperlink{ref-Fredersdorf1997}{42}}.}
 
@@ -233,7 +233,7 @@ Upon stimulation by estrogen, ERα+ breast cancer cells undergo extensive transc
 Additionally, ERα amplifies alcohol-induced deregulation of tRNA\textsuperscript{Leu} by in MCF-7 cells\textsuperscript{\protect\hyperlink{ref-zhong2014}{47}}.
 
 As ERα+ BC is reliant on FOXA1, the aim of this study was to determine whether FOXA1 elevates tDNA expression.
-To achieve this, a bioinformatics approach was taken to analyse publically available FOXA1 and H3K27ac ChIP-seq datasets from Fu et al.~(2019)\textsuperscript{\protect\hyperlink{ref-fu2019}{48}} in the context of the MCF-7 cell line.
+To achieve this, a bioinformatics approach was taken to analyse publicly available FOXA1 and H3K27ac ChIP-seq datasets from Fu et al.~(2019)\textsuperscript{\protect\hyperlink{ref-fu2019}{48}} in the context of the MCF-7 cell line.
 Here, identification of FOXA1 and H3K72ac co-localisation at tDNAs may provide insight into FOXA1's relevance in the altered tRNA expression associated with poor prognosis in ERα+ breast cancer.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
@@ -287,10 +287,13 @@ The upstream region was defined as 500 bp preceding and the first nucleotide of 
 Thus, the start position was offset to 0 bp, and the end position was offset to -500 bp.
 The downstream region constitutes the 500 bp region beginning with the first nucleotide of tRNA gene body.
 The start position was offset to 1 bp, and the end position was offset to 500 bp.
-
 Following quantification, tRNA binding events were arranged in ascending order of -Dox Q-value and visualised as heatmaps.
-Data was also visualised with the ``heatmap'', ``average'', ``overlay'', and ``filltrack'' tools.
-EaSeq\textsuperscript{\protect\hyperlink{ref-lerdrup2016}{54}} is avaiable at \url{http://easeq.net}.
+Data was also visualised with the ``heatmap'', ``average'', ``overlay'', and ``fill-track'' tools (Figure \ref{fig:methods}).
+EaSeq\textsuperscript{\protect\hyperlink{ref-lerdrup2016}{54}} is available at \url{http://easeq.net}.
+
+\begin{figure}[p]
+\includegraphics[width=1\linewidth]{../images/methods} \caption{Overview of bioinformatic pipeline. }\label{fig:methods}
+\end{figure}
 
 \hypertarget{motif-analysis}{%
 \subsection{Motif Analysis}\label{motif-analysis}}
@@ -313,10 +316,10 @@ Group differences were determined by Mann-Whitney U, Wilcoxon signed-rank test, 
 \subsection{ChIP-Seq and ChIP-qPCR}\label{chip-seq-and-chip-qpcr}}
 
 MCF-7L cells were grown in PRF medium with 5\% CS-FBS and −/+ Dox.Cells were cross-linked with 1\% formaldehyde for 10 mins.
-Corss-linking was inhibited by quenching (1/20V, 125 mM glycine).
+Cross-linking was inhibited by quenching (1/20V, 125 mM glycine).
 Cells were washed in cold PBS and harvested in cold PBS with protease inhibitors (Roche).
-Pelleted cells were resuspended in cytosolic and then lysed in nuclear lysis buffer (10-20 min), and sheared at high output (Bioruptor, Diagenode; 4 °C, 30s per sonication cycle for 20 min).
-Sonicated lysates were cleared by centrifugation (20,000 × g, 10 min) and diluted (4 times) before preincubation with protein-A/G beads (Santa Cruz; 4 °C, 30 min).
+Pelleted cells were re-suspended in cytosolic and then lysed in nuclear lysis buffer (10-20 min), and sheared at high output (Bioruptor, Diagenode; 4 °C, 30s per sonication cycle for 20 min).
+Sonicated lysates were cleared by centrifugation (20,000 × g, 10 min) and diluted (4 times) before pre-incubation with protein-A/G beads (Santa Cruz; 4 °C, 30 min).
 
 ChIP was performed by overnight incubation (4 °C) with antibody against human FOXA1 (Abcam, ab23738) or H3K27ac (Active Motif, \#39134), followed by an additional incubation with protein-A/G beads (1h).
 For FOXA1 ChIP-seq, spike-in Drosophila melanogaster chromatin was added with the antibody against histone variant H2Av (Active Motif, \# 61752).
@@ -341,7 +344,7 @@ Real time quantitative PCR (qPCR) was perfomed using the KAPA Library Quantifica
 
 Estrogen stimulates the production of tRNAs\textsuperscript{\protect\hyperlink{ref-Hah2011}{46}}.
 The estrogen receptor is dependent on FOXA1; ChIP-seq analysis has shown that FOXA1 reprograms chromatin in MCF-7 cells\textsuperscript{\protect\hyperlink{ref-fu2016}{58}}.
-To investigate whether FOXA1 enhances tDNA expression, a doxycycline (Dox) inducible OE system in MCF-7 cells was used to achieve expression comparable to tamoxifen-resistant cells (TamR).
+To investigate whether FOXA1 enhances tDNA expression, a doxycycline (Dox) inducible OE system in MCF-7 cells was used to achieve FOXA1 OE comparable to endogenous MCF7 tamoxifen-resistant cells (TamR).
 ChIP-seq analysis was carried out for FOXA1 and H3K27ac; open, H3K27ac denotes accessible chromatin and is used to identify active promoters.
 
 It was expected that FOXA1 would alter tDNA activity.
@@ -366,7 +369,7 @@ H3K27ac sites also decrease to 266 tDNAs; 50 are lost and 23 are gained, whilst 
 Correspondingly, co-binding events lower to 246; 44 are lost and 28 are gained, whilst 230 pre-existing sites remained.
 Together, these results support the notion that FOXA1 and H3K27ac bind to tDNAs.
 
-\begin{figure}[H]
+\begin{figure}[p]
 \includegraphics[width=1\linewidth]{../images/results-01} \caption{Comparisons of FOXA1 and H3K27ac binding at tDNAs, with and without Dox.(A) Heatmaps of FOXA1 and H3K27ac across hg19 tRNA genes in MCF-7 cells. Genes arranged in order of increasing -Dox Q-value. Ratiometric heatmaps represent the log2 ratio between -Dox and +Dox peaks. Windows represent ±10kb from the centre of the gene. N = 416. (B) Average signal intensity overlay of FOXA1 and H3K27ac. Windows represent ±10kb from the centre of the gene. (C) Violin plots of FOXA1 and H3K27ac Q-values within ±500bp of the gene body. *p < 0.05.(D) Bar plots of the percentage of cells bound by FOXA1 and H3K27ac. }\label{fig:results-1}
 \end{figure}
 
@@ -386,7 +389,7 @@ Examples of exclusive and co-bound tDNAs are shown in Figure \ref{fig:results-2}
 
 SUMMARY
 
-\begin{figure}[H]
+\begin{figure}[p]
 \includegraphics[width=1\linewidth]{../images/results-02} \caption{FOXA1 OE impacts binding of FOXA1 and H3K27ac at tRNA genes. (A) Volcano plots of FOXA1 (n = 416) and H3K27ac (n = 414) Q-values in +Dox vs. −Dox cells. (Left) The purple and green dots correspond to the regions with UP and DN FOXA1, respectively. (Right) The orange and green dots correspond to the regions with UP and DN H3K27ac, respectively. The threhold for calling was set fold-change > 1.5 and P < 1e-3. (B) Violin plots of the Q-values of GAIN or LOSS tRNA genes. ****p < 0.0001. (C) Venn diagram representing the overlap between FOXA1 and H3K27ac GAIN regions. (D) Filltrack examples of seperate and co-occuring FOXA1 and H3K27ac GAIN events within ± 2 kb of tDNAs. The black line represents the gene body.}\label{fig:results-2}
 \end{figure}
 
@@ -406,12 +409,13 @@ Q-values increased 65.4\% for GAIN tDNAs, decreased 14.2\% for LOSS, decreased 8
 However, these changes were not significant for the last two catagories.
 
 Superimposing GAIN and LOSS tDNAs with UP and DOWN tDNAs (Figure \ref{fig:results-2}C) revealed that, of the 26 tDNAs that become active upon FOXA1 OE, 19 also reasonably gained H3K27ac (H3K27ac UP), and 13 reasonably gain FOXA1 (FOXA1 UP) (Figure \ref{fig:results-3}D).
-However, only 9 tDNAs gained both H3K27ac and FOXA1.
+Whereas 16 tDNAs gained both H3K27ac and FOXA1.
+9 activated tDNAs gain (UP) both H3K27ac and FOXA1 binding.
 Examples of activated tDNAs with increased H3K27ac, FOXA1, or both, are shown in Figure \ref{fig:results-3}E.
 
 SUMMARY
 
-\begin{figure}[H]
+\begin{figure}[p]
 \includegraphics[width=1\linewidth]{../images/results-03} \caption{(A) Violin plot of H3K27ac Q-values within ±500bp of the gene body of inactive and active tDNAs. *p < 0.05. (B) Barplot of tDNAs catagorised by activity change upon FOXA1 OE. tDNAs are classed as inactivated (LOSS), no-change (NC), and activated(GAIN). (C) Violin plot of tDNA Q-values, catagorised as they are in B. *p < 0.05, **p < 0.01. (D) Venn diagram representing the overlap between tDNAs classed as GAIN and UP. (E). Filltrack examples of co-occuring FOXA1 UP and H3K27ac GAIN events within ± 2 kb of tDNAs. The black line represents the gene body.}\label{fig:results-3}
 \end{figure}
 
@@ -427,7 +431,7 @@ However, FOXA1 did not significantly change the number of FOXA1 bound DNAs upstr
 On the other hand, significantly more H3K27ac binding events occured downstream (-DOX 284 vs 280; +Dox 276 vs 240) (Figure \ref{fig:results-4}B).
 This pattern of H3K27ac binding was further perpetuated by FOXA1 OE; Q-values significantly decreased 3.8\%\% upstream and 14.3\% downstream (Figure \ref{fig:results-4}C).
 
-\begin{figure}[H]
+\begin{figure}[p]
 \includegraphics[width=1\linewidth]{../images/results-04} \caption{(A) Schematic of the independent quantification of the upstream and downstream regions of tDNAs. Windows were confined to the ±500 bp, including the gene body. Binding events were counted if Q-values exceeded the input values. (B) Violin plot of the upstream and downstream Q-values for FOXA1 and H3K27ac, with or without Dox. (C)}\label{fig:results-4}
 \end{figure}
 
@@ -440,33 +444,24 @@ This pattern of H3K27ac binding was further perpetuated by FOXA1 OE; Q-values si
 \hypertarget{what}{%
 \subsubsection{What?}\label{what}}
 
-MEME CentriMo to identify de novo motifs that are enriched at tDNAs which gain both FOXA1 and H3k27ac
-
 \begin{itemize}
 \item
-  relative to other tDNAS (gain/lose, lose/lose, lose/gain)
+  MEME SEA of GAIN UP UP tDNAs (n = 9)
 \item
-  FOXA1 not enriched
+  27 de novo identified
 \item
-  Look at ERE, AP-1, others?
+  A and B box motifs as a control
 \item
-  Top 3 motifs (fisher E values) - IRF7, ERR3, NR4A1
+  p-values
 \item
-  A and B box motifs as a control?
-  How?
-
-  \begin{itemize}
-  \item
-    All downstream
-  \item
-    tDNAs where `matching sequences' all best matches = code for valine
-  \item
-    Branched amino acids associated with lower BC risk
-  \end{itemize}
+  mention AR motif also enriches/ any other established fox interactions
 \end{itemize}
 
 \hypertarget{suggests}{%
 \paragraph{Suggests?}\label{suggests}}
+
+\begin{figure}[p]
+\includegraphics[width=1\linewidth]{../images/results-05} \end{figure}
 
 \hypertarget{figure-5}{%
 \subsection{Figure 5}\label{figure-5}}
@@ -475,46 +470,108 @@ MEME CentriMo to identify de novo motifs that are enriched at tDNAs which gain b
 \tightlist
 \item
   Localisation of FOXA1 at individual tDNA genes in MCF-7 cells
+\item
+  why - tRNAs implicated in cancer
+\item
+  Largely unchanged
+\item
+  mention exceptions
+\item
+  examples of NC, UP, DOWN or 1 example from each family/cluster?
 \end{itemize}
-
-Why?
-
-\begin{itemize}
-\item
-  tRNAs implicated in cancer
-\item
-  Are they upregulated?
-\item
-  Look at gain function/gain h3/fox
-\item
-  Motif ontology
-\item
-\end{itemize}
-
-What?
 
 Suggests?
 
-\begin{longtable}[]{@{}ll@{}}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.0849}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.3491}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1698}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1132}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1226}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.0849}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.0755}}@{}}
 \caption{\label{tab:clusters}.}\tabularnewline
 \toprule()
-Group & Function \\
+\begin{minipage}[b]{\linewidth}\raggedright
+Family
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Function
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+tRNAs
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+ed\_activity
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+dox\_activity
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+fox\_fold
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+h3\_fold
+\end{minipage} \\
 \midrule()
 \endfirsthead
 \toprule()
-Group & Function \\
+\begin{minipage}[b]{\linewidth}\raggedright
+Family
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Function
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+tRNAs
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+ed\_activity
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+dox\_activity
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+fox\_fold
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+h3\_fold
+\end{minipage} \\
 \midrule()
 \endhead
-ALOXE & Insulator Function\textsuperscript{\protect\hyperlink{ref-raab2011}{27},\protect\hyperlink{ref-sizer2022}{29}} \\
-Ebersole & Insulator Function\textsuperscript{\protect\hyperlink{ref-Ebersole2011}{28},\protect\hyperlink{ref-sizer2022}{29}} \\
-HES7 & \\
-Per1 & \\
-TMEM107 & Insulator Function\textsuperscript{\protect\hyperlink{ref-raab2011}{27},\protect\hyperlink{ref-sizer2022}{29}} \\
-Arg-CCG & Implicated in Cancer Progression\textsuperscript{\protect\hyperlink{ref-Goodarzi2016}{24}} \\
-Glu-TTC & Implicated in Cancer Progression\textsuperscript{\protect\hyperlink{ref-Goodarzi2016}{24}} \\
-iMET & Proliferation of Breast Cancer \\
-Met & iMet Control \\
-SeC & Involved in REDOX\textsuperscript{\protect\hyperlink{ref-Sangha2022}{60}} \\
+ALOXE & Insulator\textsuperscript{\protect\hyperlink{ref-raab2011}{27},\protect\hyperlink{ref-sizer2022}{29}} & tRNA-Lys-TTT-3-5 & Active & 1 & 1.58 & 0.76 \\
+& & tRNA-Gln-CTG-1-5 & Inactive & 0 & 1.73 & 0.80 \\
+& & tRNA-Leu-TAG-1-1 & Active & 1 & 1.56 & 1.04 \\
+& & tRNA-Arg-TCT-2-1 & Active & 1 & 1.29 & 1.15 \\
+Ebersole & Insulator\textsuperscript{\protect\hyperlink{ref-Ebersole2011}{28},\protect\hyperlink{ref-sizer2022}{29}} & tRNA-Glu-CTC-1-5 & Active & 1 & 0.92 & 1.01 \\
+& & tRNA-Gly-TCC-2-5 & Active & 1 & 0.94 & 1.27 \\
+& & tRNA-Asp-GTC-2-5 & Active & 1 & 0.86 & 1.58 \\
+& & tRNA-Leu-CAG-1-5 & Inactive & 0 & 0.67 & 1.03 \\
+HES7 & Proximate to ALOXE & tRNA-Gly-GCC-2-6 & Active & 1 & 1.17 & 0.86 \\
+Per1 & Per1 & tRNA-Ser-CGA-1-1 & Active & 1 & 1.44 & 1.05 \\
+& & tRNA-Thr-AGT-5-1 & Active & 1 & 1.39 & 0.99 \\
+TMEM107 & Insulator\textsuperscript{\protect\hyperlink{ref-raab2011}{27},\protect\hyperlink{ref-sizer2022}{29}} & tRNA-Trp-CCA-3-3 & Active & 1 & 1.11 & 0.72 \\
+& & tRNA-Ser-GCT-4-3 & Active & 1 & 1.10 & 0.66 \\
+& & tRNA-Thr-AGT-1-1 & Active & 1 & 1.25 & 0.74 \\
+& & tRNA-Ile-AAT-5-5 & Active & 1 & 1.16 & 0.83 \\
+Arg-CCG & Cancer Progression\textsuperscript{\protect\hyperlink{ref-Goodarzi2016}{24}} & tRNA-Arg-CCG-1-1 & Inactive & 0 & 1.85 & 0.26 \\
+& & tRNA-Arg-CCG-1-2 & Inactive & 0 & 0.57 & 0.49 \\
+& & tRNA-Arg-CCG-1-3 & Active & 1 & 0.84 & 0.66 \\
+& & tRNA-Arg-CCG-2-1 & Active & 1 & 0.88 & 0.32 \\
+Glu-TTC & Cancer Progression\textsuperscript{\protect\hyperlink{ref-Goodarzi2016}{24}} & tRNA-Glu-TTC-1-1 & Inactive & 0 & 1.13 & 0.74 \\
+& & tRNA-Glu-TTC-1-2 & Active & 1 & 0.87 & 0.98 \\
+& & tRNA-Glu-TTC-2-1 & Active & 1 & 1.16 & 0.93 \\
+& & tRNA-Glu-TTC-2-2 & Active & 1 & 1.55 & 0.94 \\
+& & tRNA-Glu-TTC-4-2 & Inactive & 0 & 1.06 & 0.76 \\
+iMET & Translation Initiation & tRNA-iMet-CAT-1-1 & Active & 1 & 1.39 & 0.72 \\
+& & tRNA-iMet-CAT-1-2 & Active & 1 & 1.01 & 0.55 \\
+& & tRNA-iMet-CAT-1-3 & Active & 1 & 1.18 & 0.84 \\
+& & tRNA-iMet-CAT-1-4 & Inactive & 0 & 1.26 & 0.52 \\
+& & tRNA-iMet-CAT-1-5 & Inactive & 0 & 2.29 & 1.12 \\
+& & tRNA-iMet-CAT-1-6 & Inactive & 0 & 1.71 & 1.73 \\
+& & tRNA-iMet-CAT-1-7 & Active & 1 & 1.29 & 0.63 \\
+& & tRNA-iMet-CAT-1-8 & Active & 1 & 1.40 & 0.75 \\
+& & tRNA-iMet-CAT-2-1 & Inactive & 0 & 1.38 & 1.35 \\
+Met & iMet Control & tRNA-Met-CAT-1-1 & Inactive & 0 & 1.90 & 0.99 \\
+& & tRNA-Met-CAT-2-1 & Inactive & 0 & 0.59 & 1.32 \\
+& & tRNA-Met-CAT-3-1 & Active & 1 & 4.26 & 2.06 \\
+& & tRNA-Met-CAT-3-2 & Inactive & 0 & 1.24 & 0.24 \\
+& & tRNA-Met-CAT-4-1 & Inactive & 0 & 1.30 & 1.26 \\
+& & tRNA-Met-CAT-4-2 & Inactive & 0 & 0.74 & 1.27 \\
+& & tRNA-Met-CAT-4-3 & Active & 1 & 1.46 & 1.55 \\
+& & tRNA-Met-CAT-5-1 & Inactive & 0 & 0.48 & 1.17 \\
+& & tRNA-Met-CAT-6-1 & Active & 1 & 1.07 & 0.79 \\
+& & tRNA-Met-CAT-7-1 & Inactive & 0 & 0.85 & 0.65 \\
+SeC & REDOX\textsuperscript{\protect\hyperlink{ref-Sangha2022}{60}} & tRNA-SeC-TCA-1-1 & Active & 1 & 0.54 & 0.39 \\
+& & tRNA-SeC-TCA-2-1 & Inactive & 0 & 1.38 & 1.92 \\
 \bottomrule()
 \end{longtable}
 
@@ -525,32 +582,42 @@ SeC & Involved in REDOX\textsuperscript{\protect\hyperlink{ref-Sangha2022}{60}} 
 
 \begin{itemize}
 \item
-  FOXA1 alone not efficient to increase activity
+  fox binding upstream = h3k27ac binding downstream
 
   \begin{itemize}
-  \tightlist
   \item
-    p300
+    briefly reiterate results
+  \item
+    binding intensity decreases
   \end{itemize}
-\item
-  FOXA1 moves nucleosomes to make other TF accessible?
-\item
-  Differences in nucleosome positioning will contribute to the distinct density patterns of modified histones, as nucleosomes are excluded from active tRNA promoters and enriched in flanking regions\textsuperscript{\href{https://www.nature.com/articles/nrg3001\#ref-CR8}{8}}.
-\item
-  Brf1 required for iMET txn
 \item
   Loses fox = weak binding?
 \item
+  explain input peak
+\item
   Dynamic vs stable marks
 \item
+  motifs interaction with ERa
+\item
+  foxa1 looping
+\end{itemize}
+
+Future -
+
+\begin{itemize}
+\item
   ATAC-seq
+\item
+  h3kme3 along with h3k27ac
+\item
+  look at DN tdnas
 \end{itemize}
 
 \hypertarget{conclusion}{%
 \section{Conclusion}\label{conclusion}}
 
 \begin{flushright}
-2670 Words
+2627 Words
 \end{flushright}
 \footnotesize
 

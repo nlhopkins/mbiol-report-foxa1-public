@@ -44,3 +44,33 @@ euler(
                    FOXUP = "FOXA1 UP",
                    H3UP = "H3K27ac UP")
     )
+
+
+
+
+euler(
+    c(
+        LOSS = 27,
+        FOXDN = 62,
+        H3DN = 124,
+        "LOSS&FOXDN" = 5,
+        "LOSS&H3DN" = 24,
+        "LOSS&FOXDN&H3DN" = 5,
+        "FOXDN&H3DN" = 33
+    )
+    ,
+    shape = "circle"
+)  %>%
+    plot(
+        quantities = list(type = c("counts"), cex = 3),
+        lty = 0,
+        alpha = 0.75,
+        fills = c(
+            LOSS = "grey",
+            FOXDN = "#39BDB1",
+            H3DN = "#ABB064"
+        ),
+        labels = c(LOSS = "Activity LOSS",
+                   FOXDN = "FOXA1 DN",
+                   H3DN = "H3K27ac DN")
+    )

@@ -1,5 +1,6 @@
 diff <-
-    diffexpressed %>% select(c("name", "diffexpressed", "comparison")) %>% pivot_wider(names_from = "comparison",
+    diffexpressed %>% select(c("name", "diffexpressed", "comparison")) %>% 
+    pivot_wider(names_from = "comparison",
                                                                                        values_from = "diffexpressed")
 
 
@@ -8,7 +9,7 @@ p <- data  %>% pivot_wider(
     values_from = "value",
     id_cols = c(1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19)
 ) %>%
-    left_join(diff) %>%
+    merge(diff) %>%
     distinct() %>%
     mutate(ed_activity = ifelse(ed_h3k27ac > activity_threshold,
                                 "1",
@@ -16,28 +17,7 @@ p <- data  %>% pivot_wider(
     
     mutate(dox_activity = ifelse(dox_h3k27ac > activity_threshold,
                                  "1",
-                                 "0")) %>%
-    select(
-        c("name",
-            "ed_h3k27ac",
-            "dox_h3k27ac",
-            "ed_foxa1",
-            "dox_foxa1_high",
-            "fox_fold",
-            "h3_fold",
-            "ed_activity",
-            "dox_activity",
-            "fox_fold",
-            "h3_fold",
-            "h3_status",
-            "fox_status",
-            "activity_status",
-            "dox_activity",
-            "ed_activity"
-            
-        )
-    )
-
+                                 "0")) 
 
 imet <- p %>% filter(
     name %in% c(
@@ -65,7 +45,7 @@ met <- p %>% filter(
         "tRNA-Met-CAT-4-3",
         "tRNA-Met-CAT-5-1",
         "tRNA-Met-CAT-6-1",
-        "tRNA-Met-CAT-7-1)"
+        "tRNA-Met-CAT-7-1"
     )
 )
 

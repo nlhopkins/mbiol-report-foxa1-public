@@ -46,10 +46,9 @@ data <- raw %>%
     pivot_longer(cols = contains(c("_foxa1", "_h3k27ac")) &
                      !contains("bound"),
                  names_to = "treatment") %>%
-    filter(treatment != "dox_foxa1_low") %>%
-    mutate(condition = str_extract(treatment, "[^_]+")) %>%
-    mutate(amino = str_replace(name, "^(([^-]+-){1}[^-]+)-.*", "\\1")) %>%
-    mutate(activity = ifelse(value > activity_threshold, '1', '0'))
+    filter(treatment != "dox_foxa1_low") %>% # remove foxa1 'low' repeat
+    mutate(condition = str_extract(treatment, "[^_]+")) %>% # extract ed or +dox
+    mutate(activity = ifelse(value > activity_threshold, '1', '0')) # 1 = active, 0 = inactive
 
 
 
@@ -62,18 +61,18 @@ downstream <- read.delim("data/raw/downstream.txt") %>%
     janitor::clean_names() %>%
     mutate(position = "downstream")
 
-total_activity_threshold <- full_join(upstream,
+total_activity_threshold <- full_join(upstream, # merge upstream and downstream datasets
                                       downstream) %>%
-    mutate(across(contains("ed"), ~ .x / ed_input)) %>%
-    mutate(across(contains("dox"), ~ .x / dox_input)) %>%
+    mutate(across(contains("ed"), ~ .x / ed_input)) %>% # normalise -Dox to -Dox input
+    mutate(across(contains("dox"), ~ .x / dox_input)) %>% # normalise -Dox to -Dox input
     pivot_longer(cols = contains(c("_foxa1", "_h3k27ac")),
                  names_to = "treatment") %>%
     group_by(treatment) %>%
-    summarise_at("value", median, na.rm = TRUE) %>%
+    summarise_at("value", median, na.rm = TRUE) %>% # get median
     filter(treatment == "ed_h3k27ac") %>%
     pull(2)
 
-total <- full_join(upstream,
+total <- full_join(upstream, # merge upstream and downstream datasets
                    downstream) %>%
     mutate(across(contains("ed"), ~ .x / ed_input)) %>% # normalise -Dox to -Dox input
     mutate(across(contains("dox"), ~ .x / dox_input)) %>% # normalise Dox to Dox input
@@ -98,10 +97,9 @@ total <- full_join(upstream,
     pivot_longer(cols = contains(c("_foxa1", "_h3k27ac")) &
                      !contains("bound"),
                  names_to = "treatment") %>%
-    filter(treatment != "dox_foxa1_low") %>%
+    filter(treatment != "dox_foxa1_low") %>% # remove foxa1 'low' repeat
     mutate(condition = str_extract(treatment, "[^_]+")) %>%
-    mutate(amino = str_replace(name, "^(([^-]+-){1}[^-]+)-.*", "\\1")) %>%
-    mutate(activity = ifelse(value > activity_threshold, '1', '0'))
+    mutate(activity = ifelse(value > activity_threshold, '1', '0'))# 1 = active, 0 = inactive
 
 
 

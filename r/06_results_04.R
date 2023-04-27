@@ -26,20 +26,22 @@ total_binding <- total %>%
 
 #### barplot -dox vs +dox ####
 total_binding  %>% ggplot(aes(
+    # plot
     x = factor(
         condition,
         levels = c("ed", "dox"),
         labels = c("-Dox", "+Dox")
     ),
     y = bound_count / gene_count * 100,
-    fill = factor(
+    # percentage
+    fill = factor( # fill = position
         position,
         levels = c("upstream", "downstream"),
         labels = c("Upstream", "Downstream")
     )
 )) +
-    geom_bar(position = "dodge", stat = "identity") +
-    facet_wrap(vars(factor(
+    geom_bar(position = "dodge", stat = "identity") + # barplot
+    facet_wrap(vars(factor( # facet by binding target
         binding,
         levels = c("fox", "h3k27ac"),
         labels = c("FOXA1", "H3K27ac")
@@ -62,7 +64,7 @@ total_binding  %>% ggplot(aes(
         expand = c(0, 0),
         breaks = seq(0, 100, by = 20)
     ) +
-    geom_text(
+    geom_text( # text showing the counts and percentage
         position = position_dodge(width = 1),
         aes(
             label = paste(
@@ -82,32 +84,32 @@ total_binding  %>% ggplot(aes(
 
 
 #### barplot up vs down ####
-total_binding  %>% ggplot(aes(
+total_binding  %>% ggplot(aes( #plot
     x = factor(
         position,
         levels = c("upstream", "downstream"),
         labels = c("Upstream", "Downstream")
     ),
-    y = bound_count / gene_count * 100,
+    y = bound_count / gene_count * 100, # count and percentage
     fill = factor(
         condition,
         levels = c("ed", "dox"),
         labels = c("-Dox", "+Dox")
     )
 )) +
-    geom_bar(position = "dodge", stat = "identity") +
-    facet_wrap(vars(factor(
+    geom_bar(position = "dodge", stat = "identity") + # barplot
+    facet_wrap(vars(factor( # facet by binding target
         binding,
         levels = c("fox", "h3k27ac"),
         labels = c("FOXA1", "H3K27ac")
     )),
     nrow = 1,
     strip.position = "bottom") +
-    xlab("") +
-    ylab("% of Bound tDNAs") +
-    scale_fill_manual(name = "",
+    xlab("") + # x title
+    ylab("% of Bound tDNAs") + # y title
+    scale_fill_manual(name = "", # colours
                       values = c("#ACA4E1", "#39BDB1")) +
-    theme_classic(base_size = 40) +
+    theme_classic(base_size = 40) + # theme + font size
     theme(
         legend.position = "top",
         strip.placement = "outside",
@@ -119,7 +121,7 @@ total_binding  %>% ggplot(aes(
         expand = c(0, 0),
         breaks = seq(0, 100, by = 20)
     ) +
-    geom_text(
+    geom_text( # add counts and pecerntage to the bars
         position = position_dodge(width = 1),
         aes(
             label = paste(
@@ -141,14 +143,14 @@ total_binding  %>% ggplot(aes(
 
 #### boxplot of bound tdnas by position ####
 total %>%
-    pivot_longer(cols = contains("bound"),
+    pivot_longer(cols = contains("bound"), # pivot bound catargories into 2 columns
                  # pivot for readability
                  names_to = "target",
                  values_to = "bound") %>%
     mutate(target = case_when(str_detect(treatment, "fox") ~ "fox", TRUE ~ "h3")) %>% # extract target
     select(c("name", "condition", "value", "treatment", "target", "position")) %>% # select these columns
     distinct() %>% # remove repeated rows
-    ggplot(aes(
+    ggplot(aes( # plot
         fill = factor(
             condition,
             levels = c("ed", "dox"),
@@ -163,16 +165,16 @@ total %>%
     )) +
     geom_violin(trim = FALSE,
                 color = NA)  +
-    facet_wrap(vars(factor(
+    facet_wrap(vars(factor( # facet by binding target
         target,
         levels = c("fox", "h3k27ac"),
         labels = c("FOXA1", "H3K27ac")
     )),
     nrow = 1,
     strip.position = "bottom") +
-    scale_fill_manual(name = "",
+    scale_fill_manual(name = "", # colours
                       values = c("#ACA4E1", "#39BDB1")) +
-    stat_summary(
+    stat_summary( # boxplot
         fun.data = "median_iqr",
         
         geom = "pointrange",
@@ -188,7 +190,7 @@ total %>%
         strip.background = element_rect(color = NA),
         panel.spacing = unit(0, "lines")
     ) +
-    stat_compare_means(
+    stat_compare_means( # compare means
         aes(group = condition),
         method = "wilcox.test",
         label = "p.signif",
@@ -205,4 +207,3 @@ total %>%
         expand = c(0, 0),
         breaks = seq(-6, 9, by = 3)
     )
-

@@ -55,7 +55,7 @@ volcano_fox %>%
         strip.background = element_rect(color = NA),
         panel.spacing = unit(0, "lines")
     ) +
-    scale_color_manual(name = "",
+    scale_color_manual(name = "", # pretty colours :)
                        # colours
                        values =
                            c("#3ec1b6", "grey", "#aca4e0")) +

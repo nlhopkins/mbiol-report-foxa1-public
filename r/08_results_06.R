@@ -115,7 +115,7 @@ tmem <- tdnas %>% filter(
     mutate(group = "TMEM107",
            func = "Chromatin Insulator")
 
-clusters <- list(aloxe,
+clusters <- list(aloxe, # datasets for merging
            ebersole,
            hes,
            per1,
@@ -125,9 +125,9 @@ clusters <- list(aloxe,
            imet,
            met,
            sec) %>%
-    reduce(full_join) %>%
-    mutate(ed_activity = ifelse(ed_activity == "1", "Active", "Inactive")) %>%
-    mutate(dox_activity = ifelse(dox_activity == "1", "Active", "Inactive")) %>%
+    reduce(full_join) %>% # merge
+    mutate(ed_activity = ifelse(ed_activity == "1", "Active", "Inactive")) %>% # replace 1 = active and 0 = inactive
+    mutate(dox_activity = ifelse(dox_activity == "1", "Active", "Inactive")) %>%# replace 1 = active and 0 = inactive
     mutate_if(is.numeric, ~ round(., 2)) %>%
     rename(
         "-Dox Activity" = ed_activity,

@@ -13,29 +13,28 @@ data  %>%
     distinct() %>% # remove repeated rows
     ggplot(aes(
         # create plot
-        x = factor(condition, levels = c("ed", "dox")),
-        y = log2(value),
-        fill = treatment
+        x = factor(condition, levels = c("ed", "dox")), # factor and levels control the order
+        y = log2(value), # log2 
+        fill = treatment # fill colour
     )) +
     geom_violin(trim = FALSE, # violin plot
                 color = NA) +
-    facet_wrap(vars(factor(
+    facet_wrap(vars(factor( # facets
         target,
         levels = c("fox", "h3") ,
         labels = c("FOXA1", "H3K27ac")
     )),
     strip.position = "bottom") +
-    stat_summary(fun.data = "median_iqr",
+    stat_summary(fun.data = "median_iqr", # boxplot 
                  # add boxplot
                  geom = "pointrange",
                  color = "black") +
     theme_classic(base_size = 40) +
-    stat_compare_means(
+    stat_compare_means( # compare means
         # compare means
         comparisons = list(c("ed", "dox")),
         method = "wilcox.test",
-        label = "p",
-        # change to "p.signif" to show asterisks
+        label = "p", # change to "p.signif" to show asterisks
         paired = F,
         label.x = 1.4,
         label.y = 5,
@@ -85,7 +84,7 @@ binding <- data %>%
     select(c("name", "condition", "bound", "binding", "target")) %>% # select columns we need 
     distinct() %>% 
     group_by(bound, condition, binding) %>% # grouping for counts
-    filter(bound == "1") %>% 
+    filter(bound == "1") %>% # filter to show only tdnas that are bound
     mutate(bound_count = n()) %>% # get count of bound tdnas
     ungroup() %>% 
     mutate(gene_count = n_distinct(name)) # get number of tdnas (for percentages)
@@ -99,7 +98,7 @@ binding %>% ggplot(aes(
         levels = c("ed", "dox"),
         labels = c("-Dox", "+Dox")
     ),
-    y = bound_count / gene_count * 100,
+    y = bound_count / gene_count * 100, # y = percentage of tdnas bound
     fill = target
 )) +
     geom_bar(position = "dodge", stat = "identity") + # barplot

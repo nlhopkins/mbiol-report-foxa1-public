@@ -1,4 +1,8 @@
-#### Packages ####
+#### Install Packages ####
+
+install.packages(c("tidyverse", "ggpubr", "eulerr"))
+
+#### Load packages ####
 library(tidyverse) # for tidying data and use of the pipe %>% (which means 'THEN' do this....)
 library(ggpubr) # plot stats
 library(eulerr) # venn diagrams

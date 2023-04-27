@@ -167,7 +167,7 @@ total %>%
                 color = NA)  +
     facet_wrap(vars(factor( # facet by binding target
         target,
-        levels = c("fox", "h3k27ac"),
+        levels = c("fox", "h3"),
         labels = c("FOXA1", "H3K27ac")
     )),
     nrow = 1,
